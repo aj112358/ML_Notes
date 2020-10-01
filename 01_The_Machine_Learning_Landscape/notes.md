@@ -79,13 +79,63 @@ Here is a list of a few real-world applications of ML, of which we will be learn
 
 We classify ML systems into three broad categories:
 
-* Whether or not they are trained with human supervision (supervised, semi-supervised, unsupervised, reinforcement learning)
-* Whether or not they can learn continuously (online learning vs. batch learning)
-* Whether they compare new data to old data OR detect patterns in input data and creating a predictive model (instance-based learning vs. model-based learning
+* Supervised Learning vs. Unsupervised Learning (Whether or not they are trained with human supervision)
+* Batch Learning vs. Online Learning (Whether or not they can learn continuously)
+* Instance-Based Learning vs. Model-Based Learning (Whether they compare new data to old data OR detect patterns in input data and creating a predictive model)
+
+We look at these in turn.
+
+# 1.4.1 - Supervised Learning vs. Unsupervised Learning
+
+
+We can classify ML systems based on the amount and type of human supervision they receive. In general, we have four major subcategories:
+
+1. Supervised Learning
+
+Here, the training set you feed your ML algorithm comes attached with the desired classification, which are called "labels".
+
+A common example of a supervised learning task if "classification". Given a data set with many features, we wish to classify each sample point into one or more categories (called a "class").
+
+Another common example is that of "regression". Given a data set, we wish to predict a target numerical value based on the features.
+
+
+Some important supervised learning algorithms:
+* Linear regression
+* Logistic regression
+* k-Nearest Neighbors
+* Decision trees & Random forests
+* Support vector machines
+* Neural networks
+
+
+
+2. Unsupervised Learning
+
+Here, the training set that we feed to our ML model does NOT come attached with the desired output (either classification or numerical value). The ML system essentially tries to look for patterns in the data set that would allow it to categorize sample points together based on some rules.
+
+Some important unsupervised learning algorithms:
+* Clustering
+..* k-Means
+..* DBSCAN
+..* Hierarchical Cluster Analysis (HCA)
+
+
+3. Semi-Supervised Learning
 
 
 
 
+4. Reinforcement Learning
+
+
+
+
+
+# 1.4.2 - Batch Learning vs. Online Learning
+
+
+
+# 1.4.3 - Instance-Based Learning vs. Model-Based Learning
 
 
 
