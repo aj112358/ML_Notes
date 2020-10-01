@@ -11,37 +11,39 @@ This repository is meant to be a medium for learning ML using the well known O'R
 
 ### Tools Used In ML
 
-* Scikit-Learn
+* Scikit-Learn: This is a Python framework for performing ML computations.
 
-This is a Python framework for performing ML computations.
+* TensorFlow: Similar to Scikit-Learn, this is a library that allows one to create more complex ML models, as well as train deep NNs, and also allows for distributed computing
 
-* TensorFlow
+* Keras: This is a high-level DL API that TensorFlow has adopted as it's main API. It allows users a simple way to code NNs.
 
-Similar to Scikit-Learn, this is a library that allows one to create more complex ML models, as well as train deep NNs, and also allows for distributed computing
+* Python: This is a high-level programming language that is commonly used for coding ML/DL algorithms.
 
-* Keras
+* NumPy, Pandas, Matplotlib: These are a few libraries available for use in Python, that allow you to perform mathematical/scientific computations and create visualizations. Other libraries that also fall into these categories are: SciPy, Seaborn, Plotly, etc.
 
-This is a high-level DL API that TensorFlow has adopted as it's main API. It allows users a simple way to code NNs.
+* Mathematics: To truly learn ML/DL at the foundational level, you will need a good background in calculus, linear algebra, statistics and probability.
 
-* Python
-
-This is a high-level programming language that is commonly used for coding ML/DL algorithms.
-
-* NumPy, Pandas, Matplotlib
-
-These are a few libraries available for use in Python, that allow you to perform mathematical/scientific computations and create visualizations. Other libraries that also fall into these categories are: SciPy, Seaborn, Plotly, etc.
-
-* Mathematics
-
-To truly learn ML/DL at the foundational level, you will need a good background in calculus, linear algebra, statistics and probability.
-
-* Jupyter Notebooks
-
-This is an application that allows you to write code and execute it line-by-line. You can also write regular text, add visuals, and write LaTeX equations.
+* Jupyter Notebooks: This is an application that allows you to write code and execute it line-by-line. You can also write regular text, add visuals, and write LaTeX equations.
 
 
 
 
+### External Resources
 
+As of 2020, there are many resources for learning ML/DL, including books, YouTube videos, MOOCs, post-secondary courses, and private companies. Here are some good resources that you can look into if you feel the need for a different teaching style:
+
+1. Andrew Ng's ML course, either on Coursera (https://www.coursera.org/learn/machine-learning) or on YouTube (https://www.youtube.com/playlist?list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN)
+
+2. fast.ai Deep Learning course (https://www.fast.ai)
+
+3. Google's ML Crash Course (https://developers.google.com/machine-learning)
+
+4. deeplearning.ai (https://www.deeplearning.ai)
+
+5. ML Courses on Udemy (https://www.udemy.com/course/machinelearning/) or (https://www.udemy.com/course/complete-machine-learning-and-data-science-zero-to-mastery/)
+
+6. 'Deep Learning from Scratch' by Seth Weidman
+
+7. 'Introduction to Machine Learning with Python' by Muller & Guido
 
 
