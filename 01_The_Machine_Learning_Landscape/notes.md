@@ -113,21 +113,47 @@ Some important supervised learning algorithms:
 
 Here, the training set that we feed to our ML model does NOT come attached with the desired output (either classification or numerical value). The ML system essentially tries to look for patterns in the data set that would allow it to categorize sample points together based on some rules.
 
+As an example, suppose you have some big data about a blog - you may want to classify users into groups based on some characteristics. You'll then be able to target your future blog posts tailored to these individual groups.
+
 Some important unsupervised learning algorithms:
 * Clustering
-..* k-Means
-..* DBSCAN
-..* Hierarchical Cluster Analysis (HCA)
+  * k-Means
+  * DBSCAN
+  * Hierarchical Cluster Analysis (HCA)
+* Anomaly detection & novelty detection
+  * One-class SVM
+  * Isolation forest
+* Visualization & dimensionality reduction
+  * Principal Component Analysis (PCA)
+  * Kernal PCA
+  * Locally Linear Embedding (LLE)
+  * t-Distributed Stochasting Neighbor Embedding (t-SNE)
+* Association rule learning
+  * Apriori
+  * Eclat
+  
+
 
 
 3. Semi-Supervised Learning
 
+Having to manually provide labels for a data set it very time-consuming and constly. As such, you may encounter data sets that have a few labelled samples and many unlabelled samples. Hence, mose semi-supervised learning algorithms are combinations of unsupervised algorithms and supervised algorithms.
 
+Some important semi-supervised learning algorithms:
+* Deep belief networks (DBN)
+  * Based on unsupervised components called RBMs
+  * RBMs are stacked and trained sequentially in an unsupervised manner
+  * The entire stack is fine-tuned using supervised techniques
+* Restricted Boltzmann machines (RBM)
 
 
 4. Reinforcement Learning
 
+This type of learning is very different from the above three. A learning system (called an "agent") is able to observe and environment, perform actions, and in turn get "rewards" or "penalties". It must then learn on its own to determine what the best strategy is (called a "policy") in order to maximize rewards. A policy defines what action the agent should choose when it is in a given situation.
 
+Some examples of reinforcement learning include:
+* Teaching robots how to walk
+* DeepMind's AlphaGo
 
 
 
