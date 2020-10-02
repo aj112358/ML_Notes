@@ -53,6 +53,8 @@ Another field in which implementing ML is useful are those which are too complex
 
 As a third use, we can even use ML to learn ourselves! Given a large data set with many characteristics, we may wish to know which 2-3 are the most important for predicting something about that data set. A common example that is seen is that of housing prices. We can get data on various characteristics on many different houses on the market, and we wish to know which few characteristics have the most effect on the price of a house. Applying ML techniques to big data can help us discover patterns or trends that are not immediately apparant.
 
+Overall, most ML tasks are about making predictions (either numerical or categorical). This means that the ML system must be able to make a good prediction on NEW data, once it has been trained on the training data. Having good performance on the training set is good but not sufficient - we need the ML model to perform well on NEW data!
+
 In summary, ML is very useful for:
 * Problems for which traditional solutions would require a lot of maintanence and/or a lot of conditional statements
 * Complex problems for which the traditional approach would not give a good solution
@@ -160,6 +162,15 @@ Some examples of reinforcement learning include:
 # 1.4.2 - Batch Learning vs. Online Learning
 
 
+In "batch learning", the ML system is unable to learn in increments, hence all the training data must be used at once. As such, this is slower to execute (can potentially take many hours) and takes a lot of computing resources (CPU, memory, disk space, I/O, etc.) and so is performed offline. The system is trained and then immediately launched; it does not learn anymore. This is called "offline learning". If you want this ML model to learn about new data, you will need to re-train en entirely new model from scratch (using the old and new data)! Training a new system is normally done once every 24 hours or sometimes even once per week. That being said, if the scenario you are trying to model is rapidly changing, you may need a more reactive ML system. Moreover, since training takes a lot of resources, if you happen to be doing it on a cluster then this could end up costing a lof of money (even in opportunity cost). And if your data is truly big data, then it may be impossible to do batch learning!
+
+
+In "online learning" (read: "incremental learning"), the ML system is trained in increments i.e. by feeding in the data sequentially, either individual samples or in small groups (called "mini-batches"). It's easy to see that this type of learning is very fast and cheap, and allows the ML system to learn on-the-fly as new data becomes available. So, even low memory systems can learn from big data! As such, this type of learning is very optimal for systems that receive data in a continuous manner (ex: stock prices, web server logs, time series data, etc.) and hence needs to adapt/improve quickly and independently. Moreover, since the ML system does not need to learn again from old data, the old data may be discarded once used which translates into more available disk space.
+
+
+An important parameter of online learning systems is their "learning rate" - how frequently they should adapt to new data. A **high** learning rate means more frequent updates but may cause the system to forget old data before it has been processed. A **low** learning rate means less frequent updates but the ML system will also be less sensitive to noise/outliers in new data.
+
+One challenge with online learning: if bad data is fed to the ML system, its performance will decline. To deal with this issue, you would need to monitor the ML system closely and shut it down if you detect a drop in performance. You could also monitor the input data and react to any abnormal data you see (you could use an anomaly detection algorithm if needed!).
 
 # 1.4.3 - Instance-Based Learning vs. Model-Based Learning
 
