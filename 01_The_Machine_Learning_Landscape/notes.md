@@ -175,9 +175,37 @@ One challenge with online learning: if bad data is fed to the ML system, its per
 # 1.4.3 - Instance-Based Learning vs. Model-Based Learning
 
 
+"Instance-based learning" is probably the most simple way to learn - the system simply memorizes each data point in the training set along with its label. It then deals with new data by using a "measure of similarity" to compare the new data to each individual training sample it has memorized.
+
+As an example, consider the task of classifying spam emails. A very basic measure of similarity would be to compare the total number of spam words in the new email with that in all training set emails. The reponse would be to flag an email as spam if it has many spam words in common with some training sample email.
 
 
 
+"Model-based learning" involves using the training set to construct a mathematical model, then use it to make predictions (called "inferences") on new data. If your training set is large and contains mostly good data, then your model will have high prediction accuracy. If it does not make good predictions, then you can try to improve it by using more attributes, creating more informative features, get higher quality data, or try using a different model.
+
+
+
+
+## Main Challenges of ML
+
+# Insufficient Quantity of Training Data
+
+
+# Non-Representative Training Data
+# Poor-Quality Data
+# Irrelevant Features
+# Overfitting the Training Data
+# Underfitting the Training Data
+
+
+
+
+
+
+## Testing and Validating
+
+# Hyperparameter Tuning & Model Selection
+# Data Mismatch
 
 
 
