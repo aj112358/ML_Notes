@@ -195,23 +195,55 @@ As an example, consider the task of classifying spam emails. A very basic measur
 
 ## Main Challenges of ML
 
-# Insufficient Quantity of Training Data
+# Insufficient Quantity of Training Data (Bad Data)
+
+It takes a large amount of data to have a ML algorithm work to a high standard. Simple problems may require 1000s of examples; complex problems (image recognition, etc) may even require millions!
 
 
-# Non-Representative Training Data
-# Poor-Quality Data
-# Irrelevant Features
-# Overfitting the Training Data
-# Underfitting the Training Data
+
+# Non-Representative Training Data (Bad Data)
+
+If your data is not a good representation of the situation you are trying to model, then your ML algorithm will not be able to make accurate predictions on new data. It is extremely important that your training data be representative of the new data you want to generalize your model for.
+
+This may not be easy in practice: if your training sample is too small you will have "sample noise" (non-representative data as a result of chance). On the other hand, if you have a very large training data set,  this can still be non-representative if your method of data collection is flawed (called "sampling bias").
+
+# Poor-Quality Data (Bad Data)
+
+If your training data is full of errors, outliers, noise, etc, then it will difficult for your ML algorithm to detect any underlying patterns (and hence make accurate predictions). Hence, it is very important that you invest time in "cleaning" your data (indeed, the majority of a data scientist's time is spent at this stage!).
 
 
+# Irrelevant Features (Bad Data)
+
+You ML algorithm will only be capable of learning if the training data contains enough **relevant** features and less irrelevant features. Hence, a very important indicator of success for a ML model is for oyou to come up with a good set of features to train on. This process is called "feature engineering", and it involves the following general steps:
+* Feature Selection: determine the most useful features you should train on
+* Feature Extraction: combine information in existing features to create new (hopefully more indicitive!) features
+* New Data: create new features by gathering new data
+
+
+# Overfitting the Training Data (Bad Algorithm)
+
+Human nature is prone to overgeneralizing small observations of a sample to the entire overall population. Surprisingly, ML can suffer from this as well and in this context, it is called "overfitting". This is when the ML model performs (i.e. make predictions) very well on the *training data*, but does not perform well or generalize to *new data*. Overfitting occurs when your model is too complex relative to the amount and noisy-ness of the training data.
+
+The effort of trying to reduce overfitting by simplifying the model is called "regularization". It is important to find a balance between fitting the training data perfectly and keeping the model simple enough to ensure it will generalize well.
+
+The amount of regularization to apply during learning is controlled by what's known as a "hyperparameter". A hyperparameter is an intrinsic parameter of a learning algorithm, and hence it is not affected by the learning algorithm itself - it must be set prior to training AND remains constant during training. The process of deciding on the value of a hyperparameter is called "hyperparameter tuning" which is an important part of the ML process.
+
+
+# Underfitting the Training Data (Bad Algorithm)
+
+"Underfitting" occurs when your ML model is too simple to learn any underlying patterns in the training data.
 
 
 
 
 ## Testing and Validating
 
+Finally, once we have trained a model, we need to evaluate its performance and fine-tune it accordingly.
+
 # Hyperparameter Tuning & Model Selection
+
+
+
 # Data Mismatch
 
 
