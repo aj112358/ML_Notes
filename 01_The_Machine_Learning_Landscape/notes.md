@@ -265,13 +265,23 @@ One solution to this problem is to repeatedly perform a process called "cross-va
 # Data Mismatch
 
 
+It is possible that you may have access to big data for training, but this data is not actually representative of that which will be seen when your model is launched.
+
+Consider the following example:
+
+You wish to make a ML model to classify pictures of flowers when users take them on their phones. To train this model, you could easily download a very large set of flower pictures from the internet to be used to train the model. But the downside is that these pictures may not be representative of what a picture take on a phone looks like.
+
+Now, suppose that you still downloaded these pictures from the internet, and you were also able to collect pictures taken on phones. In this case, it is very important to **remember that the test set and validation set must contain data that is closely representative of the data that would be seen upon launch**. As such, you decide to use all your phone pictures for these two sets (perhaps split evenly between the two) and decide to use the internet pictures as the training set.
 
 
+Then, you use the internet pictures to train your model. Upon evaluating use the validation set, you may find its performance to be very low. This may be for two reasons: (1) your model may be overfitting to the training set, or (2) the internet pictures are not representative of the phone pictures (there is a **mismatch** between them).
+
+To determine which is the case, you can split your training data (which you haven't done throughout this example) into a reduced training set and a so-called "train-dev set" (coined by Andrew Ng). You then train your model on the reduced training set, and evaluate it's performance on the train-dev set (keep in mind both sets only contain internet pictures). Then there would be two cases.
+
+First, if your model performs well on the train-dev set, this indicates that overfitting is NOT happening, which solves issue (1) above. If that same model performs poorly on the validation set, then you know it is due to a mismatch of data. If the model performs poorly on the train-dev set, this indicates overfitting, which means you can look into regularization, try to get more data, perform data cleaning, etc.
 
 
-
-
-
+In general, the problem of data mismatch can be handled by performing "data preprocessing". In this case, that would mean taking the internet pictures and manipulating them to become more similar to the phone pictures (adjust size, color, etc).
 
 
 
