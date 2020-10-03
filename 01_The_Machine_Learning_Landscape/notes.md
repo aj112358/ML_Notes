@@ -238,9 +238,27 @@ The amount of regularization to apply during learning is controlled by what's kn
 
 ## Testing and Validating
 
-Finally, once we have trained a model, we need to evaluate its performance and fine-tune it accordingly.
+Finally, once we have trained a model, we need to evaluate its performance and fine-tune it accordingly. The obvious way is to simply deploy your model and see how it performs. The drawback is that your client may need a fully-working model to launch, and is not willing to do any sort of test launch.
+
+The way to overcome this hurdle (how to test our model before/without launching it) is to split our total data into two sets, called the "training set" and "test set". You would train your model using the training set, and then "deploy" it onto the test set and evaluate its performance. Then when you truly deploy your model, its error rate on new cases is called the "generalization error" (aka: "our-of-sample error"). We estimate this by evaluating the model on the test set - it tells you how well your model will perform on instances of data it has never seen (just like new data). A common split into training-test sets is 80%-20%. But if your data is very large and contains 10 million samples, then even a 1%-sized test set is good (as your model will still be tested on 100,000 data points, which is quite substantial).
+
+If the error on the training set is low but the generalization error from the test set is high, it means your model would likely not perform well with new data and is most likely overfitting the data.
 
 # Hyperparameter Tuning & Model Selection
+
+
+Suppose that you have decided what model you want to fit. How do we then decide on an appropriate hyperparameter to apply? One was is to create/train multiple different models, each with one possible value of the hyperparameter. For each choice of hyperparameter, you fit your model to the training data and evaluate it on the test set. Unfortunately, you may find that your model produces more error than you expected upon deployment!
+
+This problem occurs because you were using the *exact same test set* to evaluate your model on *for each hyperparameter*. In other words, your hyperparameter only works best for *that* test set, and hence the model is not performing well with new data.
+
+A common solution to this problem is called "holdout validation". We take our training set (that we created by splitting our entire data set into a training set and test set) and further split data from *it* - this data that we split out is called the "validation set" (aka: "development set", "dev set"). Hence, we have essentially further reduced our training set by taking out the validation set.
+
+Then, on this reduced training set is where we would do the above strategy of creating/training multiple models with various hyperparameters. In this case, we would evaulate each model on the *validation set*. Once we find the best hyperparameter to use, we can then use it to train our final ML model on the *entire* original training set. Finally, as usual, we can then determing the generalization error by using the test set.
+
+
+This solution works well in practice but has its own flaws. If the validation set is too small, then your model hyperparameter evaluations will be imprecise (you may select a sub-optimal hyperparameter by mistake). If the validation set is too large, then the reduced training set must be very small. In this case, it is not idea to compare candidate hyperparameter models on such a small/reduced training set with the model that will be trained on the (much larger overall) training set.
+
+One solution to this problem is to repeatedly perform a process called "cross-validation". This is where you split your training set into a reduced training set and multiple validation sets that are each small. Each hyperparameter model would then be evaluated once for each small validation set, and then you take the average of each model's evaluations. This provides a more accurate measure of that particular hyperparameter model's performance. The drawback to cross-validation is that the time complexity scales with the number of validation sets.
 
 
 
