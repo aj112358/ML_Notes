@@ -47,6 +47,8 @@ That sounds pretty annoying to me! In contrast, consider instead the following s
 
 In this problem solving scheme, we do not have to do as much maintanence work since the ML algorithm will continue to become better as new data is fed into it (which is a process that can be automated).
 
+
+
 Another field in which implementing ML is useful are those which are too complex (in terms of scalability) or cannot be described via an algorithm. Some examples are: image recognition, speech recognition, online customer support, product recommendations, and many others.
 
 As another use, we can even use ML to learn ourselves! Given a large data set with many characteristics, we may wish to know which few are the most important for predicting something about that data set. A common example that is seen is that of housing prices. We can get data on various characteristics for many different houses on the market, and we wish to know which few characteristics have the most effect on the price of a house. Applying ML techniques to big data can help us discover patterns or trends that are not immediately apparant by the human eye.
@@ -127,6 +129,9 @@ Some important unsupervised learning algorithms:
 * Association rule learning
   * Apriori
   * Eclat
+  
+  
+  ![alt text][anomaly_detection]
   
 
 #### c. Semi-Supervised Learning
@@ -260,3 +265,9 @@ In general, the problem of data mismatch can be handled by performing "data prep
 - ML model = the result of finalizing training (fully trained and tested model)
 - ML system = what you get once you deploy your model to the real-world application you're working on
 - ML project = the process of doing the above three
+
+
+[anomaly_detection]: https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/anomaly_detection.png "illustration of anomaly detection"
+
+
+
