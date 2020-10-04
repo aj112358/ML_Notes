@@ -1,8 +1,4 @@
-# The Machine Learning Landscape
-
-* ML has already been around for decades! It has only recently become popular again.
-* The first 'mainstream' application of ML was the beloved spam filter, created in the 1990s
-
+# Ch 1 - The Machine Learning Landscape
 
 ## Chapter Objectives
 
@@ -255,21 +251,12 @@ First, if your model performs well on the train-dev set, this indicates that ove
 
 In general, the problem of data mismatch can be handled by performing "data preprocessing". In this case, that would mean taking the internet pictures and manipulating them to become more similar to the phone pictures (adjust size, color, etc.).
 
-
-
-
 [//]: # (https://blogs.perficient.com/2018/01/29/machine-learning-vs-statistical-learning/#:~:text=Both%20methods%20are%20data%20dependent.&text=Statistical%20Learning%20is%20math%20intensive,way%20less%20of%20human%20effort.
 )
 
+[//]: # (https://towardsdatascience.com/the-actual-difference-between-statistics-and-machine-learning-64b49f07ea3)
 
-
-
-
-https://towardsdatascience.com/the-actual-difference-between-statistics-and-machine-learning-64b49f07ea3
-
-
-
-ML algorithm = the name of the specific math model/formula you want to train (linear, svm, decision tree, etc)
-ML model = the result of finalizing training (fully trained and tested model)
-ML system = what you get once you deploy your model to the real-world application you're working on
-ML project = the process of doing the above three
+-ML algorithm = the name of the specific math model/formula you want to train (linear, svm, decision tree, etc)
+-ML model = the result of finalizing training (fully trained and tested model)
+-ML system = what you get once you deploy your model to the real-world application you're working on
+-ML project = the process of doing the above three
