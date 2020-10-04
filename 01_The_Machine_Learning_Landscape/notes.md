@@ -52,8 +52,6 @@ In this problem solving scheme, we do not have to do as much maintanence work si
       title = "general machine learning flow chart"/>
 </p>
 
-<--- ![alt text][machine_learning_flow_chart] --->
-
 Another field in which implementing ML is useful are those which are too complex (in terms of scalability) or cannot be described via an algorithm. Some examples are: image recognition, speech recognition, online customer support, product recommendations, and many others.
 
 As another use, we can even use ML to learn ourselves! Given a large data set with many characteristics, we may wish to know which few are the most important for predicting something about that data set. A common example that is seen is that of housing prices. We can get data on various characteristics for many different houses on the market, and we wish to know which few characteristics have the most effect on the price of a house. Applying ML techniques to big data can help us discover patterns or trends that are not immediately apparant by the human eye.
