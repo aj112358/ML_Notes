@@ -5,7 +5,7 @@ https://towardsdatascience.com/the-actual-difference-between-statistics-and-mach
 
 
 
-### Ch 1 - The Machine Learning Landscape
+# Ch 1 - The Machine Learning Landscape
 
 * ML has already been around for decades! It has only recently become popular again.
 * The first 'mainstream' application of ML was the beloved spam filter, created in the 1990s
@@ -94,7 +94,7 @@ We classify ML systems into three broad categories:
 
 We look at these in turn.
 
-# 1.4.1 - Supervised Learning vs. Unsupervised Learning
+### 1.4.1 - Supervised Learning vs. Unsupervised Learning
 
 
 We can classify ML systems based on the amount and type of human supervision they receive. In general, we have four major subcategories:
@@ -166,7 +166,7 @@ Some examples of reinforcement learning include:
 
 
 
-# 1.4.2 - Batch Learning vs. Online Learning
+### 1.4.2 - Batch Learning vs. Online Learning
 
 
 In "batch learning", the ML system is unable to learn in increments, hence all the training data must be used at once. As such, this is slower to execute (can potentially take many hours) and takes a lot of computing resources (CPU, memory, disk space, I/O, etc.) and so is performed offline. The system is trained and then immediately launched; it does not learn anymore. This is called "offline learning". If you want this ML model to learn about new data, you will need to re-train en entirely new model from scratch (using the old and new data)! Training a new system is normally done once every 24 hours or sometimes even once per week. That being said, if the scenario you are trying to model is rapidly changing, you may need a more reactive ML system. Moreover, since training takes a lot of resources, if you happen to be doing it on a cluster then this could end up costing a lof of money (even in opportunity cost). And if your data is truly big data, then it may be impossible to do batch learning!
@@ -179,7 +179,7 @@ An important parameter of online learning systems is their "learning rate" - how
 
 One challenge with online learning: if bad data is fed to the ML system, its performance will decline. To deal with this issue, you would need to monitor the ML system closely and shut it down if you detect a drop in performance. You could also monitor the input data and react to any abnormal data you see (you could use an anomaly detection algorithm if needed!).
 
-# 1.4.3 - Instance-Based Learning vs. Model-Based Learning
+### 1.4.3 - Instance-Based Learning vs. Model-Based Learning
 
 
 "Instance-based learning" is probably the most simple way to learn - the system simply memorizes each data point in the training set along with its label. It then deals with new data by using a "measure of similarity" to compare the new data to each individual training sample it has memorized.
@@ -195,24 +195,24 @@ As an example, consider the task of classifying spam emails. A very basic measur
 
 ## Main Challenges of ML
 
-# Insufficient Quantity of Training Data (Bad Data)
+### Insufficient Quantity of Training Data (Bad Data)
 
 It takes a large amount of data to have a ML algorithm work to a high standard. Simple problems may require 1000s of examples; complex problems (image recognition, etc) may even require millions!
 
 
 
-# Non-Representative Training Data (Bad Data)
+### Non-Representative Training Data (Bad Data)
 
 If your data is not a good representation of the situation you are trying to model, then your ML algorithm will not be able to make accurate predictions on new data. It is extremely important that your training data be representative of the new data you want to generalize your model for.
 
 This may not be easy in practice: if your training sample is too small you will have "sample noise" (non-representative data as a result of chance). On the other hand, if you have a very large training data set,  this can still be non-representative if your method of data collection is flawed (called "sampling bias").
 
-# Poor-Quality Data (Bad Data)
+### Poor-Quality Data (Bad Data)
 
 If your training data is full of errors, outliers, noise, etc, then it will difficult for your ML algorithm to detect any underlying patterns (and hence make accurate predictions). Hence, it is very important that you invest time in "cleaning" your data (indeed, the majority of a data scientist's time is spent at this stage!).
 
 
-# Irrelevant Features (Bad Data)
+### Irrelevant Features (Bad Data)
 
 You ML algorithm will only be capable of learning if the training data contains enough **relevant** features and less irrelevant features. Hence, a very important indicator of success for a ML model is for oyou to come up with a good set of features to train on. This process is called "feature engineering", and it involves the following general steps:
 * Feature Selection: determine the most useful features you should train on
@@ -220,7 +220,7 @@ You ML algorithm will only be capable of learning if the training data contains 
 * New Data: create new features by gathering new data
 
 
-# Overfitting the Training Data (Bad Algorithm)
+### Overfitting the Training Data (Bad Algorithm)
 
 Human nature is prone to overgeneralizing small observations of a sample to the entire overall population. Surprisingly, ML can suffer from this as well and in this context, it is called "overfitting". This is when the ML model performs (i.e. make predictions) very well on the *training data*, but does not perform well or generalize to *new data*. Overfitting occurs when your model is too complex relative to the amount and noisy-ness of the training data.
 
@@ -229,7 +229,7 @@ The effort of trying to reduce overfitting by simplifying the model is called "r
 The amount of regularization to apply during learning is controlled by what's known as a "hyperparameter". A hyperparameter is an intrinsic parameter of a learning algorithm, and hence it is not affected by the learning algorithm itself - it must be set prior to training AND remains constant during training. The process of deciding on the value of a hyperparameter is called "hyperparameter tuning" which is an important part of the ML process.
 
 
-# Underfitting the Training Data (Bad Algorithm)
+### Underfitting the Training Data (Bad Algorithm)
 
 "Underfitting" occurs when your ML model is too simple to learn any underlying patterns in the training data.
 
@@ -244,7 +244,7 @@ The way to overcome this hurdle (how to test our model before/without launching 
 
 If the error on the training set is low but the generalization error from the test set is high, it means your model would likely not perform well with new data and is most likely overfitting the data.
 
-# Hyperparameter Tuning & Model Selection
+### Hyperparameter Tuning & Model Selection
 
 
 Suppose that you have decided what model you want to fit. How do we then decide on an appropriate hyperparameter to apply? One was is to create/train multiple different models, each with one possible value of the hyperparameter. For each choice of hyperparameter, you fit your model to the training data and evaluate it on the test set. Unfortunately, you may find that your model produces more error than you expected upon deployment!
@@ -262,7 +262,7 @@ One solution to this problem is to repeatedly perform a process called "cross-va
 
 
 
-# Data Mismatch
+### Data Mismatch
 
 
 It is possible that you may have access to big data for training, but this data is not actually representative of that which will be seen when your model is launched.
