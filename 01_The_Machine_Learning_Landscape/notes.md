@@ -52,7 +52,7 @@ In this problem solving scheme, we do not have to do as much maintanence work si
       title = "general machine learning flow chart"/>
 </p>
 
-<-- ![alt text][machine_learning_flow_chart] -->
+<--- ![alt text][machine_learning_flow_chart] --->
 
 Another field in which implementing ML is useful are those which are too complex (in terms of scalability) or cannot be described via an algorithm. Some examples are: image recognition, speech recognition, online customer support, product recommendations, and many others.
 
