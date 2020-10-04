@@ -5,9 +5,18 @@ This repository is meant to be a medium for learning ML using the well known O'R
 
 ### History of Machine Learning
 
+ML has already been around for decades! It has only recently become popular again. Here are some history facts:
+
+* The first 'mainstream' application of ML was the beloved spam filter, created in the 1990s
 * late 1990s - Worldwide research of deep NN training is abandoned 
 * 2006 - Geoffrey Hinton et at. publish a paper titled *"A Fast Learning Algorithm for Deep Belief Nets"*, showing how a deep NN can be trained to do handwriten digit recognition with 98% accuracy (they called it "deep learning")
 * 2019 - The second edition of "Hands-On Machine Learning with Scikit-Learn, Keras & Tensorflow" is published!
+
+
+
+
+
+
 
 ### Tools Used In ML
 
