@@ -48,10 +48,11 @@ That sounds pretty annoying to me! In contrast, consider instead the following s
 In this problem solving scheme, we do not have to do as much maintanence work since the ML algorithm will continue to become better as new data is fed into it (which is a process that can be automated).
 
 <p align="center">
- <img src="https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/machine_learning_flow_chart.png" title = "machine_learning_flow_chart"/>
-<\p>
+ <img src="https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/machine_learning_flow_chart.png"
+      title = "general machine learning flow chart"/>
+</p>
 
-![alt text][machine_learning_flow_chart]
+<-- ![alt text][machine_learning_flow_chart] -->
 
 Another field in which implementing ML is useful are those which are too complex (in terms of scalability) or cannot be described via an algorithm. Some examples are: image recognition, speech recognition, online customer support, product recommendations, and many others.
 
