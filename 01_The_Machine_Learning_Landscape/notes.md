@@ -133,10 +133,19 @@ Some important unsupervised learning algorithms:
   * Apriori
   * Eclat
   
+
+<p align = "center">
+ <img src = "https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/clustering_visualization.png"
+      title = "clustering visualization"
+      />
+</p>
   
-![alt text][clustering_visualization]
   
-![alt text][anomaly_detection]
+<p align = "center">
+ <img src = "https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/anomaly_detection.png"
+      title = "illustration of anomaly detection"
+      />
+</p>
   
 
 #### c. Semi-Supervised Learning
@@ -150,7 +159,13 @@ Some important semi-supervised learning algorithms:
   * The entire stack is fine-tuned using supervised techniques
 * Restricted Boltzmann machines (RBM)
 
-![alt text][semi_supervised_learning]
+
+<p align = "center">
+ <img src = "https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/semi_supervised_learning.png"
+      title = "illustration of semi-supervised learning"
+      />
+</p>
+
 
 #### d. Reinforcement Learning
 
@@ -171,7 +186,13 @@ An important parameter of online learning systems is their "learning rate" - how
 
 One challenge with online learning: if bad data is fed to the ML system, its performance will decline. To deal with this issue, you would need to monitor the ML system closely and shut it down if you detect a drop in performance. You could also monitor the input data and react to any abnormal data you see (you could use an anomaly detection algorithm if needed!).
 
-![alt text][online_learning_flow_chart]
+
+<p align = "center">
+ <img src = "https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/online_learning_flowchart.png"
+      title = "online learning flow chart"
+      />
+</p>
+
 
 ### 1.4.3 - Instance-Based Learning vs. Model-Based Learning
 
