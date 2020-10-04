@@ -257,7 +257,12 @@ In general, the problem of data mismatch can be handled by performing "data prep
 
 
 
-https://blogs.perficient.com/2018/01/29/machine-learning-vs-statistical-learning/#:~:text=Both%20methods%20are%20data%20dependent.&text=Statistical%20Learning%20is%20math%20intensive,way%20less%20of%20human%20effort.
+
+[//]: # (https://blogs.perficient.com/2018/01/29/machine-learning-vs-statistical-learning/#:~:text=Both%20methods%20are%20data%20dependent.&text=Statistical%20Learning%20is%20math%20intensive,way%20less%20of%20human%20effort.
+)
+
+
+
 
 
 https://towardsdatascience.com/the-actual-difference-between-statistics-and-machine-learning-64b49f07ea3
