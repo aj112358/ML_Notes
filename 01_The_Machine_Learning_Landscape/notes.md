@@ -256,7 +256,7 @@ In general, the problem of data mismatch can be handled by performing "data prep
 
 [//]: # (https://towardsdatascience.com/the-actual-difference-between-statistics-and-machine-learning-64b49f07ea3)
 
--ML algorithm = the name of the specific math model/formula you want to train (linear, svm, decision tree, etc)
--ML model = the result of finalizing training (fully trained and tested model)
--ML system = what you get once you deploy your model to the real-world application you're working on
--ML project = the process of doing the above three
+- ML algorithm = the name of the specific math model/formula you want to train (linear, svm, decision tree, etc)
+- ML model = the result of finalizing training (fully trained and tested model)
+- ML system = what you get once you deploy your model to the real-world application you're working on
+- ML project = the process of doing the above three
