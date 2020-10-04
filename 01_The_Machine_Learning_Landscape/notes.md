@@ -282,4 +282,3 @@ In general, the problem of data mismatch can be handled by performing "data prep
 [online_learning_flow_chart]: https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/online_learning_flowchart.png "online learning flow chart"
 
 [semi_supervised_learning]: https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/semi_supervised_learning.png "illustration of semi-supervised learning"
-
