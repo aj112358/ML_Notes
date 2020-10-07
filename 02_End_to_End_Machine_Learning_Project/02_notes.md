@@ -99,6 +99,26 @@ Finally, we can think about what _type_ of ML problem this is. It is clearly a s
 ### 2.1.2 - Select a Performance Measure
 
 
+Once we have solidified the objective, our next step is to select a performance measure that we will use to assess the performance of our ML model. 
+
+A common performance measure used with regression problems is the "root-mean-square error" (RMSE), which is written mathematically as:
+
+<img src="http://latex.codecogs.com/svg.latex?\operatorname{RMSE}(\mathbf{X},h)&space;=&space;\sqrt{\frac{1}{m}\sum_{i=1}^m\left(h(\mathbf{x}^{(i)})-y^{(i)}\right)^2}" title="RMSE formula" />
+
+The logic behind this formula is that if the regular error is larger, then the square comes into affect and causes that particular error to be more "exposed" than smaller errors. We then take the average of all the errors, by adding then dividing by m. The squaring process causes the units of measurement to also be squared, hence we take the square root to revert to the normal units.
+
+Another common performance measure is the "mean-absolute error" (MAE), which is written mathematically as:
+
+<img src="http://latex.codecogs.com/svg.latex?\operatorname{MAE}(\mathbf{X},h)&space;=&space;\frac{1}{m}\sum_{i=1}^m\left|h(\mathbf{x}^{(i)})-y^{(i)}\right|" title="http://latex.codecogs.com/svg.latex?\operatorname{MAE}(\mathbf{X},h) = \frac{1}{m}\sum_{i=1}^m\left|h(\mathbf{x}^{(i)})-y^{(i)}\right|" />
+
+Both these formulas are essentially different ways to measure the "distance" between two vectors using different metrics (c.f. norms on metric spaces). In this context, we are finding the distance between each prediction vector and the corresponding vector of target values.
+
+
+### 2.1.3 - Check the Assumptions
+
+
+
+
 
 
 ## 2.2 - Get the Data
