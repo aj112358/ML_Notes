@@ -23,7 +23,7 @@ Here are the main steps in any ML project:
 
 To illustrate these steps, we will go through an entire ML project from start to finish using a real data set, one that is very commonly used as an example for any beginning ML student, called the "California Housing Prices dataset". This is a data set that contains data on prices of houses in California back in 1990 which was collected through a census survey. This data set can be found on Kaggle here: https://www.kaggle.com/camnugent/california-housing-prices
 
-_NOTE: For the purposes of this course, we will use a modified version of this data set (see later...)
+_NOTE: For the purposes of this course, we will use a modified version of this data set (see later...)_
 
 There any many different sources where one can procure data sets from. Here are some online sources:
 
@@ -49,14 +49,52 @@ Of course, it is also possible to collect your own data! Here are some ways you 
 * Web scraping
   * Write Python code to scrape a website
     * Libraries to use: BeautifulSoup, Requests, lxml, Selenium
-* In-Perosn data collection
+* In-Person data collection
   * Create your own surveys (with qualitative and quantitative questions)
   * Hold focus groups
   
 
 ## 2.1 - Look at the Big Picture
 
+This first step is to get a very quick high-level overview of our data set, and to set out our objective. 
+
+To start, we can go to the Kaggle page (linked above) to see what's written about it, what variables are included in the data, and other information. If you scroll down the webpage to the "Data Explorer" section, you can see a high-level quick overview of the data using either of the three visualization options ('Detail', 'Compact', 'Column'). 
+
+Under the 'Detail' tab, we see there are 10 variables in this data set including location (longitude & latitude coordinates, proximity to the ocean), various descriptive features of a house (age, total number of rooms/bedrooms), and population data (number of residents in a block, median income). Any units pertaining to numerical data is also described. We can also see some initial histograms of each variable which gives us some insight to the distribution of values for that variable (ex: all clustered about the same value, or spread out evenly)
+
+The 'Compact' tab shows us the actual tabulated data. We will do a more in-depth data analysis in the later stages of a ML project, but for now, the main thing we can see is the decimal accuracy of each variable.
+
+The 'Column' tab gives a bit more detail than the 'Detail' tab, including some basic descriptive statistics, but otherwise has mostly the same information as the 'Detail' tab.
+
+One thing to note is that the data in this data set is for so-called "block groups" in California. A "block group" (aka: "district") is defined to be the smallest geographical unit for which the US Census Bureau publishes sample data.
+
+Next, we must carefully understand what our objective is.
+
+
 ### 2.1.1 - Frame the Problem
+
+
+With this data set, our objective is to **predict the median housing price in any given district**. Although, as data scientists, this may be our mathematical objective, there may be more business objectives that we need to also carefully take into consideration.
+
+If you work for an organization, you may wish to ask your manager some more probing questions like:
+* How your model will be used?
+* How does the organization expect to benefit from your model?
+* What do they consider a 'success' and a 'failure'?
+* What is the timeline for the project?
+* What computational resources are you given to create your model?
+* What type of audience will you be presenting your solution to?
+* Is the data stored on a cluster?
+* Will the data be streaming in continuously over time?
+* Has the organization done a similar project in the past?
+* How are you solving your problem currently?
+
+
+Knowing the answer to as many of these questions as possible will help you in your endeavor to create an appropriate and accurate ML model - it will determine what algorithms you choose to investigate, how much time and effort you spend fine-tuning, etc.
+
+For the purposes of this course, we assume the scenario that our ML model's output will be fed into yet another ML system. This second ML system will ultimately make the decision of whether a certain block group is worth looking into for future investment.
+
+Finally, we can think about what _type_ of ML problem this is. It is clearly a supervised learning problem (we are given the desired output labels for each input vector). It is also clearly a regression problem (we are trying to predict a numerical value). More specifically, we can classify this as a _multiple regression_ problem since we have multiple input features, and can also classify it as a _univariate regression_ problem since we are only predicting a single output value. Finally, since we are using a static data set and are not expecting data to flow continuously into our ML system, this is a batch learning problem.
+
 
 ### 2.1.2 - Select a Performance Measure
 
