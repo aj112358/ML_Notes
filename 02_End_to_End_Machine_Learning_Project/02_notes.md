@@ -73,7 +73,6 @@ Next, we must carefully understand what our objective is.
 
 ### 2.1.1 - Frame the Problem
 
-
 With this data set, our objective is to **predict the median housing price in any given district**. Although, as data scientists, this may be our mathematical objective, there may be more business objectives that we need to also carefully take into consideration.
 
 If you work for an organization, you may wish to ask your manager some more probing questions like:
@@ -99,7 +98,6 @@ Finally, we can think about what _type_ of ML problem this is. It is clearly a s
 
 
 ### 2.1.2 - Select a Performance Measure
-
 
 Once we have solidified the objective, our next step is to select a performance measure that we will use to assess the performance of our ML model. 
 
@@ -130,10 +128,20 @@ Once you are certain about your objective, performance measure, and assumptions,
 
 ## 2.2 - Get the Data
 
+
 ### 2.2.1 - Create the Workspace
+
+I will assume that you have already set up your entire workspace, set up your Python environment (as you see fit), installed the appropriate Python libraries, and are able to start a new Jupyter Notebook (JN) and execute code without any problems.
 
 
 ### 2.2.2 - Download the Data
+
+
+There are many ways that data could be stored. A common way is in a relation database (ex: MySQL, postgreSQL, Microsoft SQL Server, Oracle, etc.). These databases themselves could be spread over a distrubuted cluster (ex: Hadoop), or even in multiple files (ex: different locations' financial data in Excel sheets). You need to make sure that you get all the data at your disposable from any source - the more data means (potentially) a better ML model. You may need to ask your manager for access if you do not have the clearance to the data, and should also look into any legal constraints/concerns as necessary (ex: private information should not get leaked!). Once you have your data, you should take some time to learn about its "data schema", the structure of how the data is stored and the connections between variables/tables in the data.
+
+For this course, we will use a reduced version of the California housing data set which has been simplified by removing many features.
+
+We now continue this discussion in the associated JN.
 
 
 ### 2.2.3 - Take a Quick Look at the Data Structure
