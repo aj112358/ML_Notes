@@ -150,10 +150,53 @@ We now continue this discussion in the associated JN.
 ### 2.2.4 - Create a Test Set
 
 
-## 2.3 - Discover and Visualize the Data to GAin Insights
+## 2.3 - Discover and Visualize the Data to Gain Insights
+
+### 2.3.1 - Visualizing Geographical Data
 
 
+### 2.3.2 - Looking for Correlations
 
+
+### 2.3.3 - Experimenting with Attribute Combinations
+
+
+## 2.4 - Prepare the Data for ML Algorithms
+
+
+### 2.4.1 - Data Cleaning
+
+### 2.4.2 - Handling Text and Categorical Attributes
+
+### 2.4.3 - Custom Transformers
+
+### 2.4.4 - Feature Scaling
+
+### 2.4.5 - Transformation Pipelines
+
+
+## 2.5 - Select and Train a Model
+
+### 2.5.1 - Training and Evaluating on the Training Set
+
+### 2.5.2 - Better Evaluation Using Cross-Validation
+
+
+## 2.6 - Fine-Tune Your Model
+
+### 2.6.1 - Grid Search
+
+### 2.6.2 - Randomized Search
+
+### 2.6.3 - Ensemble Methods
+
+### 2.6.4 - Analyze the Best Models and Their Errors
+
+### 2.6.5 - Evaluate Your System on the Test Set
+
+## 2.7 - Present Your Solution
+
+## 2.8 - Launch, Monitor, and Maintain Your System
 
 
 
