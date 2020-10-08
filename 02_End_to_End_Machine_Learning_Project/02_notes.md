@@ -81,6 +81,8 @@ If you work for an organization, you may wish to ask your manager some more prob
 * How does the organization expect to benefit from your model?
 * What do they consider a 'success' and a 'failure'?
 * What is the timeline for the project?
+* How is the data coming in?
+* Where are your predictions going?
 * What computational resources are you given to create your model?
 * What type of audience will you be presenting your solution to?
 * Is the data stored on a cluster?
@@ -116,15 +118,43 @@ Both these formulas are essentially different ways to measure the "distance" bet
 
 ### 2.1.3 - Check the Assumptions
 
+Finally, before we actually start writing any code, we should perform a fail-safe check with our assumptions for the problem. We don't want to be writing code for months on end only to later realize we've been working under a false/undesired assumption and/or realizing we could have done something easier, less time consuming, more cost effective, etc.
 
+Some assumptions you want to consider are:
+* Is this a regression or classification task?
+* How will our ML model's output be used downstream?
+* What is the level of accuracy our model needs? (Very strict or more loose?)
+* What is the deadline(s) for this project?
 
-
-
+Once you are certain about your objective, performance measure, and assumptions, it's time to start coding!
 
 ## 2.2 - Get the Data
 
-
 ### 2.2.1 - Create the Workspace
+
+
+### 2.2.2 - Download the Data
+
+
+### 2.2.3 - Take a Quick Look at the Data Structure
+
+
+### 2.2.4 - Create a Test Set
+
+
+## 2.3 - Discover and Visualize the Data to GAin Insights
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 [anomaly_detection]: https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/anomaly_detection.png "illustration of anomaly detection"
