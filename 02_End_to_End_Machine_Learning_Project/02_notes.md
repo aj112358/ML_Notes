@@ -152,11 +152,14 @@ We now continue this discussion in the associated JN.
 
 ## 2.3 - Discover and Visualize the Data to Gain Insights
 
+So far, we have only taken a very high-level look at the data when we downloaded it (cf. 2.2.3 above). In this step, we invest our time in looking deeper into the data.
+
+**NOTE: We must only explore the _training set_ and NOT the test set!!!**
+
+In case we want to add things to the stratified training set we wish to explore, we can simply create a copy of it to fool around with. This way, the original is kept unchanged.
+
 ### 2.3.1 - Visualizing Geographical Data
-
-
 ### 2.3.2 - Looking for Correlations
-
 
 ### 2.3.3 - Experimenting with Attribute Combinations
 
@@ -165,33 +168,24 @@ We now continue this discussion in the associated JN.
 
 
 ### 2.4.1 - Data Cleaning
-
 ### 2.4.2 - Handling Text and Categorical Attributes
-
 ### 2.4.3 - Custom Transformers
-
 ### 2.4.4 - Feature Scaling
-
 ### 2.4.5 - Transformation Pipelines
 
 
 ## 2.5 - Select and Train a Model
 
 ### 2.5.1 - Training and Evaluating on the Training Set
-
 ### 2.5.2 - Better Evaluation Using Cross-Validation
 
 
 ## 2.6 - Fine-Tune Your Model
 
 ### 2.6.1 - Grid Search
-
 ### 2.6.2 - Randomized Search
-
 ### 2.6.3 - Ensemble Methods
-
 ### 2.6.4 - Analyze the Best Models and Their Errors
-
 ### 2.6.5 - Evaluate Your System on the Test Set
 
 ## 2.7 - Present Your Solution
