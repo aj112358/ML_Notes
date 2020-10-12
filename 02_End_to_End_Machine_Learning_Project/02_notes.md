@@ -176,6 +176,8 @@ In case we want to add things to the stratified training set we wish to explore,
 
 ## 2.5 - Select and Train a Model
 
+We have invested a lot of time in understanding the problem, exploring our data set, and creating a transformation pipeline. We are finally ready to take our cleaned data and train a model using it!
+
 ### 2.5.1 - Training and Evaluating on the Training Set
 ### 2.5.2 - Better Evaluation Using Cross-Validation
 
