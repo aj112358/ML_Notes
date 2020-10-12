@@ -190,13 +190,57 @@ We have invested a lot of time in understanding the problem, exploring our data 
 ### 2.6.4 - Analyze the Best Models and Their Errors
 ### 2.6.5 - Evaluate Your System on the Test Set
 
+
 ## 2.7 - Present Your Solution
+
+Now that we are finally done the model creation process, the next step is to **get approval for launch**. This is usually done in the form of a presentation, which should be concise, have clear visualizations and easy-to-remember statements. Some things to may wish to discuss:
+* your solution
+* highlight what you have learned about the problem and the data
+* what assumptions were made
+* how well your model performs
+* what your model's limitations are
+
+Hopefully you have been documenting your entire process throughout all your hard work!
+
+For our example, our ML model doesn't seem to perform that much better than the original method of prediction (which was simply the experts' price estimates - usually off by 20%). It may still be a good idea to launch though, as it would allow the experts' time to be used for other things.
+
 
 ## 2.8 - Launch, Monitor, and Maintain Your System
 
+Now that we have gotten approval for launch, we need to get our ML model ready for production. Some things we should do:
+* Clean our code
+* Write documentation
+* Create tests (unit tests???)
 
+We can now deploy our ML model into our production environment. The simplest way to do this is to save our model (as a pickle file) and load it directly into the production environment. It can then be used to make predictions by simply calling the 'predict()' method.
 
+If we happen to be launching this on a web application (phone app; website) we can look into setting up a query code between the app and our model. Another option is to 'wrap' your model in some online web service (Flask; Docker) so that the web application can query it through a REST API. This has the added benefit of allowing you to make updates when necessary without disrupting the web app, and also allows you to use as many servers on the web service as needed to balance incoming requests.
 
+Yet another option is to deploy the model onto a cloud platform like 'Google Cloud AI Platform'. This provides a web service that automatically takes care of load balancing for you. You can use this web service in your organizations website or on a phone app.
+
+**This is not the end...**
+
+We need to think about writing code to monitor our ML system's live performance, and trigger alerts if there is a drop. A drop could be quick/steep, but could also be a slow decay over time. This is common as ML systems get old as time goes on and need to be continually updated to our changing world.
+
+One way to monitor our ML system's live performance is to simply infer it from downstream metrics. For example, if we had designed a recommender system which provides suggestions for users, and we observe that the number of suggested products sold drops below the same for non-suggested products, this means something is awry. The main suspect is the model - perhaps our data pipeline is broken, or the model needs to be re-trained on fresh data.
+
+Unfortunately, it is not always possible to determine the model's performance _without_ human analysis. For example, if we had designed an image classification system used to detect product defects on a production line, then it would be very important to get alerts quickly (otherwise we could accidentally ship defective products to thousands of customers!). One solution, with regards to human analysis, is to get people to check various pictures that the model had classified (especially those it was unsure about).
+
+So! We need to implement a monitoring system (with or without human analysis) that not only detects drops in performance but also defines procedures to follow in case of such occurences. Unfortunately, **this can be a lot of work**, and may even be more work than constructing the model itself!
+
+Not only that, but if the data keeps updating, you will have to keep up and re-train your ML model regularly. Of course, the easiest thing is to automate this whole process:
+* Collect fresh data regularly and label it
+* Write a script to train and fine-tune a model automatically and periodically
+* Write a script to evaluate both new and old model on an updated test set (only deploy if new one is better)
+
+Another thing we should do is **evaluate the quality of input data**. It's possible the model's performance is dropping because of poor-quality inputs (ex: bad sensor, upstream data is stale). Even though it may take some time for your ML system's performance to drop enough to trigger an alert, we can still try to catch such issues early. Some things to look out for:
+* Increasingly more inputs are missing a feature
+* Mean/standard deviation drifts too far from the training set
+* Categorical feature starts containing new/unexpected categories
+
+Finally, as is good practice in programming, keep backups of all your models, pipelines, etc. Have these on the ready in case you need to revert to an older model; you can even automate this process using a script as well! You could also consider keeping backups of each version of the data sets used - you can rollback to a previous one if the new one (during the collection process?) gets corrupted. Although, this would take up a lot of memory so always think of the trade-offs! But, having backups allows you to evaluate your model on any of them too.
+
+_Note: Something you can think about is creating several subsets of the test set as well, so that you can evaluate how your model performs on specific parts of the data. (ex: subsets each for a specific kind of ocean proximity). This will give you a deeper understanding of your model's strengths and weaknesses._
 
 
 
