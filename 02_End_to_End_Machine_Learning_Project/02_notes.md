@@ -243,7 +243,13 @@ Finally, as is good practice in programming, keep backups of all your models, pi
 _Note: Something you can think about is creating several subsets of the test set as well, so that you can evaluate how your model performs on specific parts of the data. (ex: subsets each for a specific kind of ocean proximity). This will give you a deeper understanding of your model's strengths and weaknesses._
 
 
+## - Concluding Remarks
 
+Working through the entire 8-step ML process is quite an ordeal! It takes a lot of time investment as well as setting up a lot of initial infrastructure. There are a lot of tools at our disposal for each step of the process. Most of the work was contained in the data cleaning steps and the model creation process (model selection and fine-tuning). Once we have a pipeline built, it is easy to automate this task for production. 
+
+**Important Note:** The ML algorithm themselves are important, but **NOT as important as** having a good understanding of the entire ML process. It is better to simply be comfortable with a few ML algorithms and be very efficient with the ML process, than it is to spend lots of time learning new/advanced algorithms and not getting more experience with the ML process. 
+
+GL;HF :)
 
 
 
