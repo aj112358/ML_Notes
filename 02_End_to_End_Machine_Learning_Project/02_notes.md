@@ -126,6 +126,7 @@ Some assumptions you want to consider are:
 
 Once you are certain about your objective, performance measure, and assumptions, it's time to start coding!
 
+
 ## 2.2 - Get the Data
 
 
@@ -136,18 +137,46 @@ I will assume that you have already set up your entire workspace, set up your Py
 
 ### 2.2.2 - Download the Data
 
-
 There are many ways that data could be stored. A common way is in a relation database (ex: MySQL, postgreSQL, Microsoft SQL Server, Oracle, etc.). These databases themselves could be spread over a distrubuted cluster (ex: Hadoop), or even in multiple files (ex: different locations' financial data in Excel sheets). You need to make sure that you get all the data at your disposable from any source - the more data means (potentially) a better ML model. You may need to ask your manager for access if you do not have the clearance to the data, and should also look into any legal constraints/concerns as necessary (ex: private information should not get leaked!). Once you have your data, you should take some time to learn about its "data schema", the structure of how the data is stored and the connections between variables/tables in the data.
 
 For this course, we will use a reduced version of the California housing data set which has been simplified by removing many features.
 
-We now continue this discussion in the associated JN.
+We now continue this discussion in more detail in the associated JN. Here in these notes we simply summarize the main ideas and our findings. **(Go to "ML Step2 2 in JN)**
+
+To download the data, we write our code inside a function, and then simply call this function. We do the same when loading the data into the JN. This allows us to easily do the same in the future for updated data, or if we want to use a new machine.
 
 
 ### 2.2.3 - Take a Quick Look at the Data Structure
 
+With the data downloaded into the JN, we can have a quick initial look at it. We can use various methods provided by the pandas library including .head(), .info(), .describe(), and .columns. We can also take advantage of many features provided by the matplotlib and seaborn libraries including creating a basic histogram of relationships between each attribute, creating a heatmap, etc. 
+
 
 ### 2.2.4 - Create a Test Set
+
+Once you are done with your initial look, the next thing you should do is *immediately split the data into a training set and test set.* It is important to do this before the more in-depth EDA as we don't want to accidentally "discover" some pattern in the test set that may bias our choice of ML algorithm. This is called "data snooping" bias.
+
+We can also think about creating multiple subsets of the test set, each for specific parts of the data we may wish to evaluate our model on *(ex: a subset of each type of ocean proximity)*. This could potentially give us a deeper understanding of our model's strengths and weaknesses.
+
+In order to split our data, we will **use a unique identifier for each instance to dictate whether that instance is allocated to the training or test set**. This method has a few benefits:
+
+1. Random splitting will cause the test set to be different each time our ML program is executed. This method maintains consistency.
+2. New data can easily be included in the training and test sets, without affecting the allocation of old data.
+
+In the case that the data does not come with a unique identifier column, we can simply make our own for instance by using the most stable features in the data set. 
+
+Further, we can implement a method of sampling called **stratified sampling**, which involves partitioning a population into sub-populations each of which is homogeneous with respect to a certain characteristic/attribute. Then, we can ensure that we sample data (into the training and test set) in the same ratios of these sub-populations.
+
+In our data, we infer that the median_income attribute is very important for predicting the median_house_value. So we perform stratified sampling with this attribute. We convert this numerical attribute into categorical attributes defined by income levels as seen below:
+
+Category | Income Level
+---|---
+1 | 0 - 1.5
+2 | 1.5 - 3.0
+3 | 3.0 - 4.5
+4 | 4.5 - 6.0
+5 | 6.0+
+
+Then, we use Scikit-Learn to split our data into a training set and test set using the method of stratified sampling. Having finally split our data, we can now move on to our in-depth EDA.
 
 
 ## 2.3 - Discover and Visualize the Data to Gain Insights
