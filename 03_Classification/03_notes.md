@@ -23,13 +23,25 @@ To procure the data, Scikit-Learn has a built-in function that allows one to dow
 1. Small ("toy") data sets -> 
 2. Large ("real world") data sets ->
 3. Generated data sets ->
-4. Download from openml.org repository -> https://www.openml.org
+4. Download from OpenML repository: This is a public repository of many user-made data sets -> https://www.openml.org
 
 https://www.openml.org/d/554
 
 http://yann.lecun.com/exdb/mnist/ -> original website
 
-We will be downloading the MNIST data set from the openml.org repository, and so we can use SKL's 'datasets.fetch_openml' function.
+We will be downloading the MNIST data set from the openml.org repository, and so we can use SKL's 'datasets.fetch_openml' function. Once downloaded, we can get some key information about what this data set contains using various SKL methods. Every data set downloaded through SKL comes loaded as a dictionary with the same keys, so we can look at each key in turn:
+* .DESCR -> Contains detailed description about the data set
+* .details -> Contains various meta-data properties of the data set
+* .data -> Contains the actual data points (NumPy array)
+* .target -> Contains associated labels for each data point (NumPy array)
+* .feature_names -> Contains names of all feature columns (784 columns for MNIST; each digit image is a 28x28 pixel grid)
+* .target_names -> Contains names of all target columns (only one column for MNIST)
+* .url -> Gives URL of data set on the OpenML repository
+
+You will find that there are 70,000 images with each image posessing 784 features.  This is because each image is in fact a 28x28 grid of pixel, and so each feature is the grayscale value of a particular pixel (0 = white; 255 = black). We can visualize these images simply by using matplotlib.
+
+The final (and very important!) thing we should do is to **split our data into a training and test set**. As it happens, the MNIST data set is already split into a training and test set for us: The first 60,000 instances make the training set, and the last 10,000 instances make the test set. Moreover, the training set comes pre-shuffled, meaning that all our cross-validation folds will have the same ratio of digits.
+
 
 ## 3.1 - Training a Binary Classifier
 
