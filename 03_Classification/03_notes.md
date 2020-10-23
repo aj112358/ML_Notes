@@ -66,6 +66,8 @@ The final (and very important!) thing we should do is to **split our data into a
 
 ## - Concluding Remarks
 
+In this chapter we have learned the many aspects of a classification task.
+
 
 
 
