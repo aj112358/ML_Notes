@@ -4,9 +4,9 @@
 
 1. Apply the ML process through a classification problem
 2. Learn various performance measures for a classification problem
-  a. Cross-Validation
-  b. Confusion matrix
-  c. Precision and recall
+    1. Cross-Validation
+    2. Confusion matrix
+    3. Precision and recall
 3. Learn about the trade-off between precision and recall
 4. Implement a multiclass classifier
 5. Learn about multilabel classification
