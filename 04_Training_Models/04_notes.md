@@ -132,6 +132,20 @@ Something else to take into consideration is the total number of iterations you 
 
 ### 4.2.2 - Stochastic Gradient Descent
 
+The main problem with batch gradient descent is that it uses the entire training data set at each iteration which causes it to execute more slowly. This is in contrast to "stochastic" gradient descent, which selects a single random training instance at each iteration. This makes the stochastic gradient descent algorithm much faster than the batch version, but the trade off is that its movement towards the minimum is more random and chaotic. As a result, when it does get close to the minimum it will not be able to get arbitrarily close to it due to its chaotic nature, and hence the model parameters it returns are only a rough approximation of the true minimum. On the other hand, there are benefits to implementing stochastic gradient descent. Because of its random behaviour it can "jump out/away" from any local minima and does not get caught like batch gradient descent would. 
+
+So how can we implement stochastic gradient descent and take advantage of the randomness but also solve the issue of not being able to settle on the optimal model parameter values? The solution is to **gradually reduce the learning rate** over each iteration. We start with a large learning rate which allows the algorithm to make progress quickly and possibly get past any local minima. Then we reduce the learning rate to make the jumps smaller which will help the algorithm to more accurately reach the global minimum. The learning rate is governed by a "learning schedule" which is simply a function that decides what the learning rate should be for that iteration.
+
+Potential problems could occur if you try to reduce the learning rate too quickly (it may get stuck in a local minimum) and if it is reduced too fast (it may bounce around the global minimum without getting closer to it, hence returning an even less optimal value).
+
+We implement some code in the JN to illustrate this algorithm:
+
+As you can see, we only get a close **approximation** to the true optimal model parameter values. Also, you can see in the code that we actually run through the training set only 50 times; each round is called an "epoch", and within each epoch the algorithm goes through the training data only 50 times (as opposed to batch gradient descent, which goes through the training set 1000 times).
+
+The final observation is that selecting instances randomly for each iteration may result in some instances not being selected at all and still others being selected multiple times. To make sure that the algorithm goes through each instance during each epoch, one approach is to **shuffle the training set (instances and labels!) at the beginning of each epoch** and then simply go through each instance one at a time. Of course, this takes more time for convergence to the global minimum.
+
+
+
 
 ### 4.2.3 - Mini-Batch Gradient Descent
 
