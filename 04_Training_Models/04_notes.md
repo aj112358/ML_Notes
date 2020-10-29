@@ -88,10 +88,51 @@ One main difficulty that could arise when implementing gradient descent is the c
     
 As can be seen, if the random initialization is too far left, then the gradient descent algorithm will instead reach the local minimum, confusing it for the global minimum. If the random initialization is too far right, then the gradient descent algorithm will take a long time to execute as it has to travel along the portion of the graph with near-zero slope.
 
+As it so happens, the MSE cost function for linear regression is a convex function, hence it only has a single global minimum. Moreover, it is Lipschitz continuous meaning its output values do not change abruptly, which translates into its slope also only changing gradually. As such, the gradient descent method is guaranteed to reach the global minimum with any amount of precision (given you let the algorithm run long enough).
+
+In three-dimensions, the MSE cost function is shaped like a paraboloid. Hence it is possible that it may be stretched along one of its axes. If you consider how gradient descent uses the gradient as the measure of how/where to travel, we can look at the paraboloids level curves as shown in the diagram below:
+
+<insert level curve diagram>
+    
+As can be seen, if there is a stretch along one of the axes (right-hand diagram), the gradient descent method takes a long time to converge to the minimum. On the other hand, if both axes have the same scale (no stretching), then gradient descent essentially goes directly towards the minimum. This is why **feature scaling is important**!
+
+Finally, when we are training a model, we must remember that we are essentailly searching through the parameter space for the most optimal parameters to use. So if your ML problem has lots of parameters this search will be more difficult and take a longer time. Later in this book we will learn techniques we can implement to reduce the number of parameters that are needed.
 
 
 ### 4.2.1 - Batch Gradient Descent
+
+As you may have alluded to, the general gradient descent algorithm requires us to compute the gradient vector of the cost function. Considering the linear regresson MSE formula above, we can easily compute the partial derivative of an arbitrary parameter \theta_j to be:
+
+<partial derivative formula>
+    
+and hence, the gradient vector is simply:
+
+<gradient vector> = \frac{2}{m}X^T(X\theta - y)
+
+*NOTE: This formula involves doing computations with the entire training data set at each iteration, hence the name **batch** gradient descent. Unfortunately, one consequence is that gradient descent executes very slowly for large data sets. Luckily, as we know, its good for use when there are a lot of features.*
+
+Finally, to compute the next iterative value, we simply apply the learning rate \eta as shown:
+
+\theta_new = \theta_old - \eta * <gradient>
+    
+Let's jump to the JN and see what this looks like in practice!
+
+Indeed, we get the same values for the model parameters as when we used the normal equation, as well as from the SKL built-in 'LinearRegression()' class! The question that you should be asking now is: 'What would happen if we used a higher or lower learning rate?'. Here is a visual that depicts, for three different learning rates, the first 10 iterations of gradient descent. The red dashed line is our random initialization, and the blue lines are the result of each iteration (i.e. we take the theta parameters of that iteration and plot the line defined by them).
+
+<insert learning rate visual>
+    
+As you can see, with the very small \eta=0.02 learning rate, the speed of convergence of gradient descent is much slower. With \eta = 0.5, we greatly overshoot the optimal solution and the lines actually diverge away from our data points!
+
+As we know, we can utilize a grid search to find the optimal learning rate. A good idea is to **limit the number of iterations so that grid search can eliminate models that take too long to converge** (indicating that learning rate was not the optimal one).
+
+Something else to take into consideration is the total number of iterations you wish to run gradient descent for. Too few iterations would mean that your have not reached the minimum, but too many iterations mean you would be wasting time (the model parameters have already, with regards to decimal place accuracy, reached the minimum). To solve this issue, we simply use a very large number of iterations and also implement an example of 'early stopping', where we break the algorithm/loop once the gradient vector has norm smaller than some specified number called the "tolerance" (denoted with \epsilon).
+
+**Note:** It may take O(1/\epsilon) iterations to reach the minimum within your specified tolerance \epsilon. As such, if you decrease the tolerance by a factor of 10, the number of iterations will increase by a factor of 10 also!
+
+
 ### 4.2.2 - Stochastic Gradient Descent
+
+
 ### 4.2.3 - Mini-Batch Gradient Descent
 
 
