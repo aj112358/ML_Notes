@@ -169,13 +169,18 @@ The table below compares various properties of each algorithm. Don't forget that
 
 ## 4.3 - Polynomial Regression
 
+In cases where a simple line will not fit your data, you can look into doing a "polynomial regression" instead. This involves creating new features as *powers* of old features. Then, with these new features, you **can** create a linear regression model on your non-linear data set! 
 
+Let's see an implementation in the JN.
 
+A very good use of polynomial regression is to **find relationships between features**, which is something that linear regression cannot do. Indeed, when you instantiate a 'PolynomialFeatures' class by specifying the 'degree' parameter, the class will actually create all possible combinations of features up to that degree. For example, if you had two features a & b and you specified degree=3, then the new features would be all of b^3, ab, ab^2, a^2, a^2b, a^3 (i.e. it will make the full spectrum of all cubic terms).
 
-
+Something to take note of is the complexity of doing a polynomial regression: Specifying degree=d will take your n features and turn them into (n+d)!/n!d! number of features, which can get very large very quickly!
 
 
 ## 4.4 - Learning Curves
+
+
 
 ## 4.5 - Regularized Linear Models
 
