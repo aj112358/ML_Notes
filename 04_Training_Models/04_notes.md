@@ -40,10 +40,29 @@ Now that we have the equation for a linear regression algorithm, in order to "tr
 
 Here is the general formula for the MSE, as we have seen before:
 
-<img src="http://latex.codecogs.com/svg.latex?\operatorname{MSE}(\mathbf{X},h)&space;=&space;\frac{1}{m}\sum_{i=1}^m\left(h(\mathbf{x}^{(i)})-y^{(i)}\right)^2" title="MSE formula" />
+<img src="http://latex.codecogs.com/svg.latex?\operatorname{MSE}(\mathbf{X},h)=\frac{1}{m}\sum_{i=1}^m\left(h(\mathbf{x}^{(i)})-y^{(i)}\right)^2" title="MSE formula" />
+
+Substituting our linear regression model for <img src="http://latex.codecogs.com/svg.latex?h(\mathbf{x}^{(i)})" title="blah" /> gives use the form of the MSE for linear regression (we simplify the notation also by only writing theta as the argument in the formula):
+    
+<img src="http://latex.codecogs.com/svg.latex?\operatorname{MSE}(\theta)=\frac{1}{m}\sum_{i=1}^m\left(\theta^Tx^{(i)}-y^{(i)}\right)^2" title="MSE formula for linear regression" />
 
 
 ### 4.1.1 - The Normal Equation
+
+To minimize the MSE cost function, we must find the appropriate value of \theta. As it happens, using some calculus and linear algebra, one can show that the solution of this minimization problem can be written in closed-form as:
+
+<img src="http://latex.codecogs.com/svg.latex?\hat{\theta}=(X^TX)^{-1}*X^Ty" />
+
+where:
+
+- \hat{\theta} - value of \theta that minimizes the MSE
+- y - column vector of target values
+
+This equation is called the "normal equation". Let's implement this as Python code in the JN:
+
+
+
+
 ### 4.1.2 - Computational Complexity
 
 ## 4.2 - Gradient Descent
