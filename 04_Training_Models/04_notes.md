@@ -180,6 +180,43 @@ Something to take note of is the complexity of doing a polynomial regression: Sp
 
 ## 4.4 - Learning Curves
 
+So far we have only looked at fitting linearly-related data and quadratically-related data. If we wanted to, we could have fitted the quadratic data with a very high-degree polynomial (ex: 300-degree polynomial). Here is a visual of a linear, quadratic, and 300-degree polynomial fit to the same quadratic data:
+
+<insert visual here>
+    
+As can be seen, the 300-degree polynomial is grossly overfitting the data, whereas the linear model is underfitting the data. It seems that the quadratic model is the right fit.
+
+In this example, we had already known that a quadratic model would be a good fit, as that is the type of model that was underlying the data we generated! But in practice, the question is **how do we decide on the complexity of our model**? A related question is **how can we measure the level of underfitting or overfitting that may be occurring**?
+
+One way to investigate underfitting or overfitting is to implement cross-validation, as we have seen in the past. If your model performs well on the training set but performs poorly on the validation set(s), this is an indication of overfitting. If it performs poorly on both the training and validation sets, then it is underfitting.
+
+Here, we look into another way to investigate underfitting or overfitting - by plotting the "learning curve" of the ML algorithm. This is a plot that depcits the models performance on the training data as well as on the validation set, both as a function of the training data size (i.e. training iteration). A learning curve is created by essentially training the ML algorithm several times on different sized subsets of the training set. 
+
+We implement some code in the JN to illustrate learning curves for underfitting and overfitting. Here is the learning curve we get for underfitting:
+
+<insert your graph for underfitting>
+    red curve -> training data
+    blue curve -> validation data
+
+From this plot, we see a few defining characteristics of underfitting:
+* Performance curve for the training data:
+    * Starts with zero RMSE as the model can fit the training data perfectly
+    * RMSE starts to increase as perfect fitting cannot happen with more training data (noise & data is not linear in the first place)
+    * Training error increases, then plateaus (*hence, simply adding more instances won't help!*)
+* Performance  curve for the validation data:
+    * Starts with high RMSE as the model cannot make good predictions when having only trained on a few instances
+    * RMSE starts to decrease as the model becomes better at making predictions (due to more training data)
+    * Validation error decreases, then plateaus (*because a linear model is insufficient for our data set*)
+* Both curves, when plateaued, are very close to one another AND have high RMSE
+
+**Recall: A solution for resolving underfitting the training data is to either try a more complex model or create better features**
+
+
+
+
+
+
+
 
 
 ## 4.5 - Regularized Linear Models
