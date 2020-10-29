@@ -60,12 +60,35 @@ where:
 
 This equation is called the "normal equation". Let's implement this as Python code in the JN:
 
-
-
+<see JN>
+    
 
 ### 4.1.2 - Computational Complexity
 
+When doing computational mathematics, it is important to consider the time and space complexity of your code and computations. In our case, to use the normal equation requires us to compute the inverse of a (n+1)x(n+1) sized matrix (n is the number of features), which has a computational complexity (time?) somewhere between O(n^2.4) and O(n^3). Since SKL first computes the SVD of the matrix, it's computational complexity happens to be around O(n^2).
+
+Unfortunately, even using the SVD can get very slow if your ML problem has a large enough amount of features. The good news is that since both the normal equation and using the SVD are both linear problems, the space complexity is usually not an issue as long as you have enough memory!
+
+Finally, once you have created your linear regression model, using it to make predictions has very low computational complexity (it is a linear model after all; it's only computing sums and products!).
+
+Now that we know the basics of linear regression, we look at a completly different way to **train** a linear regression model, which uses a limiting technique as opposed to direct computation of the model parameters.
+
+
 ## 4.2 - Gradient Descent
+
+The method of **Gradient Descent** is a more general *optimization algorithm* that can be applied to a variety of problems in order to find optimized solutions. It uses the gradient of the function as the steepest path to a local minimum or local maximum, and it does this in an iterative fashion.
+
+We start with an initial guess for \theta, simply using random values as the model parameters. This step is called "random initialization". We then use a pre-defined (or iteratively computed) step size along with the gradient to compute the next iteration. Eventually, the iterations will converge to the local minimum.
+
+Here, the step size is a hyperparameter called the "learning rate". If chosen too small, the algorithm will take longer to converge. If chosen too large, the algorithm may overshoot the target local minimum and the iterations will diverge.
+
+One main difficulty that could arise when implementing gradient descent is the cost function (in the case of linear regression, the MSE) may be discontinuous or non-differentiable. The following diagram depicts two scenarios that could affect the execution of gradient descent:
+
+<insert image>
+    
+As can be seen, if the random initialization is too far left, then the gradient descent algorithm will instead reach the local minimum, confusing it for the global minimum. If the random initialization is too far right, then the gradient descent algorithm will take a long time to execute as it has to travel along the portion of the graph with near-zero slope.
+
+
 
 ### 4.2.1 - Batch Gradient Descent
 ### 4.2.2 - Stochastic Gradient Descent
