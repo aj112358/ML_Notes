@@ -144,16 +144,35 @@ As you can see, we only get a close **approximation** to the true optimal model 
 
 The final observation is that selecting instances randomly for each iteration may result in some instances not being selected at all and still others being selected multiple times. To make sure that the algorithm goes through each instance during each epoch, one approach is to **shuffle the training set (instances and labels!) at the beginning of each epoch** and then simply go through each instance one at a time. Of course, this takes more time for convergence to the global minimum.
 
+**NOTE:** If you choose not to shuffle the instances during each epoch, then the algorithm will optimize each label one at a time and hence may/will not settle near the global minimum!
 
+Finally, as usual we can use SKL to implement stochastic gradient descent for us using its 'SGDRegressor' class.
 
 
 ### 4.2.3 - Mini-Batch Gradient Descent
 
+"Mini-batch" gradient descent has properties of both batch and stochastic gradient descent algorithms. At each iteration, it uses a random set of training instances called "mini-batches". Using more than one instance per iteration allows it to be less chaotic when trying to find the global minimum, and so when it reaches it its steps will be more near to it (but will still be chaotic). But, as a negative consequence, since its step sizes are smaller it may get stuck at a local minimum and may not be able to "jump out".
 
 
+### 4.2.4 - Gradient Descent Concluding Remarks
 
+The following figure depcts the iterative movement of each algorithm in the parameter space. As you can see, the batch gradient descent algorithm goes right towards the minimum value, where as the stochastic and mini-batch algorithms still jump around the minimum, with the mini-batch algorithm staying closer to the minimum. 
+
+**Note: Both stochastic and mini-batch gradient descent still have the ability to reach the global minimum, so long as you find and use a good learning schedule!**
+
+<insert gradient descent comparison graph>
+    
+The table below compares various properties of each algorithm. Don't forget that **scaling is required for gradient descent!**
+
+<insert GD table here>
+    
 
 ## 4.3 - Polynomial Regression
+
+
+
+
+
 
 
 ## 4.4 - Learning Curves
