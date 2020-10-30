@@ -338,10 +338,37 @@ We implement some code for early stopping in the JN.
 
 ## 4.6 - Logistic Regression
 
+Some regression algorithms can infact be used for classification tasks, and vice versa. "Logistic regression" (aka: "logit regression") is commonly used as a binary classifier, where a computed probablilty of >50% yields the prediction of that particular instance being the the "positive class" (labelled '1'), and a probability <50% yields the prediciton that the instance is in the "negative class" (labelled '0'). 
 
 
 ### 4.6.1 - Estimating Probabilities
+
+Just as with linear regression, logistic regression assigns weights (the model parameters) to each input instance then adds a bias term. Then logistic regression does one extra step where it passes this weighted result to the the "logistic function" (which is a special case of the more general family of sigmoid functions). Here are the equations:
+
+<img src="http://latex.codecogs.com/svg.latex?\sigma(t)=\frac{1}{1+e^{-t}}"  />
+
+<img src="http://latex.codecogs.com/svg.latex?\hat{p}=h_\theta(x)=\sigma(x^T\theta)"  />
+
+<insert image of logistic function>
+    
+As you can see, this ML algorithm first computes the weighted sum $x^T\theta$ then uses this as the input to the logistic function. Since the logistic functions codomain is [0,1], we can interpret the outputs as probabilities (*although the logistic curve is NOT a probability density function!*). Finally, to make decisions we simply use the decision function:
+
+<img src="http://latex.codecogs.com/svg.latex?\hat{y}=\begin{cases}0\quad\text{if}\quad&space;p<0.5\\1\quad\text{if}\quad&space;p\geq&space;0.5\\\end{cases}&space;" title="http://latex.codecogs.com/svg.latex?\hat{y}=\begin{cases}0\quad\text{if}\quad p<0.5\\1\quad\text{if}\quad p\geq 0.5\\\end{cases} " />
+
+Note from the graph that if \sigma(t)<0.5 then t<0, and also if \sigma(t)\geq 0.5 then t\geq 0. So if the weighted sum $x^T\theta$ is positive we know the logistic function will be positive, hence the predicted classification will be in the positive class (and vice versa for the negative class).
+
+*Remark: The input variable of the logistic function, t, is called the "logit" which comes from the "logit function" which is the inverse of the logistic function. The logit is also called the "log-odds" since it computes the log of the ratio of the two probabilities.*
+
+
 ### 4.6.2 - Training and Cost Function
+
+
+
+
+
+
+
+
 ### 4.6.3 - Decision Boundaries
 ### 4.6.4 - Softmax Regression
 
