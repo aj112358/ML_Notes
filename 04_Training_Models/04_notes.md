@@ -388,9 +388,46 @@ Finally, we add that like any ML algorithm, we can apply regularization techniqu
 
 ### 4.6.4 - Softmax Regression
 
+In the previous JN example, we only made a binary classifer but logistic regression can infact be generalized to multiple classes. This is called "softmax regression" (aka: multinomial logistic regression").
+
+The idea is the same as when we learned about 'multiclass classifiers' (cf. Ch 3 notes). The softmax regression algorithm computes a decision score $s_k(x)$ for each class k as per the formula:
+
+<img src="http://latex.codecogs.com/svg.latex?s_k(x)=x^T\theta^{(k)}" />
+
+Once you have computed all the class scores for each input instance, you then pass the scores (one instance at a time) to the "softmax function" (aka: "normalized exponential") seen below:
+
+<img src="http://latex.codecogs.com/svg.latex?\hat{p}_k=\sigma(s(x))_k=\frac{exp(s_k(x))}{\sum_{j=1}^K(exp(s_j(x)))"  />
+
+This gives us the probability $\hat{p}^k$ that the particular instance belongs to class k. Finally, the prediction is that the instance belongs to the class exhibiting the highest probability, which we can express mathematically as follows:
+
+<img src="http://latex.codecogs.com/svg.latex?\hat{y}=\operatorname{argmax}_k\left(\hat{p}_k\right)=\operatorname{argmax}_k\left(\sigma(s(x))_k\right)=\operatorname{argmax}_k\left(s_k(x)\right)"  />
+
+where the last equality follows from the fact that the standard exponential function is maximized when its argument is maximized. In NumPy, the 'argmax' operator returns the value of a variable that maximizes a function, and in this case will return the class value k.
+
+**Note: The softmax regression algorithm can make predictions with only one class at a time. Hence you must be sure to only use it when you know the classes are mutually exclusive!**
+
+Now, we need to construct a cost function that models the behaviour of our multiclass logistic regression scenario, and hence are able to optimize. The cost function we use for softmax regression is called the "cross entropy" and it is given by the equation below:
+
+<img src="http://latex.codecogs.com/svg.latex?\operatorname{J}(\theta)=-\frac{1}{m}\sum_{i=1}^{m}\sum_{k=1}^K\left[y_k^{(i)}\operatorname{log}(\hat{p}_k^{(i)})\right]"  />
+
+**Cross entropy is frequently used to measure how well a set of estimated class probabilities matches the target classes.**
+
+**Note: If the number of classes K=2, we simply get back the usual cost function for logistic regression!**
+
+As usual, we require the gradient vector in order to find the minimum of this cost function:
+
+<img src="http://latex.codecogs.com/svg.latex?\nabla_{\theta^{(k)}}\operatorname{J}(\Theta)=\frac{1}{m}\sum_{i=1}^m\left[\left(\hat{p}_k^{(i)}-y_k^{(i)}\right)x^{(i)}\right]"  />
+
+We will illustrate the use of the softmax regression ML algorithm by attempting to classify the entire Iris data set.
+
+
 ## - Concluding Remarks
 
-In this chapter we have learned lots of stuff.
+In this chapter we have learned some of the foundational mathematical theory underlying linear regression, polynomial regression, and logistic regression. We learned about the iterative technique known as gradient descent (and its variants), and implemented with each of the above three ML algorithms. We plotted and used learning curves to investigate how our ML models were learning which gave us insight into underfitting and overfitting. In particular, for logistic regression as well as the more general softmax regression techniques, we learned how to visualize the resulting ML model's decision boundaries.
+
+We also learned the very important concept of regularization (and three variants: ridge, lasso, elastic net) and how it can be used to reduce overfitting during training. We also looked briefly into early stopping as another technique to control the training of our ML model.
+
+Finally, we implemented all the above in Python in our JN. Nice work!
 
 
 
