@@ -368,27 +368,29 @@ We need to construct a cost function that we can use to describe the training pr
 
 and expressed over the entire set of training data, this then takes the usual average cost structure:
 
-<img src="http://latex.codecogs.com/svg.latex?\operatorname{J}(\theta)=-\frac{1}{m}\sum_{i=1}^{m}\left[y^{(i)}\operatorname{log}(\hat{p}^{(i)})&plus;(1-y^{(i)})\operatorname{log}(1-\hat{p}^{(i)})\right]" title="http://latex.codecogs.com/svg.latex?\operatorname{J}(\theta)=-\frac{1}{m}\sum_{i=1}^{m}\left[y^{(i)}\operatorname{log}(\hat{p}^{(i)})+(1-y^{(i)})\operatorname{log}(1-\hat{p}^{(i)})\right]" />
+<img src="http://latex.codecogs.com/svg.latex?\operatorname{J}(\theta)=-\frac{1}{m}\sum_{i=1}^{m}\left[y^{(i)}\operatorname{log}(\hat{p}^{(i)})+(1-y^{(i)})\operatorname{log}(1-\hat{p}^{(i)})\right]"  />
 
 It turns out that no closed-form solution for minimizing this cost function exists. Luckily, it can be shown that this cost function is convex and hence, through gradient descent, will converge to its global minimum. So, in order to compute the gradient, we need its partial derivative which can be compute to be:
 
-<img src="http://latex.codecogs.com/svg.latex?\frac{\partial}{\partial&space;\theta_j}\operatorname{J}(\theta)=\frac{1}{m}\sum_{i=1}^{m}\left[\left(\sigma\left(\theta^Tx^{(i)}\right)-y^{(i)}\right)x_j^{(i)}\right]" title="http://latex.codecogs.com/svg.latex?\frac{\partial}{\partial \theta_j}\operatorname{J}(\theta)=\frac{1}{m}\sum_{i=1}^{m}\left[\left(\sigma\left(\theta^Tx^{(i)}\right)-y^{(i)}\right)x_j^{(i)}\right]" />
+<img src="http://latex.codecogs.com/svg.latex?\frac{\partial}{\partial&space;\theta_j}\operatorname{J}(\theta)=\frac{1}{m}\sum_{i=1}^{m}\left[\left(\sigma\left(\theta^Tx^{(i)}\right)-y^{(i)}\right)x_j^{(i)}\right]" />
 
 And thus we can now implement logistic regression! We can utilize any of the three gradient descent methods we discussed earlier (batch, stochastic, mini-batch).
 
 
 ### 4.6.3 - Decision Boundaries
 
+As an example of using logistic regression, we apply it to the well-known classification problem involving the "Iris data set". We will construct a binary classifier to predict whether an instance is of the type Iris virginica or is not, and will only use petal width as a single feature. Let's jump to the JN
 
+Finally, we add that like any ML algorithm, we can apply regularization techniques to logistic regression also, using either $l1$ or $l2$ penalties. SKL uses an $l2$ penalty by default.
 
-
+**NOTE:** The hyperparameter that controls the amount/strength of regularization is *not* alpha, but infact the reciprocal of alpha labelled as C=1/\alpha. So, if you want **less regularization**, you would decrease alpha, hence would need to **increase the hyperparameter C**
 
 
 ### 4.6.4 - Softmax Regression
 
 ## - Concluding Remarks
 
-In this chapter we have learned the many aspects of a classification task.
+In this chapter we have learned lots of stuff.
 
 
 
