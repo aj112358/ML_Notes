@@ -262,7 +262,17 @@ which gives us a new cost function which we can express as follows:
 
 <img src="http://latex.codecogs.com/svg.latex?J(\theta)=\operatorname{MSE}(\theta)+\frac{1}{2}\alpha\sum_{i=1}^n\theta_i^2"  />
 
+where we include the 1/2 factor so that the derivative looks nicer. As a note, the J(\theta) is a standard notation for any general cost function. Also note that the **sum starts with i=1, *not* i=0**, so the \theta_0 term is not regularized. We can express the regularization term in vector form as 
 
+<img src="http://latex.codecogs.com/svg.latex?\frac{1}{2}||w||_2^2"  />
+
+Now, how does this regularization term help to constrain the ML model? Well, since the we are taking the sum of positive terms, in order to minimize the cost function, we now need to consider that we need to also minimize this summation, which means that the values of the model parameters \theta_1, ..., \theta_n will have to be constrained and kept as small as possible!
+
+**IMPORTANT NOTE: The regularization term should only be included in the cost function DURING TRAINING. Once you have trained the model, we use the original cost function (without the regularization term) as the performance measure.**
+
+**Aside: It is common for the cost function to take different forms during training and during evaluation. For training purposes, you want to use one that is easily differentiated and can perform computations with easily. During evaluation, you would want to use a cost function that is a good measure of performance as to how your model will be used. (ex: Classifiers use something called the "log loss" as their cost function, but then use precision & recall for evaluating performance)**
+
+Now, in the expression above, the value \alpha is a hyperparameter that dictates "how strongly" you want to regularize your model. If \alpha=0, then you get the usual cost function, hence you are performing no regularization. If \alpha is large, then to minimize the summation the model parameter values will need to be accordingly very small (potentially very close to 0 if \alpha is large enough). Hence, since your model parameters are very small, your linear model will visually be a near-horizontal line passing through the mean of the data set.
 
 
 
