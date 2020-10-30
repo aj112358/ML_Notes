@@ -251,6 +251,8 @@ When it comes to linear models, we normally implement regularization by constrai
 * Lasso regression
 * Elastic net
 
+We also look at the notion of "early stopping" as a way to break our .fit method once our validation error reaches a minimum value.
+
 
 ### 4.5.1 - Ridge Regression
 
@@ -297,17 +299,47 @@ Another regularized technique we can implement with linear regression is called 
 
 <img src="http://latex.codecogs.com/svg.latex?J(\theta)=\operatorname{MSE}(\theta)+\alpha\sum_{i=1}^n|\theta_i|"  />
 
+An important characterizing feature of doing lasso regression is that it will **eliminate the weights (ie. set to zero) of the least important features**. So lasso regression automatically performs feature selection and it outputs a sparse model with very few non-zero feature weights. To prevent the gradient descent implementation of lasso regression from being chaotic around the minimum, you will need to gradually reduce the learning rate (as discussed previously).
 
+You may note that the lasso cost function above is not differentiable at each \theta_i, 1\leq i\leq n (by the nature of the absolute value). So to implement gradient descent, we replace the use of the gradient vector with a "subgradient vector" (which is a generalization of the concept of gradient to non-differentiable functions) whenever any of these model parameters are zero.
 
+The equation below shows the lasso cost function with a subgradient vector that can be used to implement gradient descent:
 
-
+<insert math equation here>
+    
+As usual, SKL offers us its 'Lasso' class that we can use to implement lasso regression. See the JN for a simple implementation.
 
 
 ### 4.5.3 - Elastic Net
+
+"Elastic Net" is a regularization technique that is "in between" ridge and lasso regressions. Its regularization term is a combination of those from ridge and lasso as seen below:
+
+<img src="http://latex.codecogs.com/svg.latex?J(\theta)=\operatorname{MSE}(\theta)+r\alpha\sum_{i=1}^n|\theta_i|+\frac{1-r}{2}\alpha\sum_{i=1}^n\theta_i^2"  />
+
+Here the r value is called the "mix ratio" and it allows us to control the extent to which we want the cost function to behave more like ridge regression or lasso regression. As you can see, if r=0 we simply get back the ridge regression cost function, and when r=1, we get the lasso regression cost function.
+
+We implement SKL's 'ElasticNet' class in the JN as a quick illustration.
+
+#### When to use Ridge vs. Lasso vs. Elastic Net vs. Non-regularized linear regression?
+
+First, you definitely want to implement some amount of regularization in your ML models. Ridge regression is a good default method to use, but if you know that most of your features are irrelevant/not useful, then implementing lasso or elastic net would be beneficial as they will essentially get rid of these features by taking their weights close to zero. With these latter two, elastic net is preferred as pure lasso's behaviour is more chaotic (especially so when the number of features is greater than the number of training instances OR when several features are strongly correlated - *but if several features are strongly correlated, you should have already picked up on this in your EDA, right?!*).
+
+
 ### 4.5.4 - Early Stopping
+
+This method of regularization is very different from the above three. With "early stopping" we simply monitor the learning curves and break the execution of the .fit method once we observe a minimum in the validation error. Of course, both the validation and training errors will (on average **over each epoch**) be decreasing. Eventually the validation error will begin to increase which is indicative of the ML algorithm starting to overfit the data. It is at this point we stop the training. Here is an easy visual depicting such a scenario:
+
+<insert pic here>
+    
+Now, as we discussed and observed with stochastic and mini-batch gradient descent methods, their learning curves are not smooth, so it is usually more difficult to determine when you have reached the minimum validation error. A good solution to follow is to **stop training when the validation error has been increasing for some number of epochs**. Then you simply use the model parameters that were computed step that is the same number of epochs back.
+
+We implement some code for early stopping in the JN.
 
 
 ## 4.6 - Logistic Regression
+
+
+
 ### 4.6.1 - Estimating Probabilities
 ### 4.6.2 - Training and Cost Function
 ### 4.6.3 - Decision Boundaries
