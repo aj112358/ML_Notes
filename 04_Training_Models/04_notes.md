@@ -266,20 +266,43 @@ where we include the 1/2 factor so that the derivative looks nicer. As a note, t
 
 <img src="http://latex.codecogs.com/svg.latex?\frac{1}{2}||w||_2^2"  />
 
+and in regards to gradient descent, we simply add (\alpha w) to the MSE gradient vector we saw previously.
+
 Now, how does this regularization term help to constrain the ML model? Well, since the we are taking the sum of positive terms, in order to minimize the cost function, we now need to consider that we need to also minimize this summation, which means that the values of the model parameters \theta_1, ..., \theta_n will have to be constrained and kept as small as possible!
 
 **IMPORTANT NOTE: The regularization term should only be included in the cost function DURING TRAINING. Once you have trained the model, we use the original cost function (without the regularization term) as the performance measure.**
 
 **Aside: It is common for the cost function to take different forms during training and during evaluation. For training purposes, you want to use one that is easily differentiated and can perform computations with easily. During evaluation, you would want to use a cost function that is a good measure of performance as to how your model will be used. (ex: Classifiers use something called the "log loss" as their cost function, but then use precision & recall for evaluating performance)**
 
-Now, in the expression above, the value \alpha is a hyperparameter that dictates "how strongly" you want to regularize your model. If \alpha=0, then you get the usual cost function, hence you are performing no regularization. If \alpha is large, then to minimize the summation the model parameter values will need to be accordingly very small (potentially very close to 0 if \alpha is large enough). Hence, since your model parameters are very small, your linear model will visually be a near-horizontal line passing through the mean of the data set.
+Now, in the expression above, the value \alpha is a hyperparameter that dictates "how strongly" you want to regularize your model. If \alpha=0, then you get the usual cost function, hence you are performing no regularization. If \alpha is large, then to minimize the summation the model parameter values will need to be accordingly very small (potentially very close to 0 if \alpha is large enough). Hence, since your model parameters are very small, your linear model will visually be a near-horizontal line passing through the mean of the data set. Thus, you will need to find a value for \alpha that provides balance to your model.
 
+In the visual below, we have two graphs. The left-hand one is ridge regression applied to a linear model. The right-hand one is ridge regression with a 10-degree polynomial model, and in this case the data has been scaled before regularization. Both graphs have the same original data set, and various values of \alpha:
 
+<insert visual here>
+    
+As you can see, increasing the value of \alpha does indeed cause the ML model (ie. regression curve) to become more flat. As a result, these higher-\alpha models have reduced variance but increased bias.
 
+Just as with linear regression, we can perform ridge regression either through its closed-form solution or by implementing gradient descent. The closed-form solution to the regularized cost function J(\theta) is:
 
+<img src="http://latex.codecogs.com/svg.latex?  \hat{\theta}=(X^TX+\alphaI_{n+1})^{-1}X^Ty"   />
+
+where I_{n+1} is the usual identity matrix but with a 0 as the (1,1)-entry.
+
+Of course, we can also use SKL's built-in 'Ridge' class to implement ridge regression (using both the closed-form solution AND gradient descent) for us. We go to the JN to see the code
 
 
 ### 4.5.2 - Lasso Regression
+
+Another regularized technique we can implement with linear regression is called "lasso regression" (aka: "Least Absolute Shrinkage & Selection Operator" regression). In Lasso regression, we add a different type of regularization term using the $l1$-norm instead:
+
+<img src="http://latex.codecogs.com/svg.latex?J(\theta)=\operatorname{MSE}(\theta)+\alpha\sum_{i=1}^n|\theta_i|"  />
+
+
+
+
+
+
+
 ### 4.5.3 - Elastic Net
 ### 4.5.4 - Early Stopping
 
