@@ -198,7 +198,7 @@ We implement some code in the JN to illustrate learning curves for underfitting 
     red curve -> training data
     blue curve -> validation data
 
-From this plot, we see a few defining characteristics of underfitting:
+From this plot, we see a few defining characteristics of **underfitting**:
 * Performance curve for the training data:
     * Starts with zero RMSE as the model can fit the training data perfectly
     * RMSE starts to increase as perfect fitting cannot happen with more training data (noise & data is not linear in the first place)
@@ -211,17 +211,64 @@ From this plot, we see a few defining characteristics of underfitting:
 
 **Recall: A solution for resolving underfitting the training data is to either try a more complex model or create better features**
 
+Next, we look at the learning curves for an overfitting scenario:
+
+<insert graph of overfitting>
+    
+From this plot, we see it looks very similar to the aboe underfitting plot, but here we also have a few differences that characterize of **overfitting**:
+* The RMSE values are much lower
+* There is a clear gap between the two curves
+    * The model performs better on the (red) training set than it does on the (blue) validation set -> overfitting is occurring!
+    
+**Recall: A solution for resolving overfitting is to use a larger training set until the validation error and training error converge.**
 
 
+## ASIDE: The Bias-Variance Trade-Off
 
+An important thing to keep in mind is something called the "bias-variance trade-off". Any ML model's generalization error is the sum of the following three kinds of error:
 
+1. **Bias**: This comes about due to incorrect assumptions about the data (ex: assuming it's linear when it's actually quadratic). A **high-bias model** is most likely to **underfit the training data**.
 
+2. **Variance**: This comes about from the model's excessive sensitivity to small variations in the training data. A model with many degrees-of-freedom is likely to have a **high variance** and hence will **overfit the training data**.
 
+3. **Irreducible error**: This comes about from noise in the actual data set itself. There is usually no way to completely eliminate this error (hence, 'irreducible') but steps can be taken to try and minimize it (ex: fix source of the data, remove outliers)
+
+Based on these definitions, here is a general rule-of-thumb:
+
+**Increasing a model's complexity will (usually) increase the variance and decrease its bias.**
+
+**Decreasing a model's complexity will (usually) decrease the variance and increase its bias.**
+
+When designing ML systems, you will have to decide which of variance or bias is more important to minimize and/or will need to decide how to balance each. Since we cannot minimize both, this is why it is called a *trade-off*.
 
 
 ## 4.5 - Regularized Linear Models
 
+As we know, a good way to **reduce overfitting** is to "regularize" your ML model, meaning to constrain it in some way with respect to its degrees of freedom (ex: reduce the degree of a polynomial regression). With fewer degrees of freedom, it will make it less easy for the ML algorithm to overfit your data.
+
+When it comes to linear models, we normally implement regularization by constraining the weights (i.e. model parameter values) of the model. There are three methods to achieve this and we learn about each in turn:
+* Ridge regression
+* Lasso regression
+* Elastic net
+
+
 ### 4.5.1 - Ridge Regression
+
+"Ridge regression" (aka: "Tikhonov regularization") is a method of regularization used to solve the issue of multi-collinearity when doing linear regression. To the usual MSE cost function we simply add a "regularization term" 
+
+<img src="http://latex.codecogs.com/svg.latex?\alpha\sum_{i=1}^n\theta_i^2"  />
+
+which gives us a new cost function which we can express as follows:
+
+<img src="http://latex.codecogs.com/svg.latex?J(\theta)=\operatorname{MSE}(\theta)+\frac{1}{2}\alpha\sum_{i=1}^n\theta_i^2"  />
+
+
+
+
+
+
+
+
 ### 4.5.2 - Lasso Regression
 ### 4.5.3 - Elastic Net
 ### 4.5.4 - Early Stopping
