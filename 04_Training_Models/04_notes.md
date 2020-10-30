@@ -362,14 +362,28 @@ Note from the graph that if \sigma(t)<0.5 then t<0, and also if \sigma(t)\geq 0.
 
 ### 4.6.2 - Training and Cost Function
 
+We need to construct a cost function that we can use to describe the training process for logistic regression. Then we can look into how to minimize it. The cost function used for logistic regression is as follows:
 
+<img src="http://latex.codecogs.com/svg.latex?c(\theta)=\begin{cases}-log(\hat{p})&\quad\text{if}\quad&space;y=1\\-log(1-\hat{p})&\quad\text{if}\quad&space;y=0\\\end{cases}&space;" title="http://latex.codecogs.com/svg.latex?c(\theta)=\begin{cases}-log(\hat{p})&\quad\text{if}\quad y=1\\-log(1-\hat{p})&\quad\text{if}\quad y=0\\\end{cases} " />
 
+and expressed over the entire set of training data, this then takes the usual average cost structure:
 
+<img src="http://latex.codecogs.com/svg.latex?\operatorname{J}(\theta)=-\frac{1}{m}\sum_{i=1}^{m}\left[y^{(i)}\operatorname{log}(\hat{p}^{(i)})&plus;(1-y^{(i)})\operatorname{log}(1-\hat{p}^{(i)})\right]" title="http://latex.codecogs.com/svg.latex?\operatorname{J}(\theta)=-\frac{1}{m}\sum_{i=1}^{m}\left[y^{(i)}\operatorname{log}(\hat{p}^{(i)})+(1-y^{(i)})\operatorname{log}(1-\hat{p}^{(i)})\right]" />
 
+It turns out that no closed-form solution for minimizing this cost function exists. Luckily, it can be shown that this cost function is convex and hence, through gradient descent, will converge to its global minimum. So, in order to compute the gradient, we need its partial derivative which can be compute to be:
 
+<img src="http://latex.codecogs.com/svg.latex?\frac{\partial}{\partial&space;\theta_j}\operatorname{J}(\theta)=\frac{1}{m}\sum_{i=1}^{m}\left[\left(\sigma\left(\theta^Tx^{(i)}\right)-y^{(i)}\right)x_j^{(i)}\right]" title="http://latex.codecogs.com/svg.latex?\frac{\partial}{\partial \theta_j}\operatorname{J}(\theta)=\frac{1}{m}\sum_{i=1}^{m}\left[\left(\sigma\left(\theta^Tx^{(i)}\right)-y^{(i)}\right)x_j^{(i)}\right]" />
+
+And thus we can now implement logistic regression! We can utilize any of the three gradient descent methods we discussed earlier (batch, stochastic, mini-batch).
 
 
 ### 4.6.3 - Decision Boundaries
+
+
+
+
+
+
 ### 4.6.4 - Softmax Regression
 
 ## - Concluding Remarks
