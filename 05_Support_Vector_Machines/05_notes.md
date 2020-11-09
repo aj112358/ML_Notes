@@ -54,14 +54,25 @@ We now go to the JN to (very quickly and easily, because we have experience!) im
 **NOTE**: The 'LinearSVC' class regularizes the bias term, so you should *center the training set first* (by subtracting the mean). This is automatically done for you if you choose to use 'StandardScaler' to scale your data first. 
 
 
-
-
-
-
-
-
 ## 5.2 - Non-Linear SVM Classification
+
+Of course, not all your data will exhibit a linear behaviour. For non-linear data sets, you can create new polynomial features (i.e. powers of original features), and thereby hopefully the resulting features will have a linear profile (as we had done in the last chapter!).
+
+As we have seen, we can use SKL's 'PolynomialFeatures' class to do such a thing for us. We can then scale the data (as is very important with SVM!) and finally train our SVM model on the new (hopefully linear) features. We go to the JN to do this now, and will use the "moons data set" from the SKL dataset library (if you plot the data, it essentially looks like a yin-yang symbol).
+
+
 ### 5.2.1 - Polynomial Kernal
+
+Wanting to implement polynomial features begs the question "**what degree should we use**". As with anything in ML, there are trade-offs that have to be taken into consideration.
+
+If we use a lower-degree polynomial, the SVM model will not be able to handle very complex data sets (for example, if your data set is of the 10th-degree but you only create polynomial features up to the 3rd-degree). On the other hand, if you try to use a higher-degree polynomial, then the SVM model will take a very very long time to fit.
+
+To find a balance between these two extremes, we implement a mathematical technique called the "**kernal trick**" (see here: https://en.wikipedia.org/wiki/Kernel_method). This is a way to train an SVM model using many polynomial features of high-degree *without actually creating them*. We can implement the kernal trick using SKL's 'SVC' class, and we do it now in the JN.
+
+**NOTE:** If you find your model is overfitting (underfitting), just try reducing (increasing) the degree when implementing the kernel trick.
+
+As usual, in order to determine some appropriate values of the hyperparameters to use, you can perform a grid search. A good technique is to **start with a wider search, then narrow your search down to the more promising hyperparameter values**.
+
 ### 5.2.2 - Similarity Features
 ### 5.2.3 - Gaussian RBF Kernal
 ### 5.2.4 - Computational Complexity
