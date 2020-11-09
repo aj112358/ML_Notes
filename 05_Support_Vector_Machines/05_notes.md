@@ -131,8 +131,50 @@ On a final note, SVMs can also be used for outlier detection. See the SKL docume
 
 
 ## 5.4 - Under the Hood
+
+In this last section we discuss some of the mathematical theory underlying the SVM ML algorithm.
+
+
 ### 5.4.1 - Decision Function & Predictions
+
+The linear SVM classifier has the decision function defined by the equation below:
+
+<img src="http://latex.codecogs.com/svg.latex?\mathbf{w^Tx}&plus;b=w_1b_1&plus;\cdots&plus;w_nb_n&plus;b" title="decision function for SVM model" />
+
+where b represents the bias term, w are the feature weights, and x are the input instance values. The SVM model makes its predictions depending on the sign of this decision function. If the output of the decision function is positive, the prediction is the positive class (labelled '1'), and if negaative the prediction is the negative class (labelled '0'). This is expressed in the equation below:
+
+<img src="http://latex.codecogs.com/svg.latex?\hat{y}=\begin{cases}0,&space;\text{&space;if&space;}&space;\mathbf{w^Tx}&plus;b<0&space;\\1,&space;\text{&space;if&space;}&space;\mathbf{w^Tx}&plus;b\geq0\end{cases}&space;" title="http://latex.codecogs.com/svg.latex?\hat{y}=\begin{cases}0, \text{ if } \mathbf{w^Tx}+b<0 \\1, \text{ if } \mathbf{w^Tx}+b\geq0\end{cases} " />
+
+Hence, the decision boundary is simply the case when $\hat{y}=0$. As we can infer from the structure of the decision function, the decision function itself is in general an $n$-dimensional hyperplane, and so the decision boundary is an $n-1$-dimensional hyperplane. Both are hyperplanes as we are considering only the linear SVM problem; their topology will change for non-linear problems. Below is a visual of the 2D hyperplane and 1D decision boundary (solid black line) for the Iris data set we have worked with previously:
+
+<insert image here>
+
+In this image, the two dashed lines together form a margin around the decision boundary and hence separate the two classes. As per the street analogy, we wish to make this margin as large as possible and are interested in the values of w and b that cause this.
+
+
 ### 5.4.2 - Training Objective
+
+Because all ML problems are (essentially) optimization problems, we can frame the SVM ML algorithm using the same language. Informally, we know that to "train" an SVM model, we are trying to maximize the width of the margins. Once we have found the feature weights that accomplish this, we have found our decision function (written above). 
+
+In order to investigate the width of the margin, we can look at the "slope" of the decision function, which is simply the norm of $\mathbf{w}$. From our basic high school math knowledge, we know that if we divide this slope by a positive number greater than 1, the resulting decision function will become more horizontally stretched. Hence the margin will become wider! **Thus, in order to maximize the width of the margins, we must minimize the norm of the weight vector.**
+
+Now, we also need to consider margin violations, of which we have seen two types: hard and soft. First, let's consider *hard margin classification*. If we wish to ensure that each class label is on its appropriate size, we simply need to ensure that the decision function outputs values greater than 1 for the positive training instances, and less than -1 for negative training instances. One way to accomplish this mathematically is to simply use the absolute value function, but we know this is not differentiable at the origin. So instead we define a new indicator-type variable as follows:
+
+<img src="http://latex.codecogs.com/svg.latex?t^{(i)}=\begin{cases}-1,&space;\text{&space;if&space;}&space;y^{(i)}=0&space;\text{&space;(negative&space;class})&space;\\&plus;1,&space;\text{&space;if&space;}&space;y^{(i)}=1&space;\text{&space;(positive&space;class})\end{cases}&space;" title="http://latex.codecogs.com/svg.latex?t^{(i)}=\begin{cases}-1, \text{ if } y^{(i)}=0 \text{ (negative class}) \\+1, \text{ if } y^{(i)}=1 \text{ (positive class})\end{cases} " />
+
+Using this, we get our final mathematical version of the **hard margin SVM optimization problem** (i.e. training objective):
+
+<img src="http://latex.codecogs.com/svg.latex?\begin{cases}\text{Objective:&space;}&space;&\text{minimize&space;}&space;\frac{1}{2}\mathbf{w^Tw}\\\text{Constraint:&space;}&space;&t^{(i)}\left(\mathbf{w^Tx}^{(i)}&plus;b\right)&space;\geq&space;1,&space;\,&space;i=1,2,\cdots,m\end{cases}" title="Optimization problem for hard-margin linear SVM classification" />
+
+Next, for *soft margin classification*, we must introduce so-called **slack variables**, denoted $\zeta^i \geq 0$ to measure by how much the i-th input instance is allowed to violate the margin. We now have the following two optimization problems:
+1. minimize the norm of the weight vector (to maximize the margin)
+2. minimize the slack variables (to minimize margin violations)
+
+In order to combine these into a single mathematical statement, we can use the technique of regularization and introduce a hyperparameter (the usual 'C' in SKL) that controls the trade-off between these two problems. This yields the final mathematical version of the **soft margin SVM optimization problem**:
+
+<img src="http://latex.codecogs.com/svg.latex?\begin{cases}\text{Objective:&space;}&space;&\text{minimize&space;}&space;\frac{1}{2}\mathbf{w^Tw}&plus;C\displaystyle\sum_{i=1}^m\zeta^{(i)}\\\text{Constraint:&space;}&space;&t^{(i)}\left(\mathbf{w^Tx}^{(i)}&plus;b\right)&space;\geq&space;1-\zeta^{(i)}&space;\text{&space;and&space;}&space;\zeta^{(i)}\geq&space;0,&space;\,&space;i=1,2,\cdots,m\end{cases}" title="Optimization problem for soft-margin linear SVM classification" />
+
+
 ### 5.4.3 - Quadratic Programming
 ### 5.4.4 - The Dual Problem
 ### 5.4.5 - Kernalized SVMs
