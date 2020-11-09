@@ -176,7 +176,33 @@ In order to combine these into a single mathematical statement, we can use the t
 
 
 ### 5.4.3 - Quadratic Programming
+
+The above two formulations of the hard-margin and soft-margin SVM optimization problem are examples of **quadratic programming (QP) problems** or more specifically **convex quadratic optimization problems with linear constraints**. In general, a QP problem can be stated mathematically as follows:
+
+<insert problem here, p.168>
+
+There is a lot of existing mathematical theory behind solving such optimization problems, as well already-made code and online solvers, so I personally encourage you to look into various texts to learn more about them. 
+
+
 ### 5.4.4 - The Dual Problem
+
+So far, we have not discussed the kernal trick and how to include it in our mathematical formalizations above. We do this now, and to do so we must investigate a different, but related, constrained optimization problem.
+
+Given any constrained optimization problem, which we call the **primal problem**, it can be expressed in a different way called its **dual problem**. As it so happens, solutions to the dual problem usually provide you with a *lower bound* to the solution of the primal problem. In some cases, the solution to the dual problem is actually the same as that of the primal problem, the conditions being that your objective function be convex, and the inequality constraints by convex and continuously differentiable.
+
+It can be shown that our two formulations of the SVM above satisfy these criteria, and hence we can choose to either solve the primal problem or the dual problem, as both will yield the same solution. For the linear SVM optimization problem, its dual problem is as follows:
+
+<img src="http://latex.codecogs.com/svg.latex?\begin{cases}\text{Objective:&space;}&space;&\text{minimize&space;}&space;\frac{1}{2}\displaystyle\sum_{i=1}^m\sum_{j=1}^m\alpha^{(i)}\alpha^{(j)}t^{(i)}t^{(j)}\mathbf{x}^{(i)T}\mathbf{x}^{(j)}&space;-&space;\sum_{i=1}^m\alpha^{(i)}\\\text{Constraint:&space;}&space;&&space;\alpha^{(i)}\geq&space;0,&space;\,&space;i=1,2,\cdots,m\end{cases}" title="dual problem of linear SVM optimization" />
+
+Once we determine the vector \hat{a} that solves this optimization problem, we can use it to compute the feature weights and bias term via:
+
+<img src="http://latex.codecogs.com/svg.latex?\begin{cases}&\hat{\mathbf{w}}=\displaystyle\sum_{i=1}^m\hat{\alpha}^{(i)}t^{(i)}\mathbf{x}^{(i)}\\&&space;\hat{b}=\frac{1}{n_s}\displaystyle\sum_{\substack{i=1&space;\\&space;\hat{\alpha}^{(i)}>0}}^m\left(&space;t^{(i)}-&space;\hat{\mathbf{w}}\mathbf{x}^{(i)}\right)\end{cases}" title="solution to primal problem" />
+
+An important consideration to keep in mind is that **the dual problem is faster to solve than the primal one *when the number of training instances is smaller than the number of features***.
+
+More importantly, the **dual problem makes the kernel trick possible**.
+
+
 ### 5.4.5 - Kernalized SVMs
 ### 5.4.6 - Online SVMs
 
