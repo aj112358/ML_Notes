@@ -30,6 +30,34 @@ The common visualization of an SVM classifier is one of fitting the **widest pos
 
 ### 5.1.1 - Soft Margin Classification
 
+There are two main ways one can draw a decision boundary for linearly separable data. The first is called **hard margin classification**, in which we have the very strict properties that (i) all instances must be "off the street", and (ii) all instances must be on their appropriate side of the street. As anything in life, the more restrictions you place on something, the harder it is to deal with it. In this case, there are two main issues with hard margin classification:
+
+1. It only works if the data is actually linearly separable
+2. It is very sensitive to outliers
+
+These problems are exhibited in the two plots below:
+
+<insert plots of problems>
+
+As you can see, the left plot contains an outlier that is located near the other label instances. In this case, the data is NOT linearly separable and hence it is impossible to satisfy criteria (i) in the definition (i.e. there does not exist a street in which all instances would be off is). In the right picture, we see that there is a green outlier nearer to the blue instances. In this case, the data is still linearly separable BUT if we continue to construct a decision boundary as well as the parallel dashed lines, we see this causes the street to be very narrow and hence our SVM model will not generalize well.
+
+To avoid these issues, we simply relax our strict criteria and use a more flexible model. We must consider the trade-offs and find a balance between **keeping the street as wide as possible** and **limiting any so-called "margin violations"** (instances that fall on the street, or on the wrong side). This flexible model is achieved with **soft margin classification**.
+
+We can use SKL's 'LinearSVC' class to implement a SVM model in Python. This class allows for many hyperparameters, one of which is aptly names **C**. To obtain a **softer** margin classifcation use a **smaller value of C**; for **harder** margin classification, use **larger values of C**. In general, if you have a lot of margin violations, you're gonna have a bad time! So it is a good idea to try and minimize the amount of margin violations, but of course the tradeoff is that your SVM model will not generalize as well. **If you are finding that your SVM model is overfitting your data, you can implement regularization by simply using a smaller C value**.
+
+The above discussion can be summarized with the visual below:
+
+<insert plots of various C values>
+
+We now go to the JN to (very quickly and easily, because we have experience!) implement an SVM classifier that will distinguish between 'virginica' and 'non-virginica' instances using only petal length and width, just as we had done in the last chapter.
+
+**NOTE**: The 'LinearSVC' class regularizes the bias term, so you should *center the training set first* (by subtracting the mean). This is automatically done for you if you choose to use 'StandardScaler' to scale your data first. 
+
+
+
+
+
+
 
 
 ## 5.2 - Non-Linear SVM Classification
