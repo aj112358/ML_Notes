@@ -119,11 +119,15 @@ Here is a summary table for comparison:
 
 ## 5.3 - SVM Regression
 
+We now turn our attention to implementing SVMs for regression tasks. SVM supports both linear **and** non-linear regression. In order to implement SVMs for regression, we look at the reverse of the widest-street analogy: SVM for regression can be thought of as making a street that **contains as many instances as possible on the street** while still limiting "margin violations" (which are, in this case, the instances **off** the street). The width of the street is controlled by the hyperparameter 'tol' - larger values correspond to wider streets.
 
+SVM regression models are said to be **"$\epsilon$-sensitive"** because adding more training instances *inside* the margins (which are defined by the support vectors) does not affect the model's predictions.
 
+We can implement SVM for a regression task using SKL's 'LinearSVR' class. We go to the JN to do that now.
 
+Finally, for non-linear SVM regression, we can simply implement a polynomial kernel just as we had done for classification above. In this case, we instead use SKL's 'SVR' class which does happen to support the kernel trick.
 
-
+On a final note, SVMs can also be used for outlier detection. See the SKL documention for more details if you are interested.
 
 
 ## 5.4 - Under the Hood
