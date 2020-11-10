@@ -171,7 +171,7 @@ Now, we also need to consider margin violations, of which we have seen two types
 
 Using this, we get our final mathematical version of the **hard margin SVM optimization problem** (i.e. training objective):
 
-<img src="http://latex.codecogs.com/svg.latex?\begin{cases}\text{Objective:&space;}&space;&\text{minimize&space;}&space;\frac{1}{2}\mathbf{w^Tw}\\\text{Constraint:&space;}&space;&t^{(i)}\left(\mathbf{w^Tx}^{(i)}&plus;b\right)&space;\geq&space;1,&space;\,&space;i=1,2,\cdots,m\end{cases}"  title="Optimization problem for hard-margin linear SVM classification" />
+<img src="http://latex.codecogs.com/svg.latex?\begin{cases}\text{Objective:&space;}&space;&\text{minimize&space;}&space;\frac{1}{2}\mathbf{w^Tw}\\\text{Constraint:&space;}&space;&t^{(i)}\left(\mathbf{w^Tx}^{(i)}&plus;b\right)&space;\geq&space;1,&space;\,&space;i=1,2,\cdots,m\end{cases}" title="Optimization problem for hard-margin linear SVM classification" />
 
 Next, for *soft margin classification*, we must introduce so-called **slack variables**, denoted $\zeta^i \geq 0$ to measure by how much the i-th input instance is allowed to violate the margin. We now have the following two optimization problems:
 1. minimize the norm of the weight vector (to maximize the margin)
