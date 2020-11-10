@@ -247,13 +247,18 @@ That's the kernel trick!
 
 ### 5.4.6 - Online SVMs
 
+Recall that "online learning" is learning that occurs incrementally, possibly as new data is received. One way to implement SVM in an online learning fashion is to implement gradient descent to minimize the cost function, although it so happens that this implementation converges slower than solving a quadratic programming problem directly. It is also possible to implement *kernalized* online SVMs but we choose not to discuss it here.
 
 
+### 5.4.7 - Non-Linear SVMs
 
+For non-linear problems, you should consider implementing a neural network instead of using SVM, especially so if your data is large-scale.
 
 ## - Concluding Remarks
 
+In this section, we learned about the ML algorithm that is *support vector machines*. We practiced implementing them with Python code, and also looked into the underlying mathematical theory. We learned how SVMs can be used for both regression and classfication tasks, both with linear and non-linear data. We looked at ways to implement polynomial kernels and create similarity features to turn a non-linear SVM ML problem into a linear one. We discussed the differences between soft-margin and hard-margin optimization problems and expressed both mathematically in terms of a typical mathematics optimization problem.
 
+So far, this is definitely my favorite ML model as the mathematical theory make it very easy to understand. Let's continue!
 
 
 
