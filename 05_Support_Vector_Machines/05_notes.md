@@ -203,7 +203,34 @@ An important consideration to keep in mind is that **the dual problem is faster 
 More importantly, the **dual problem makes the kernel trick possible**.
 
 
-### 5.4.5 - Kernalized SVMs
+### 5.4.5 - Kernalized SVMs (i.e. The "Kernel Trick")
+
+We finally discuss this infamour **Kernel trick** that we have been using blindly in our JN Python code. The motivation behind the kernel trick is as follows.
+
+Consider a two-dimensional training set, and suppose we wish to apply a second-degree polynomial transformation to it, in an attempt to create new features on which a *linear* SVM model can be fit. Further suppose that the specific second-degree polynomial mapping we wish to apply is defined as below:
+
+<img src="http://latex.codecogs.com/svg.latex?\phi(\mathbf{x})=\phi\left(\begin{bmatrix}x_1&space;\\x_2&space;\\\end{bmatrix}\right)=\begin{bmatrix}x_1^2&space;\\\sqrt{2}x_1x_2&space;\\x_2^2&space;\\\end{bmatrix}&space;" title="http://latex.codecogs.com/svg.latex?\phi(\mathbf{x})=\phi\left(\begin{bmatrix}x_1 \\x_2 \\\end{bmatrix}\right)=\begin{bmatrix}x_1^2 \\\sqrt{2}x_1x_2 \\x_2^2 \\\end{bmatrix} " />
+
+**Note:** The transformed vector is three-dimensional, as it should be since a generic second-order polynomial consists of the two square terms and the cross term.
+
+Now, consider applying this transformation to two generic vectors a & b, and then taking their dot product. You will get something like this:
+
+<insert math here>
+    
+As you can see, we get the very nice property:
+
+<img src="http://latex.codecogs.com/svg.latex?\phi(\mathbf{a})\cdot\phi(\mathbf{b})=(\mathbf{a}\cdot\mathbf{b})^2" title="wow" />
+
+Now, how does this help us? Well, if you look at the formulation of the dual problem above, you'll notice that we have a term like x^Tx in the first summation. So, if we were to apply a polynomial transformation to our training data, we would have to compute the left-hand-side of the above identity...BUT: we can now greatly simplify the calculations by simply computing the right-hand-side of the identity instead! This means that we **don't even need to apply the transformation** at all, and thus the computations are greatly reduced! *This is the why and how the kernel trick works*.
+
+In general, a **kernel** (in the context of ML) is a function that relates a dot product of transformed vectors to the original vectors themselves. This allows us to by-pass the actually transforming the vectors first. A few common kernels you will encounter in ML are listed below:
+
+<img src="http://latex.codecogs.com/svg.latex?\begin{cases}\text{Linear:&space;}&space;&K(\mathbf{a},&space;\mathbf{b})=\mathbf{a}^T\mathbf{b}&space;\\\text{Polynomial:&space;}&space;&K(\mathbf{a},&space;\mathbf{b})=(\gamma\mathbf{a}^T\mathbf{b}&plus;r)^d&space;\\\text{Gaussian&space;RBF:&space;}&space;&K(\mathbf{a},&space;\mathbf{b})=\operatorname{exp}\left(-\gamma\lVert\mathbf{a}-\mathbf{b}\rVert^2\right)&space;\\\text{Sigmoid:&space;}&space;&K(\mathbf{a},&space;\mathbf{b})=\operatorname{tanh}\left(\gamma\mathbf{a}^T\mathbf{b}&plus;r\right)&space;\\\end{cases}&space;" title="Common kernels encountered in ML" />
+
+
+
+
+
 ### 5.4.6 - Online SVMs
 
 ## - Concluding Remarks
