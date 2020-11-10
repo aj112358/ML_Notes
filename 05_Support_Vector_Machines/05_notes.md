@@ -96,7 +96,7 @@ Luckily, the computational issues are once again bypassed as the 'SVM' class use
 
 One common similarity function is called the "**Gaussian Radial Basis Function (RBF)**". Its equation is below:
 
-<img src="http://latex.codecogs.com/svg.latex?\phi_\gamma(\mathbf{x},l)=\operatorname{exp}\left(-\gamma\lVert&space;x-l\rVert^2\right)" title="Gaussian RBF" />
+<img src="http://latex.codecogs.com/svg.latex?\phi_\gamma(\mathbf{x},l)=\operatorname{exp}\left(-\gamma\lVert&space;x-l\rVert^2\right)"  title="Gaussian RBF" />
 
 As you can infer from this equation, instances that are closer to the landmark will have value closer to 1, and instances that are further away will have value closer to 0. Also, the value of gamma dictates the horizontal stretch of the Gaussian. Smaller values of gamma will cause the Gaussian curve to be more narrow, and this translates into each instance's range-of-influence being *smaller*. This will result in a decision boundary that is more irregular and less smooth. Larger gamma values will produce a more smooth decision boundary.
 
@@ -167,11 +167,11 @@ In order to investigate the width of the margin, we can look at the "slope" of t
 
 Now, we also need to consider margin violations, of which we have seen two types: hard and soft. First, let's consider *hard margin classification*. If we wish to ensure that each class label is on its appropriate size, we simply need to ensure that the decision function outputs values greater than 1 for the positive training instances, and less than -1 for negative training instances. One way to accomplish this mathematically is to simply use the absolute value function, but we know this is not differentiable at the origin. So instead we define a new indicator-type variable as follows:
 
-<img src="http://latex.codecogs.com/svg.latex?t^{(i)}=\begin{cases}-1,&space;\text{&space;if&space;}&space;y^{(i)}=0&space;\text{&space;(negative&space;class})&space;\\&plus;1,&space;\text{&space;if&space;}&space;y^{(i)}=1&space;\text{&space;(positive&space;class})\end{cases}&space;" title="http://latex.codecogs.com/svg.latex?t^{(i)}=\begin{cases}-1, \text{ if } y^{(i)}=0 \text{ (negative class}) \\+1, \text{ if } y^{(i)}=1 \text{ (positive class})\end{cases} " />
+<img src="http://latex.codecogs.com/svg.latex?t^{(i)}=\begin{cases}-1,&space;\text{&space;if&space;}&space;y^{(i)}=0&space;\text{&space;(negative&space;class})&space;\\&plus;1,&space;\text{&space;if&space;}&space;y^{(i)}=1&space;\text{&space;(positive&space;class})\end{cases}&space;" title="indicator variable" />
 
 Using this, we get our final mathematical version of the **hard margin SVM optimization problem** (i.e. training objective):
 
-<img src="http://latex.codecogs.com/svg.latex?\begin{cases}\text{Objective:&space;}&space;&\text{minimize&space;}&space;\frac{1}{2}\mathbf{w^Tw}\\\text{Constraint:&space;}&space;&t^{(i)}\left(\mathbf{w^Tx}^{(i)}&plus;b\right)&space;\geq&space;1,&space;\,&space;i=1,2,\cdots,m\end{cases}" title="Optimization problem for hard-margin linear SVM classification" />
+<img src="http://latex.codecogs.com/svg.latex?\begin{cases}\text{Objective:&space;}&space;&\text{minimize&space;}&space;\frac{1}{2}\mathbf{w^Tw}\\\text{Constraint:&space;}&space;&t^{(i)}\left(\mathbf{w^Tx}^{(i)}&plus;b\right)&space;\geq&space;1,&space;\,&space;i=1,2,\cdots,m\end{cases}"  title="Optimization problem for hard-margin linear SVM classification" />
 
 Next, for *soft margin classification*, we must introduce so-called **slack variables**, denoted $\zeta^i \geq 0$ to measure by how much the i-th input instance is allowed to violate the margin. We now have the following two optimization problems:
 1. minimize the norm of the weight vector (to maximize the margin)
