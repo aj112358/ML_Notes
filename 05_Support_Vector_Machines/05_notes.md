@@ -227,11 +227,29 @@ In general, a **kernel** (in the context of ML) is a function that relates a dot
 
 <img src="http://latex.codecogs.com/svg.latex?\begin{cases}\text{Linear:&space;}&space;&K(\mathbf{a},&space;\mathbf{b})=\mathbf{a}^T\mathbf{b}&space;\\\text{Polynomial:&space;}&space;&K(\mathbf{a},&space;\mathbf{b})=(\gamma\mathbf{a}^T\mathbf{b}&plus;r)^d&space;\\\text{Gaussian&space;RBF:&space;}&space;&K(\mathbf{a},&space;\mathbf{b})=\operatorname{exp}\left(-\gamma\lVert\mathbf{a}-\mathbf{b}\rVert^2\right)&space;\\\text{Sigmoid:&space;}&space;&K(\mathbf{a},&space;\mathbf{b})=\operatorname{tanh}\left(\gamma\mathbf{a}^T\mathbf{b}&plus;r\right)&space;\\\end{cases}&space;" title="Common kernels encountered in ML" />
 
+#### - **Aside: Mercer's Theorem**
+<see text>
+    
+There is one final note we need to discuss before we end this section. Once we solve the dual problem, we have the two equations written above that will compute the feature weights w and the bias term b, which are the solution to the corresponding primal problem. BUT: **If we apply the kernel trick, how do we get the associated primal solutions?**. You'll note that implementation of the kernel trick introduces *transfomed* input instances in the dual solution, which in some cases disallow you from even computing the feature weights w!
 
+To get around this, we can skip the computation of w entirely by substituting its expression into the original decision function. Upon doing this and simplifying, you will obtain the following form of the decision function:
 
+<insert equation here, p.172>
+
+We observe that this final summation only involves the kernel that was used and *not* any transformed vectors! We also note that since the $\alpha^i$ are non-zero **only for the support vectors**, we need only compute the kernel (and hence the entire summation) using **only the support vectors**! This is another great simplification.
+
+The same substitution can be performed with the bias term, and upon substituting the weight equation into the bias equation you will get:
+
+<insert equation here, p.172>
+
+That's the kernel trick!
 
 
 ### 5.4.6 - Online SVMs
+
+
+
+
 
 ## - Concluding Remarks
 
