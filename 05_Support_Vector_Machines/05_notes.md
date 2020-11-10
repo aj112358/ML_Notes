@@ -3,10 +3,17 @@
 ## Chapter Objectives
 
 1. Understand intuition behind SVMs
-2. Learn how to implement an SVM algorithm for classification
-    1. Batch gradient descent
-3. Learn how to implement an SVM algorithm for regression
-4. Learn the mathematical theory underlying SVM
+2. Understand the differences between linear and non-linear SVM models
+3. Learn how to implement an SVM algorithm for classification
+4. Learn how to implement an SVM algorithm for regression
+5. Learn about how to transform non-linear data into linear data
+    1. Using polynomial kernels
+    2. Using similarity features
+6. Learn the mathematical theory underlying SVM
+    1. Decision functions
+    2. Mathematical formulations of the optimization problem
+    3. The primal & dual problems and their relationships
+7. Learn about the "kernel trick"
 
 A "support vector machine" is a ML algorithm that is both powerful and versatile. It can be used for both classification and regression tasks, and is more well suited for the former, especially when you have small/medium sized datasets. It can also handle both linear and non-linear data sets! All-in-all, this is definitely a tool you want to have in your ML toolbox.
 
