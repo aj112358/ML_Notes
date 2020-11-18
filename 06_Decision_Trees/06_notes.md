@@ -158,7 +158,7 @@ The CART algorithm works essentially the same as with classification but now **t
 <insert equation here>
 
 
-### - A Note on Regularization
+### A Note on Regularization
 
 Finally, we should make sure to always incorporate regularization techniques when working with decision trees, even for a regression task. Left unrestricted, a decision tree would simply create decision boundaries to isolate every data point, thus causing a gross overfitting of the training data!
 
