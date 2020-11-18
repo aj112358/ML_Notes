@@ -29,10 +29,22 @@ We can also simply "open" this file and compile the code to create the visual in
 
 <insert tree here>
 
+**Note: One of the very nice features of using a decision tree ML algorithm is that they require very little data preparation. They don't even require *feature scaling or cerntering*!**
 
 ## 6.2 - Making Predictions
 
+To see how a decision tree model makes predictions (for classification tasks), we can use the visual of the decision tree above. 
 
+We see that all non-leaf nodes begin with a statement - in our case, either "petal length (cm) <= 2.45" or "petal width (cm) <= 2.45". Given any input instance, we simply traverse through the tree depending on if the answer to each non-leaf node's statement is true (traverse left) or false (traverse right). The ultimate leaf node we finish at is the prediction class for that input instance.
+
+*Some Terminology: You can refer to the nodes as "depth-2 right", which would mean the right child node at a depth of 2 into the tree.*
+
+Other than the statement in the non-leaf nodes, each node in a decision tree has four attributes:
+
+1. **samples**:
+2. **value**:
+3. **gini**:
+4: **class**: 
 
 
 ## 6.3 - Estimating Class Probabilities
