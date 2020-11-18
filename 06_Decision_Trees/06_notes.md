@@ -59,8 +59,29 @@ where $p_{i,k}$ is the ratio of class-k instances to the samples in the i-th nod
 
 <img src="http://latex.codecogs.com/svg.latex?G_1=1-\sum_{k=1}^3\left(p_{1,k}\,^2\right)=1-\left[p_{1,1}\,^2&plus;p_{1,2}\,^2&plus;p_{1,3}\,^2&space;\right]=1-\left[\left(\frac{0}{54}\right)^2&plus;\left(\frac{49}{54}\right)^2&plus;\left(\frac{5}{54}\right)^2\right]=0.1680384088\approx0.168" title="Sample Gini calculation" />
 
+Finally, being used as a classification algorithm, we can visualize a decision tree ML model's decision boundaries:
+
+<insert picture of decision boundaries>
+
+Each depth of the decision tree produces its own decision boundary. For the root node (depth-0), the decision boundary is the thick vertical line. Since the depth-1 left node was pure (Gini impurity of zero), it cannot be split further. The depth-1 right node howevery has a non-zero Gini impurity, and hence can be separated (it's also not a leaf node). The right-hand region is split based on the decision statement 'petal width (cm) <= 1.75'.
+
+Since we had specified the hyperparameter 'max_depth' as 2, we only have these two decision boundary. Had we set this hyperparameter as 3, we would have gotten another (disjoint) decision boundary (indicated by the vertical dotted lines), splitting each of the two regions separated by the depth-1 decision boundary.
+
+
 ## 6.3 - Estimating Class Probabilities
+
+For a classification task, we can compute the class probabilities for an input instance. We simply traverse the tree to the appropriate leaf node, and can then compute the class probabilities by dividing each number in the value list by the samples quantity.
+
+With regards to the decision boundary image aboe, each of the three colored regions (not including the vertical dotted lines) will yield the **same class probabilities**, regardless of the input instance features.
+
+And, as usual, we can use SKL's '.predict_proba()' and '.predict()' methods to automatically compute class probabilities and predictions, respectively.
+
+
 ## 6.4 - The CART Training Algorithm
+
+In order to train a decision tree, SKL uses the so-called "CART Algorithm" (*Classification and Regression Tree*) to train (aka: "grow") a decision tree.
+
+
 ## 6.5 - Computational Complexity
 ## 6.6 - Gini Impurity or Entropy?
 ## 6.7 - Regularization Hyperparameters
