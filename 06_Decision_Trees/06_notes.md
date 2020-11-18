@@ -17,7 +17,7 @@
 A *decision tree* is another ML algorithm, one that can be used for both regression and classification tasks. They are very powerful algorithms, can be used for multioutput tasks, and are capable of dealing with complex data sets. They are the fundamental component of *random forest* ML algorithms, which we will see in the next section (Ch8).
 
 
-## 6.1 - Training and Visualizing a Decision Tree
+## 6.1 - Training and Visualizing a Decision Tree (Classification)
 
 To begin our study of the decision tree ML algorithm, we will start by implementing one and seeing how it makes predictions. As we have been so far, we will use the Iris data set and create a classification algorithm. To the JN!
 
@@ -87,7 +87,7 @@ It starts by splitting the training set into two subsets, by using a statement (
 
 where $G$ measures the impurity of the corresponding subset, and $m$ is the number of instances in that subset. Once the algorithm has found a split, it applies the above steps recursively to each of the two subsets, continuing until it reaches the maximum specified tree depth OR if it cannot find a split that will reduce the Gini impurity metric.
 
-As we will discuss below, there do exist a few other hyperparameters that can be used to control the stopping of this recursive algorithm:
+As we will discuss below (see: 'Regularization Hyperparameters' section), there do exist a few other hyperparameters that can be used to control the stopping of this recursive algorithm:
 * min_samples_split
 * min_samples_leaf
 * min_weight_fraction_leaf
@@ -118,12 +118,55 @@ So the question to ask ourselves is which should we use? In truth, it doesn't ma
 
 ## 6.7 - Regularization Hyperparameters
 
+Decision trees make few assumptions about the training data. As such, if we leave them unconstrained, they may suffer from overfitting as they will essentially grow themselves directly into the training data. Indeed, decision trees can be classified as a "non-parametric model", as they do not prescribe the number of parameters upfront before the training begins (ex: like a linear regression model would, for instance). This is what explains this fact, that decision trees can grow themselves perfectly into the training set. (*In contrast, a "parametric model" predefines the number of parameters before training, and is hence less prone to overfitting, but moreso to underfitting (because may not have enough parameters)*)
 
+As we have seen many times, we can implement regularization techniques to prevent/limit overfitting. For the decision tree ML algorithm, we can qualitatively do this by trying to restrict the overall size, freedom, and/or number of nodes in the final decision tree. This can be done through the manipulation of various hyperparameters:
 
+1. **max_depth**: Specify the height (i.e. maximum depth) of the tree. (Default value is "None", meaning unlimited possible depth)
+2. **min_samples_split**: Specify the minimum number of samples a node must have before it can be split.
+3. **min_samples_leaf**: Spcify the minimum number of samples a *leaf* node must have.
+4. **min_weight_fraction_leaf**: Same as "min_samples_leaf" above, but expressed as a fraction w.r.t the total number of weighted instances
+5. **max_leaf_nodes**: Specify the maximum number of leaf nodes.
+6. **max_features**: Specify the maximum number of features that are evaluated for splitting at each node.
+
+You can investigate various combinations of values for each of these hyperparameters to obtain your desired level of accuracy.
+
+**Remark:** There exist other algorithms that train an entire decision tree (w/o restrictions) and then perform "pruning" of what the algorithm deems are unnecessary nodes. In such scenarios, a node whose children are leaf nodes is considered "unnecessary" if its purity improvement is not *statistically significant* (we can test this using a chi-squared test and looking at the p-value).
 
 
 ## 6.8 - Regression
+
+So far we have only looked into classification tasks, but decision trees can also be used for regression tasks. To see how this is done, we will train a decision tree for regression using simple noisy quadratic data, and then look at the structure of the decision tree to see how it makes predictions. The code in the JN yields the decision tree below:
+
+<insert decision tree for regression>
+
+As was the case with a classification decision tree, all non-leaf nodes have a statement which determines the traversal path through the tree, given an input instance x1. All nodes then have three common attributes:
+1. **MSE value**
+2. **Samples**: A count of how many training instances the *node* applies to.
+3. **Value**: The prediction for that node.
+
+To make a prediction, we take an input instance (in this case, the single number x1), and use it to traverse the tree. It will land on a leaf node, and the predicted output value is the value of that node. One observation is that each node will **predict the same value** for all instances that fall into that node. The predictions are the average target value of all the training instances in that node's sample.
+
+The following two plots show the decision boundaries of this decision tree:
+
+<insert picture here>
+
+The blue dots are the data, and the red horizontal lines are the predictions that each node will make. We see that the vertical decision boundaries split the data into disjoint regions. In each region, the red prediction lines are computed to be the average value of each training instance that falls within that region.
+
+The CART algorithm works essentially the same as with classification but now **tries to split each iterations input data so as to minimize the MSE**. The cost function for regression is given as follows:
+
+<insert equation here>
+
+### - A Note on Regularization
+
+Finally, we should make sure to always incorporate regularization techniques when working with decision trees, even for a regression task. Left unrestricted, a decision tree would simply create decision boundaries to isolate every data point, thus causing a gross overfitting of the training data!
+
+
 ## 6.9 - Instability
+
+
+
+
 
 ## - Concluding Remarks
 
