@@ -157,6 +157,7 @@ The CART algorithm works essentially the same as with classification but now **t
 
 <insert equation here>
 
+
 ### - A Note on Regularization
 
 Finally, we should make sure to always incorporate regularization techniques when working with decision trees, even for a regression task. Left unrestricted, a decision tree would simply create decision boundaries to isolate every data point, thus causing a gross overfitting of the training data!
@@ -164,13 +165,22 @@ Finally, we should make sure to always incorporate regularization techniques whe
 
 ## 6.9 - Instability
 
+Although decision trees are a powerful ML tool, they also have their limitations. As we may have gathered, the decision boundaries are *always perpendicular to the feature axes*. As such, decision trees are very **sensitive to rotations on the training set**. Consider the two plots below:
 
+<insert rotation plots>
 
+We see that the unaltered training data on the left is linearly separable, and the decision boundary is very simply. However, after a simple 45-degree rotation, the altered training data on the right (although still linearly separable!) has a much more complicated decision boundary, since those for a decision tree must be orthogonal to the axes. It is most likely that this decision tree will not be able to generalize to new data.
+
+*Aside: One way to deal with such an issue is to use "Principle Component Analysis", see Ch 8.*
+
+More generally, it so happens that decision trees are generally **very sensitive to any small variations in the training set**. Changing a single value slightly in the training data could give you a vastly different tree with different decision boundaries. Moreover, since the CART algorithm used by SKL is a stochastic (random) one, you may get different decision trees even with the same training set if you decide to re-train the model. To allow for consistent decision trees being made, we can specify the 'random_state' parameter when instantiating the model.
+
+This type of instability can be limited by using *random forests*, which actually create many individual decision trees and take compute their average predictions. We will study these in the next section.
 
 
 ## - Concluding Remarks
 
-
+In this section, we learned about the power and versatility of decision trees. They can be used for both regression and classification problems, and can be used for very complex data sets, although the training time may increase with data size. It is important to always regularize decision trees for they are very prone to overfitting. We also saw how to visualize the physical decision tree once it's trained as well as the resulting decision boundaries. From these we saw that one drawback of using a decision tree is their sensitivity to even slight changes in the training data.
 
 
 [anomaly_detection]: https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/anomaly_detection.png "illustration of anomaly detection"
