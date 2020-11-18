@@ -79,12 +79,49 @@ And, as usual, we can use SKL's '.predict_proba()' and '.predict()' methods to a
 
 ## 6.4 - The CART Training Algorithm
 
-In order to train a decision tree, SKL uses the so-called "CART Algorithm" (*Classification and Regression Tree*) to train (aka: "grow") a decision tree.
+In order to train a decision tree, SKL uses the so-called "CART Algorithm" (*Classification and Regression Tree*) to train (aka: "grow") a decision tree. This algorithm executes in a recursive fashion, and performs the following steps at each iteration.
+
+It starts by splitting the training set into two subsets, by using a statement (these statements are written in each non-leaf node of the decision tree visual) invovling a single feature $k$ and a single threshold value $t_k$. It selects these two by attempting to search for the pair that yields the purest subsets. The cost function associated with this optimization process is:
+
+<img src="http://latex.codecogs.com/svg.latex?J(k,t_k)=\frac{m_{left}}{m}\cdot&space;G_{left}&plus;\frac{m_{right}}{m}\cdot&space;G_{right}" title="CART algorithm cost function" />
+
+where $G$ measures the impurity of the corresponding subset, and $m$ is the number of instances in that subset. Once the algorithm has found a split, it applies the above steps recursively to each of the two subsets, continuing until it reaches the maximum specified tree depth OR if it cannot find a split that will reduce the Gini impurity metric.
+
+As we will discuss below, there do exist a few other hyperparameters that can be used to control the stopping of this recursive algorithm:
+* min_samples_split
+* min_samples_leaf
+* min_weight_fraction_leaf
+* max_leaf_nodes
+
+**Remark:** This CART Algorithm is an example of a "greedy" algorithm, since it searches for the optimal values for the current iteration without consideration to later iterations. As such, the output will only be a *reasonably good* solution, but perhaps not the true optimal solution. The problem of finding the true optimal solution (i.e. optimal tree) is actually an NP-Complete problem and is hence intractable. 
 
 
 ## 6.5 - Computational Complexity
+
+In order to make predictions, the decision tree must be traversed through to a leaf node. We can assume that a decision tree is approximately balanced, hence this traversal has time complexity $O(log_2(m))$, which we observe to be independent of the number of features! Hence, predictions are usually computed very quickly, even with very large data sets (because of the logarithm).
+
+With regards to training, the CART algorithm compares all features on all samples at each node (less if 'max_features' hyperparameter is specified). As such, training a decision tree has time complexity $O(n x m\*log_2(m))$. It's possible to have SKL speed up the training process by *pre-sorting the data* (set 'presort=True'). Since we know that sorting algorithms themselves can be very time intensive, this is really only useful for small training sets (less than a few thousand nodes), and even then the pre-sorting will slow down the training (even moreso for larger data sets!).
+
+
 ## 6.6 - Gini Impurity or Entropy?
+
+By default, SKL uses the Gini impurity metric by default. There is another metric that can be used called "entropy", set by defining the hyperparameter 'criterion' to "entropy". The concept of entropy was founded in the study of thermodynamics, and the general concept later was introduced in the branch of computer science known as "information theory", the founder of which was Claude Shannon in the early 90's.
+
+In ML, entropy is frequently used as an impurity measure - a set's entropy is zero if it contains instances of only a single class. The mathematical formulation of entropy (in the context of computer science) is:
+
+<insert formula here>
+
+So the question to ask ourselves is which should we use? In truth, it doesn't matter in the end. Both will yield similar decision trees. But there are a few key differences:
+* Gini impurity tends to isolate the most frequent class in its own branch (**it is also slightly faster to compute** (because no logarithm?))
+* Entropy tends to produce slightly more balanced trees
+
+
 ## 6.7 - Regularization Hyperparameters
+
+
+
+
+
 ## 6.8 - Regression
 ## 6.9 - Instability
 
