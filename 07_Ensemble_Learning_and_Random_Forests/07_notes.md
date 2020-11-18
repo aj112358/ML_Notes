@@ -29,7 +29,31 @@ A particular example of an ensemble method is called a **random forest**. Here w
 
 In practice, an ensemble method is used at the end of a ML project. At this point you will have already created a few good predictors, and now you can simply combine them into a better predictor. 
 
+
 ## 7.1 - Voting Classifiers
+
+We start learning about ensemble methods with a simple example involving a generic classification task.
+
+Suppose you are given a classification ML problem, and have went ahead and worked through the ML process (as we have outlined at the beginning of this course), and now have developed various classification algorithms, say logistic classifier, SVM classifier, KNN classifier, and a random forest classifier. Each of these yield approximately 80% accuracy.
+
+We can then use all these classifiers **at once** to make a prediction on a new input instance. We would pass this input instance through each individual classifier, get the predicted class from each, and then specify the prediction to be that class that was predicted most often by our group of classifiers. This type of ensemble classifier is called a **hard voting classifier**.
+
+It turns out that such a hard voting classifier will often achieve a higher accuracy than even the best individual classifier in your ensemble. In the extreme case, if each of the individiual classifiers are **weak learners** (they only do slightly better than random guessing), the entire ensemble can still come out to be a **strong learner** (achieving high accuracy). This caveat is that there should be a sufficient number of weak laerners AND that they are diverse in nature.
+
+The reason for this behaviour is explained by the statistical concept called the *law of large numbers*. As an illustration of this law, suppose we have built an ensemble consisting of 1000 classifiers, each with accuracy 51% (ie. weak learners). Using the law of large numbers and some basic probability theory, you can show that the probability of each classifer predicting the majority is approximately 75%. 
+
+Although, we must be careful of our assumptions. The above illustration assumes that the ensemble of classifiers are mutually independent, which we know is false as each is trained on the same training set. Hence, they are capable of making the same errors, and so the true perceived accuracy would be less than the statistical ideal of 75%. The lesson learned is that **ensemble methods work best when the predictors (ie. individual classifiers) are as independent from one another as possible.** One way to accomplish this is to *train each predictor using very different algorithms*.
+
+To illustrate the implementation of an ensemble method, we will create a classifier that implements hard voting. We can use SKL's 'VotingClassifier' class for this. We go to the JN now.
+
+Finally, in an attempt to increase the ensemble accuracy even further, we can try an ensemble method called **soft voting**. Here, we proceed in a similar way - create various classifiers individually, and pass a new input instance to each to get their individual predictions.
+
+NOW: Instead of doing a majority vote (hard voting), we would instead compute the class probabilities for each individual classifier, take the average of the probability for each class over the individual classifiers, and make the prediction for the class with the highest average.
+
+In order to do this, each of the individual classifiers need to be equipped with the 'predict_proba()' method. As we know, the SVC does not come with this method by default, so for that particular classifier, we must get it to implement cross-validation by setting the hyperparameter 'probability' to "True". Although this will slow down training, you will be able to then compute class probabilities.
+
+Finally, to implement soft voting, we simply specify the hyperparameter 'voting' to "soft", in the VotingClassifier class instantiation. We do this now in the JN.
+
 
 ## 7.2 - Bagging and Pasting
 ### 7.2.1 - Using SKL
@@ -39,12 +63,12 @@ In practice, an ensemble method is used at the end of a ML project. At this poin
 ## 7.3 - Random Patches and Random Subspaces
 
 ## 7.4 - Random Forests
-## 7.4.1 - Extra-Trees
-## 7.4.2 - Feature Importance
+### 7.4.1 - Extra-Trees
+### 7.4.2 - Feature Importance
 
 ## 7.5 - Boosting
-## 7.5.1 - AdaBoost
-## 7.5.2 - Gradient Boosting
+### 7.5.1 - AdaBoost
+### 7.5.2 - Gradient Boosting
 
 ## 7.6 - Stacking
 
