@@ -56,6 +56,20 @@ Finally, to implement soft voting, we simply specify the hyperparameter 'voting'
 
 
 ## 7.2 - Bagging and Pasting
+
+As we have mentioned above, in order for an ensemble method to have maximized accuracy, it is important to **use a diverse set of classifiers**. One way to do this is to simply use different training algorithms for each individual classifier. But another approach is to **use the *same training algorithm* but train each on *different random subsets* of the training set**.
+
+To get these random subsets of the training data, we have two ways. **Bagging** (aka: "bootstrap aggregating") is a term that means sampling *with* replacement *(In statistics, sampling with replacement is called **bootstrapping**)*. **Pasting** is a term that means sampling *without* replacement. We can use one or the other to sample training instances for each individual predictor we choose to use. With _bagging_, the sampling with replacement is done on the *same predictor*. This means that, for a given predictor, it is possible that it randomly chooses repeated training instances to train on. This does **not mean** that *for each classifier*, the training subsets used are disjoint - each classifier starts its training with the *entire* training set. (*It is not like the first classifier uses some subset of the training set, and then passes on the remaining training instances to the next classifier*).
+
+Once you have trained all the individual predictors, the ensemble makes predictions by using some type of **statistical aggregate function**. For classification, the mode is the most commonly used. For regression, the average is more commonly used.
+
+Each individual predictor has a higher bias (than if it were trained on the *entire* training set), but the effects of aggregation are to reduce both the bias and variance. The ensemble then generally has a similar bias but a lower variance, than any single predictor that would have been trained on the entire training data.
+
+One of the reasons that bagging and pasting are popular methods is that **they have good scalability**. Both training and making predictions can be done in parallel (different CPU cores, different servers, etc)
+
+
+
+
 ### 7.2.1 - Using SKL
 ### 7.2.2 - Out-of-Bag Evaluation
 
