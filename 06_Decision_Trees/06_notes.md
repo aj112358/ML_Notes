@@ -2,8 +2,18 @@
 
 ## Chapter Objectives
 
-1. Learn the mathematical 
-    1. Decision 
+1. Learn how to visualize a decision tree once trained
+    1. Will need the 'graphviz' library installed!
+2. Learn how a decision tree makes predictions
+    1. For classification tasks
+    2. For regression tasks
+3. Learn about impurity of a node
+    1. Gini impurity metric
+4. Learn how a decision tree estimates class probabilities
+5. Learn and implement SKL's CART training algorithm for decision trees
+6. Compare and contrast the Gini impurity and entropy metrics
+7. Learn how to implement regularization
+
 
 
 
