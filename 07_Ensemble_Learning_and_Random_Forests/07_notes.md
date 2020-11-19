@@ -174,7 +174,7 @@ From these two equations above, we can see that if a trained predictor has good 
 
 With these values computed, the next step is for AdaBoost to update the instance weights. Recall we wish to increase the weight of the *misclassified* instances. This is done via:
 
-<img src="http://latex.codecogs.com/svg.latex?w^{(i)}\leftarrow\begin{cases}w^{(i)}&space;&\quad\text{if&space;}\hat{y}_j^{(i)}=y^{(i)}\\w^{(i)}\cdot\exp(\alpha_j)&space;&\quad\text{if&space;}\hat{y}_j^{(i)}\neq&space;y^{(i)}\\\end{cases}&space;" title="Weight update rule for new instance weights" />
+<img src="http://latex.codecogs.com/svg.latex?w^{(i)}\leftarrow\begin{cases}w^{(i)}&space;&amp\quad\text{if&space;}\hat{y}_j^{(i)}=y^{(i)}\\w^{(i)}\cdot\exp(\alpha_j)&space;&amp\quad\text{if&space;}\hat{y}_j^{(i)}\neq&space;y^{(i)}\\\end{cases}&space;" title="Weight update rule for new instance weights" />
 
 for all instances i=1,2,...,m. Finally, these new instance weights are normalized by dividing each by the total sum.
 
