@@ -184,10 +184,20 @@ Once the ensemble is fully trained, predictions on new data is computed via:
 
 <img src="http://latex.codecogs.com/svg.latex?\hat{y}(x)=\operatorname{argmax}\left(\displaystyle\sum_{\substack{j=1\\\hat{y}_j(x)=k}}^N&space;\alpha_j\right)" title="http://latex.codecogs.com/svg.latex?\hat{y}(x)=\operatorname{argmax}\left(\displaystyle\sum_{\substack{j=1\\\hat{y}_j(x)=k}}^N \alpha_j\right)" />
 
+where N is the number of predictors in the ensemble.
+
 
 #### AdaBoost in SKL - SAMME
 
+As it happens, SKL uses a *multi-class* version of AdaBoost called **SAMME**, which stands for **Stagewise Additive Modelling using a Multiclass Exponential loss function**. In the case of only two classes, SAMME is equivalent to AdaBoost.
 
+If the predictors you select to implement are capable of producing class probabilities, then SKL has the ability to use a variant called **SAMME.R** (R stands for "Real"). This variant uses the class probabilities instead (rather than predictions), and so will generally perform better.
+
+In any case, SKL offers the 'AdaBoostClassifier' class (and an analagous one for regression). Let's go to the JN and implement AdaBoost!
+
+*NOTE: A decision tree with a height of one is called a "decision stump"!*
+
+To regularize the AdaBoost model (ie. to reduce overfitting), we can either **reduce the number of estimators** or **most strongly regularize the base estimator**.
 
 
 ### 7.5.2 - Gradient Boosting
