@@ -68,10 +68,30 @@ Each individual predictor has a higher bias (than if it were trained on the *ent
 One of the reasons that bagging and pasting are popular methods is that **they have good scalability**. Both training and making predictions can be done in parallel (different CPU cores, different servers, etc)
 
 
+### 7.2.1 - Implementing Bagging and Pasting in SKL
+
+We can implement both bagging and pasting in SKL using the classes 'BaggingClassifier' or 'BaggingRegressor' (both can perform bagging and pasting). We go to the JN now to see how this can be done.
+
+When using either of these classes, we can specify the hyperparameter 'bootstrap' to be "True" if we want to implement bagging, and "False" if we want to implement pasting. With these classes we must specify which 'base_estimator' we want to use, and then we can specify the number we wish to train (via 'n_estimators') as well as the size of each random sample for each to train on (via 'max_samples').
+
+Also, with the 'BaggingClassifier' class, it will **automatically perform *soft voting* if the base estimator is able to provide class probabilities**. Recall, for example, that this is the case for decision trees but not for SVMs.
+
+From the JN code, we make the following two plots to compare bagging with using a single decision tree:
+
+<insert plots here>
+
+We can see that the single decision tree's decision boundary is very complex, whereas the bagging ensemble's decision boundary is more smooth. It's easy to see then that the bagging ensemble model will better generalize to new data. Also, as we discussed above, the ensemble will have a similar bias as the decision tree but will have smaller variance.
+
+As is so happens, sampling *with* replacement (ie. bagging; bootstrapping) introdcues more diversity into the training subsets for each predictor, and so bagging actually will have a slightly higher bias than pasting. But this added diversity causes each predictor in the ensemble to be less correlated to the others, hence reducing the variance. **Overall, bagging often results in better models**.
+
+**Remark**: Of course, you could use cross-validation to evaluate both bagging and pasting to make a better informed decision!
 
 
-### 7.2.1 - Using SKL
 ### 7.2.2 - Out-of-Bag Evaluation
+
+
+
+
 
 
 ## 7.3 - Random Patches and Random Subspaces
