@@ -172,6 +172,12 @@ where eta is the **learning rate hyperparameter** (default 1).
 
 From these two equations above, we can see that if a trained predictor has good performance on the training set, it's errot rate r_j will be low, and hence the predictor's weight \alpha_j will be high (since 1-r/r > 0, and logarithms are strictly increasing). If the predictor happens to be just guessing randomly, then it's weighted error rate will be close to 0.5 whence that predictor's weight will be close to 0 (since log(1)=0). Finally, if the predictor is wrong most of the time, then the weighted error rate will be high, so that predictor's weight will actually be negative (since log(x)<0 for x<1).
 
+With these values computed, the next step is for AdaBoost to update the instance weights. Recall we wish to increase the weight of the *misclassified* instances. This is done via:
+
+<img src="http://latex.codecogs.com/svg.latex?w^{(i)}\leftarrow\begin{cases}w^{(i)}&space;&\quad\text{if&space;}\hat{y}_j^{(i)}=y^{(i)}\\w^{(i)}\cdot\exp(\alpha_j)&space;&\quad\text{if&space;}\hat{y}_j^{(i)}\neq&space;y^{(i)}\\\end{cases}&space;" title="http://latex.codecogs.com/svg.latex?w^{(i)}\leftarrow\begin{cases}w^{(i)} &\quad\text{if }\hat{y}_j^{(i)}=y^{(i)}\\w^{(i)}\cdot\exp(\alpha_j) &\quad\text{if }\hat{y}_j^{(i)}\neq y^{(i)}\\\end{cases} " />
+
+for all instances i=1,2,...,m. Finally, these new instance weights are normalized by dividing each by the total sum.
+
 
 ### 7.5.2 - Gradient Boosting
 
