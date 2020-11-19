@@ -89,12 +89,23 @@ As is so happens, sampling *with* replacement (ie. bagging; bootstrapping) intro
 
 ### 7.2.2 - Out-of-Bag Evaluation
 
+For bagging, we know that training instances are chosen randomly to create the training subset for each predictor. Since we are performing sampling *with* replacement, it is possible that many instances are sampled multiple times, but there will surely be some training instances that are **not sampled**. It can be shown that ~63% of the training instances are sampled on average, for each predictor in the ensemble. The other ~37% of training instances that are not sampled are called **out-of-bag (oob) instances**. Of course, these need not be the same for each predictor!
 
+So, during training the predictor does not have knowledge of these oob instances. As such, we can actually use them as an evaluation tool for our predictor! They essentially take the place of a validation set. We can then evaluate the ensemble by simply taking the average of these so-called **out-of-bag evaluations**. 
 
-
+Let's see how we can implement oob evaluation with bagging in the JN.
 
 
 ## 7.3 - Random Patches and Random Subspaces
+
+So far, we have discussed random samples of the training *instances*, but we can also do random sampling of the **features** as well. To do this, the 'BaggingClassifier' class allows us to specify the two hyperparameters 'max_features' and 'bootstrap_features'. The latter hyperparameter allows use to specify whether we wish to sample the features *with* replacement ("True") or *without* replacement ("False"). 
+
+Sampling from both the training instances and training features is referred to as the **random patches method**.
+
+If you choose to **use all training instances** (by setting 'boostrap' to "False, and 'max_samples' to "1.0") and simultaneously choose to **do feature sampling** (by setting 'bootstrap_features' to "True" and/or 'max_features' <1.0), this method is called the **random subspaces method**.
+
+Implementing feature sampling is particularly useful if you are dealing with high-dimensional data, such as images. It can also provide you with greater diversity among your predictors in the ensemble, hence trading a little bias for a lower variance. In the next chapter of the book, we will look into the problems that high-dimensional data can cause to us as data scientists, and how to go about alleviating some of these problems.
+
 
 ## 7.4 - Random Forests
 ### 7.4.1 - Extra-Trees
