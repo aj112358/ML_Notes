@@ -149,6 +149,19 @@ One popular boosting method is called **AdaBoost** (short for: **Adaptive Boosti
 
 As a specific example, you first start with a base classifier and train that normally. Then you use the now trained ML model and evaluate it by making predictions on the *training set*. For any training instance that was *misclassified*, we increase that instances weight (relative to the other training instances). We then move on and train the second predictor on the training set, *now updated with different weights*. Once trained, we use this second predictor on the training set and check for misclassifications, and change their weights accordingly. This process is repeated for each predictor sequentially for the entire ensemble.
 
+Once the entire ensemble has been created, **each now-trained predictor is itself assigned a relative weight** compared to all others based on its overall accuracy on the weighted training set.
+
+This method is similar to the method of gradient descent we have seen previously. In this case, we are continually adding predictors to our ensemble to make it better overall, instead of working with only a single predictor and minimizing a cost function.
+
+**Remark:** A very clear downside of sequential learning is that you *cannot parallelize the learning*. Each predictor must wait until the previous one is fully trained.
+
+
+#### Mathematics of AdaBoost
+
+We start by setting each instance's initial weight to $1/m$, where $m$ is the number of instances. Once a predictor is trained, we can compute its weighted error (when applied to the training set) via:
+
+<img src="http://latex.codecogs.com/svg.latex?r_j=\frac{\displaystyle\sum_{\substack{i=1\\\hat{y}_j^{(i)}\neq&space;y^{(i)}}}^m\left(w^{(i)}\right&space;)}{\displaystyle\sum_{i=1}^m\left(w^{(i)}\right)}" title="http://latex.codecogs.com/svg.latex?r_j=\frac{\displaystyle\sum_{\substack{i=1\\\hat{y}_j^{(i)}\neq y^{(i)}}}^m\left(w^{(i)}\right )}{\displaystyle\sum_{i=1}^m\left(w^{(i)}\right)}" />
+
 
 ### 7.5.2 - Gradient Boosting
 
