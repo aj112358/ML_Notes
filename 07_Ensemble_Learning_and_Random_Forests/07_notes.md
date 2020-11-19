@@ -138,11 +138,18 @@ We go to the JN to see an example, this time using the Iris data set.
 
 ## 7.5 - Boosting
 
+The term **boosting** (originally called: "hypothesis boosting*) refers to any ensemble method that combines weak learners (slightly better than random) into a strong learner, and does this by **training each predictor sequentially, where subsequent predictors learn from previous ones and try to correct them**.
 
-
+The two types of boosting methods we will personally look at are "AdaBoost" and "Gradient Boosting", although there are also many others available.
 
 
 ### 7.5.1 - AdaBoost
+
+One popular boosting method is called **AdaBoost** (short for: **Adaptive Boosting**). In order for it to continue improving each successive predictor, it **uses the previous predictor's training instances that were *underfitted***. Hence, each subsequent predictor will focus moreso on the harder-to-identify training instances (from the previous predictor).
+
+As a specific example, you first start with a base classifier and train that normally. Then you use the now trained ML model and evaluate it by making predictions on the *training set*. For any training instance that was *misclassified*, we increase that instances weight (relative to the other training instances). We then move on and train the second predictor on the training set, *now updated with different weights*. Once trained, we use this second predictor on the training set and check for misclassifications, and change their weights accordingly. This process is repeated for each predictor sequentially for the entire ensemble.
+
+
 ### 7.5.2 - Gradient Boosting
 
 ## 7.6 - Stacking
