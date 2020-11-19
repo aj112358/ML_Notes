@@ -108,10 +108,40 @@ Implementing feature sampling is particularly useful if you are dealing with hig
 
 
 ## 7.4 - Random Forests
+
+A **random forest** is simply an ensemble of decision trees, trained in the following way:
+* via the bagging method (generally)
+* 'max_samples' = 1.0 (ie. the entire training set)
+
+Of course, we can simply use the 'BaggingClassifier' class and use a decision tree as the 'base_estimator'. But SKL also offers us the 'RandomForestClassifier' class for our use (there is also 'RandomForestRegressor') We quickly illustrate the use of this class in the JN.
+
+The random forest algorithm introduces more randomness when growing trees by searching for the best feature *among a random subset of features* when splitting a node. With more diversity, it is able to trade more bias for smaller variance giving you better overall results.
+
+
 ### 7.4.1 - Extra-Trees
+
+It is possible to go even further beyond and introduce more randomness into a random forest by *using random thresholds* for each feature itself, alongside the aforementioned method of using random features.
+
+This type of random forest is fittingly called an **extremely randomized trees ensemble**, or simply **extra-trees** for short. Using extra-trees allows for faster training than a regular random forest, since we don't need to find *the best* possible threshold for each node.
+
+SKL offers us the 'ExtraTreesClassifier' and 'ExtraTreesRegressor' classes to implement extra-trees into our ML problem. They the the exact same hyperparameters as both respective 'RandomForest' classes.
+
+
 ### 7.4.2 - Feature Importance
 
+In any ML problem, it is very useful to have knowledge of which features are more important than others, especially if you are dealing with high-dimensional data. Random forests provide us with such information. To do this, SKL computes a weighted average over the nodes where the weights for a node are simply the number of training samples that correspond to it (the 'samples' attribute). It then scales all the scores so they sum to one. To access these feature importance scores, they are stored in the 'feature_importances_' variable.
+
+We go to the JN to see an example, this time using the Iris data set.
+
+**Random forests are an excellent and easy way to quickly determine which features are the important ones. This can help greatly during the EDA step of the ML process!**
+
+
 ## 7.5 - Boosting
+
+
+
+
+
 ### 7.5.1 - AdaBoost
 ### 7.5.2 - Gradient Boosting
 
