@@ -162,6 +162,16 @@ We start by setting each instance's initial weight to $1/m$, where $m$ is the nu
 
 <img src="http://latex.codecogs.com/svg.latex?r_j=\frac{\displaystyle\sum_{\substack{i=1\\\hat{y}_j^{(i)}\neq&space;y^{(i)}}}^m\left(w^{(i)}\right&space;)}{\displaystyle\sum_{i=1}^m\left(w^{(i)}\right)}" title="Weighted error rate of j-th predictor" />
 
+where $\hat{y}\_j^{(i)}$ is, for the j-th predictor, its prediction for the i-th instance.
+
+We then compute that now-trained *predictor's* weight via:
+
+<img src="http://latex.codecogs.com/svg.latex?\alpha_j=\eta\cdot\operatorname{log}\left(\frac{1-r_j}{r_j}\right)" title="Predictor weight" />
+
+where eta is the **learning rate hyperparameter** (default 1).
+
+From these two equations above, we can see that if a trained predictor has good performance on the training set, it's errot rate r_j will be low, and hence the predictor's weight \alpha_j will be high (since 1-r/r > 0, and logarithms are strictly increasing). If the predictor happens to be just guessing randomly, then it's weighted error rate will be close to 0.5 whence that predictor's weight will be close to 0 (since log(1)=0). Finally, if the predictor is wrong most of the time, then the weighted error rate will be high, so that predictor's weight will actually be negative (since log(x)<0 for x<1).
+
 
 ### 7.5.2 - Gradient Boosting
 
