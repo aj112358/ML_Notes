@@ -158,9 +158,9 @@ This method is similar to the method of gradient descent we have seen previously
 
 #### Mathematics of AdaBoost
 
-We start by setting each instance's initial weight to $1/m$, where $m$ is the number of instances. Once a predictor is trained, we can compute its weighted error (when applied to the training set) via:
+We start by setting each instance's initial weight to $1/m$, where $m$ is the number of instances. Once a predictor is trained, we can compute its weighted error rate (when applied to the training set) via:
 
-<img src="http://latex.codecogs.com/svg.latex?r_j=\frac{\displaystyle\sum_{\substack{i=1\\\hat{y}_j^{(i)}\neq&space;y^{(i)}}}^m\left(w^{(i)}\right&space;)}{\displaystyle\sum_{i=1}^m\left(w^{(i)}\right)}" title="http://latex.codecogs.com/svg.latex?r_j=\frac{\displaystyle\sum_{\substack{i=1\\\hat{y}_j^{(i)}\neq y^{(i)}}}^m\left(w^{(i)}\right )}{\displaystyle\sum_{i=1}^m\left(w^{(i)}\right)}" />
+<img src="http://latex.codecogs.com/svg.latex?r_j=\frac{\displaystyle\sum_{\substack{i=1\\\hat{y}_j^{(i)}\neq&space;y^{(i)}}}^m\left(w^{(i)}\right&space;)}{\displaystyle\sum_{i=1}^m\left(w^{(i)}\right)}" title="Weighted error rate of j-th predictor" />
 
 
 ### 7.5.2 - Gradient Boosting
