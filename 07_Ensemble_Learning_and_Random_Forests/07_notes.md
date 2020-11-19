@@ -149,7 +149,7 @@ One popular boosting method is called **AdaBoost** (short for: **Adaptive Boosti
 
 As a specific example, you first start with a base classifier and train that normally. Then you use the now trained ML model and evaluate it by making predictions on the *training set*. For any training instance that was *misclassified*, we increase that instances weight (relative to the other training instances). We then move on and train the second predictor on the training set, *now updated with different weights*. Once trained, we use this second predictor on the training set and check for misclassifications, and change their weights accordingly. This process is repeated for each predictor sequentially for the entire ensemble.
 
-Once the entire ensemble has been created, **each now-trained predictor is itself assigned a relative weight** compared to all others based on its overall accuracy on the weighted training set.
+Once the entire ensemble has been created, **each now-trained predictor itself has an assigned weight** compared to all others based on its overall accuracy on the weighted training set. With the ML model created, it makes predictions by taking an input instance and getting the individual predictions from all the predictors, sums the respective weights for each class across these predictions, then predicts the class as the one receiving majority of (weighted) votes.
 
 This method is similar to the method of gradient descent we have seen previously. In this case, we are continually adding predictors to our ensemble to make it better overall, instead of working with only a single predictor and minimizing a cost function.
 
@@ -174,9 +174,20 @@ From these two equations above, we can see that if a trained predictor has good 
 
 With these values computed, the next step is for AdaBoost to update the instance weights. Recall we wish to increase the weight of the *misclassified* instances. This is done via:
 
-<img src="http://latex.codecogs.com/svg.latex?w^{(i)}\leftarrow\begin{cases}w^{(i)}&space;&amp\quad\text{if&space;}\hat{y}_j^{(i)}=y^{(i)}\\w^{(i)}\cdot\exp(\alpha_j)&space;&amp\quad\text{if&space;}\hat{y}_j^{(i)}\neq&space;y^{(i)}\\\end{cases}&space;" title="Weight update rule for new instance weights" />
+<img src="http://latex.codecogs.com/svg.latex?w^{(i)}\leftarrow\begin{cases}w^{(i)}&space;&\quad\text{if&space;}\hat{y}_j^{(i)}=y^{(i)}\\w^{(i)}\cdot\exp(\alpha_j)&space;&\quad\text{if&space;}\hat{y}_j^{(i)}\neq&space;y^{(i)}\\\end{cases}&space;" title="Weight update rule for new instance weights" />
 
 for all instances i=1,2,...,m. Finally, these new instance weights are normalized by dividing each by the total sum.
+
+Then, we simply repeat this entire process with the subsequent predictor. This AdaBoost algorithm will stop when either **the number of predictors is reached** or **a perfect predictor is found**.
+
+Once the ensemble is fully trained, predictions on new data is computed via:
+
+<img src="http://latex.codecogs.com/svg.latex?\hat{y}(x)=\operatorname{argmax}\left(\displaystyle\sum_{\substack{j=1\\\hat{y}_j(x)=k}}^N&space;\alpha_j\right)" title="http://latex.codecogs.com/svg.latex?\hat{y}(x)=\operatorname{argmax}\left(\displaystyle\sum_{\substack{j=1\\\hat{y}_j(x)=k}}^N \alpha_j\right)" />
+
+
+#### AdaBoost in SKL - SAMME
+
+
 
 
 ### 7.5.2 - Gradient Boosting
