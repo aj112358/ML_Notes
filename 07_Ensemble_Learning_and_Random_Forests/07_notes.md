@@ -233,9 +233,29 @@ Of course, this also allows the training to complete much quicker. This techniqu
 
 ### 7.5.3 - XGBoost (A Quick Note)
 
+In 2014, an individual names *Tianqi Chen* released a Python library that actually implements a more optimized version of gradient boosting. He called this method **extremem gradient boosting**, or simply **XGBoost** for short. It allows gradient boosting to be very fast and scalable.
+
+Since it's built off the idea of gradient boosting, its API is similar to that of most SKL classes. We won't look into depth with XGBoost but only provide a basic illustration in the JN. ***I could not get XGBoost to install properly***
+
+**NOTE: XGBoost is involved/used in many winning ML competitions, so you should definitely check it out!!!**
 
 
 ## 7.6 - Stacking
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## - Concluding Remarks
 
