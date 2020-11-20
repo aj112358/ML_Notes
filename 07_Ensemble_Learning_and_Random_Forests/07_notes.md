@@ -220,13 +220,18 @@ One good answer to this question is to implement **early stopping** - we can loo
 
 A quick and easy way to do this is to train a full GBRT ensemble and then manually find the minimum validation error and the number of corresponding trees. Luckily, we can take advantage of SKL and use GBRTs build-in 'staged_predict()' method to compute the validation errors. This method returns an iterator over the predictions made by the (currently build) ensemble at each stage of training. Once we know the optimal number of trees, we have to train an **entirely new GBRT ensemble** using this optimal number! We go to the JN to show how this is done.
 
+With the above strategy, we are forced to train **two entirely separate** GBRT ensembles. We can also **truly** implement early stopping by actually stopping the training cycle once a minimum validation error is reached. This is done easily by simply specifying the GBRT hyperparameter 'warm_start' to "True" when you instantiate the gradient boosting class. This causes SKL to perform *incremental training* - it will keep any currently existing trees when you call the 'fit()' method. We go to the JN to see how this is done.
+
+*Note: I don't think SKL has a special early stopping method for the GBRT classes, so you can just do it manually (using if-else statements!)*
+
+#### One Final Note
+
+SKL's 'GradientBoostingRegressor' class has a hyperparameter called "subsample", which allows us to specify what fraction of the training data do we wish to train each tree on (so it's a number between 0.0 and 1.0). As usual, the training samples are selected radomly for each tree, and hence we have another technique by which to trade a higher bias for lower variance, thereby (hopefully) improving the predictive power of our ensemble.
+
+Of course, this also allows the training to complete much quicker. This technique (as you can probably guess) is called **stochastic gradient boosting**. It is also possible to use different cost functions with gradient boosting by specifying the 'loss' hyperparameter.
 
 
-
-
-
-
-
+### 7.5.3 - XGBoost (A Quick Note)
 
 
 
