@@ -202,6 +202,34 @@ To regularize the AdaBoost model (ie. to reduce overfitting), we can either **re
 
 ### 7.5.2 - Gradient Boosting
 
+The second popular boosting method is called **gradient boosting**. As usual for all boosting algoriths, gradient boosting works by sequentially adding predictors to the ensemble, where each subsequent predictor's training is based on the previous one. 
+
+With gradient boosting, we now have each subsequent predictor be trained on the **residual errors** made by the previous one (we do not change the weights of each training instance as is done with AdaBoost). Once we have trained each predictor, in order to make a prediction, we simply get the individual predictions and add them up.
+
+To illustrate gradient boosting, we will implement it with a regression task (we have been doing a lot of classification thus far in the book!). We will use a decision tree as the base estimator. In this case, this type of ML algorithm/training is called **gradient boosted regression trees** (aka: "gradient tree boosting"). As our data set, we will use noisy quadratic data. And we will use three predictors in total, all decision trees. Let's go to the JN and see how it's done!
+
+So, we implemented gradient boosting from scratch. We can also use SKL's 'GradientBoostingRegressor' class to create GBRT ensembles. It comes equipped with hyperparameters that we can fine tune to regularize the model (the usual ones associated with decision trees). It also has hyperparameters that allows us to control the actual *ensemble training process* itself (ex: number of trees, etc). We quickly show an implementation of this class in the JN (for the same regression problem stated above).
+
+In particular, the SKL class has the hyperparameter 'learning_rate' which allows you to scale the contribution of each tree. If you set it to a low value, you will need to balance that with a high number of predictors, in order to ensure a good fit to the training data and ensure good generalization. This is a regularization technique called **shrinkage**. 
+
+#### How to Determine Number of Trees to Train
+
+So with the knowledge of these boosting techniques, we can ask the question: **How to find the optimal number of trees to use?**
+
+One good answer to this question is to implement **early stopping** - we can look at the validation errors and select the number of trees that minimize them. 
+
+A quick and easy way to do this is to train a full GBRT ensemble and then manually find the minimum validation error and the number of corresponding trees. Luckily, we can take advantage of SKL and use GBRTs build-in 'staged_predict()' method to compute the validation errors. This method returns an iterator over the predictions made by the (currently build) ensemble at each stage of training. Once we know the optimal number of trees, we have to train an **entirely new GBRT ensemble** using this optimal number! We go to the JN to show how this is done.
+
+
+
+
+
+
+
+
+
+
+
 ## 7.6 - Stacking
 
 ## - Concluding Remarks
