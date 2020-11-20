@@ -242,22 +242,49 @@ Since it's built off the idea of gradient boosting, its API is similar to that o
 
 ## 7.6 - Stacking
 
+Another ensemble method is **stacking**, short for **stacked generalization**. Here, instead of using a trivial function to aggregate each predictor's predictions, we actually **train another model entirely for the purposes of aggregation**. 
+
+The image below shows how to make predictions with a stacked ensemble model:
+
+<insert image here>
+
+We see that a new input instance is passed to each predictor in or ensemble, thereby yielding one prediction from each. Then we pass each individual prediction into a final ML model called a **blender** (aka: "meta learner"), and thus get the final prediction for the input instance.
 
 
+#### How to Make the Blender
+
+That all seems simple enough, so the question now is how to make the blender. One common approach is to use a so-called **hold-out set**, and another is to make **out-of-fold predictions**. We will look at implementing a hold-out set.
+
+The two diagrams below show the process of making the blender:
+
+<insert pictures here>
+    
+We start by splitting the training set into two subsets, and only use the first one to train each individual predictor. The other subset is said to be **held out**. We can refer to these predictors as the **first layer**.
+
+Once the predictors are trained, we then evaluate them each on the held-out set (this set contains new data the predictors have not seen) which will yield three predictions. We now use these predicted values to create a new training set. This new training set will have the same number of instances as the held-out set, will be N-dimensional, where N is the number of predictors, and will have the same target values as the held-out set. We then decide what ML algorithm we wish to use as our blender, and train it using this new training set.
 
 
+#### Implementing Multiple Blenders/Layers
+
+Now, as you may have imagined, it is possible to create many different blenders, and thus have many different **layers** in your stacking ensemble, each layer essentially being composed of intermediary blenders and the last layer being a single final blender. To do this, we simply partition our training data into the same number of subsets that we want blenders.
+
+For example, let's say you wanted three blenders. To start you would split the training data into three subsets. We use the first one to train the first layer of predictors, and then use these predictors to make predictions on the second subset. This would then allow use to create a new training set. We use this new training set to train predictors in the second layer. Once the second layer predictors are made, we pass them the third subset to get another new training set. We then use this final new training set to train the final blender. (*That sounds pretty complicated!*)
+
+The image below shows what such a stacking ensemble would look like:
+
+<insert image>
+
+Finally, to use it for making predictions, we take an input instance and pass it to the predictors in the first layer. Each predictor produces its prediction, and passes it to *each* predictor in the second layer (each of which can be thought of a blender itself). These predictors make their predictions and pass them to the final blender, which then yields the final prediction.
 
 
+#### SKL Implementations
 
-
-
-
-
-
-
+It so happens that SKL does **not** come equipped with classes for implemnting stacking ensembles. We would have to do this from scratch ourselves. Once you understand the idea behind stacking and can visualize it in your mind it shouldn't be a problem to do this. You also have the option of using an already made library, one such option is **DESlib**. I would personally write it from scratch myself.
 
 
 ## - Concluding Remarks
+
+In this chapter, we learned about ensemble learning and the many tools we have for implementing it including random forsts, bagging, boosting, and stacking. We implemented each in SKL, and talked briefly about the statistical theory as to why an ensemble method would provide better predictive power. With bagging, we saw how we can make use of the non-chosen training instances in a validation set. With boosting, we say how it takes advantage of previous predictors' mistakes to become better. With random forests, they have the ability to help use with feature selection. We also looked at early stopping and how to implement it in SKL. Nice work!
 
 
 [anomaly_detection]: https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/anomaly_detection.png "illustration of anomaly detection"
