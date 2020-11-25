@@ -1,70 +1,34 @@
-# Ch 7 - Ensemble Learning and Random Forests
+# Ch 8 - Dimensionality Reduction
 
 ## Chapter Objectives
 
 1. Learn various popular ensemble methods
     1. Bagging
-    2. Boosting
-    3. Stacking
-2. Learn why ensemble methods work
-    1. Law of large numbers
-3. Learn about bagging and pasting
-    1. Compare and contrast
-    2. Out-of-bag evaluation
-4. Learn about random patches and random subspaces
-5. Learn about random forests
-    1. Implementation in SKL
-6. Learn about boosting
-    1. AdaBoost
-    2. Gradient Boost
-7. Learn about stacking
-
-## 7.1 - Voting Classifiers
 
 
-## 7.2 - Bagging and Pasting
+## 8.1 - The Curse of Dimensionality
 
+## 8.2 - Main Approaches for Dimensionality Reduction
+### 8.2.1 - Projection
+### 8.2.2 - Manifold Learning
 
-### 7.2.1 - Implementing Bagging and Pasting in SKL
+## 8.3 - Principle Component Analysis (PCA)
+### 8.3.1 - Preserving the Variance
+### 8.3.2 - Principle Components
+### 8.3.3 - Projecting Down to d Dimensions
+### 8.3.4 - Using SKL
+### 8.3.5 - Explained Variance Ratio
+### 8.3.6 - Choosing the Right Number of Dimensions
+### 8.3.7 - PCA for Compression
+### 8.3.8 - Randomized PCA
+### 8.3.9 - Incremental PCA
 
-### 7.2.2 - Out-of-Bag Evaluation
+## 8.4 - Kernel PCA
+### 8.4.1 - Selecting a Kernal & Tuning Hyperparameters
 
+## 8.5 - LLE
 
-## 7.3 - Random Patches and Random Subspaces
-
-
-## 7.4 - Random Forests
-
-### 7.4.1 - Extra-Trees
-
-
-### 7.4.2 - Feature Importance
-
-## 7.5 - Boosting
-
-
-### 7.5.1 - AdaBoost
-
-
-### 7.5.2 - Gradient Boosting
-
-### 7.5.3 - XGBoost (A Quick Note)
-
-
-## 7.6 - Stacking
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 8.6 - Other Dimensionality Reduction Techniques
 
 
 
