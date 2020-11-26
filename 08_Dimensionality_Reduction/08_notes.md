@@ -73,14 +73,33 @@ Hence, we have to be careful when deciding whether to use projection!
 
 ### 8.2.2 - Manifold Learning
 
+The Swiss roll data set above is an example of a 2D *manifold*. A **$d$-dimensional manifold** is a part of an $n$-dimensional space (with d<n) that *locally* resembles a $d$-dimensional hyperplane. More simply, a 2D manifold is a 3D shape that can be bent/twisted within a higher-dimensional space.
 
+**Note:** From Wikipedia *a manifold is a topological space that locally resembles Euclidean space near each point*.
 
+Many of the dimensionality reduction techniques that exist work by **modelling the manifold on which the training instances lie**. This is called **manifold learning**, and it relies on the so-called **manifold assumption** which is that **most real-world high-dimensional data sets lie close to a much lower-dimensional manifold** (which is often what is observed).
 
+The manifold assumption is often accompanied by another assumption: *the ML problem will be simpler if expressed in the lower-dimensional space of the manifold*. As it turns out, this actually *depends on the data set*.
 
+Consider the figure below:
 
+<insert figure>
+    
+In the top two diagrams, we see that the data set in the original space (left-hand plot) would have a complicated decision boundary, but the same data in the manifold space (right-hand plot) has a very simple decision boundary. In the lower two diagrams, we see the opposite: the data set in the original space has a much more simple decision boundary, but the data in the manifold space has a more complicated decision boundary (consisting of four different lines).
+
+The takeaway is that implementing dimensionality reduction techniques will indeed make your training execute faster, but the resulting ML model **may or may not** perform better. Even more so, reducing the dimension may not even lead to a simpler solution, as the above figure shows! This is why **it is important to train on the original data set first, and THEN think about dimensionality reduction techniques after**.
+
+Now that we have knowledge of the two main techniques of DR, we will look into more specific methods, learn their underlying theory, and how to implement them in SKL.
 
 
 ## 8.3 - Principle Component Analysis (PCA)
+
+
+
+
+
+
+
 ### 8.3.1 - Preserving the Variance
 ### 8.3.2 - Principle Components
 ### 8.3.3 - Projecting Down to d Dimensions
