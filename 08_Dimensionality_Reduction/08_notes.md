@@ -27,14 +27,58 @@ So, in this chapter, we will look at some ways to implement dimensionality reduc
 
 ## 8.1 - The Curse of Dimensionality
 
+It is difficult to envision any object that exists in a world with greater than three dimensions - our human intuition only works up to three dimensions. It so happens that many intersting things can happen in higher-dimensional worlds:
+
+* In a 10,000-dimensional unit hypercube, the probability that a point will be close to any particular axis is essentially 1 (compared to only 0.001 in a unit square!)
+* Two points in a 1,000,000-dimensional unit hypercube will have average distance ~408.25 between them (compared to only 0.66 in a unit cube!)
+
+The second point above begs the question of *how can there be so much space in a UNIT hypercube in 1,000,000 dimensional space?!* It turns out that there is a LOT more space in a unit hypercube as you continue to go up in dimensions.
+
+Coming back to data science, we can now infer that a high-dimensional data set will be **very sparse** - there will be a lot of "distance" between each training instance. This will result in making it harder to make predictions on new data, as the new data has the possibility of being even further away from the training set. Thus, **the more dimensions the training set has, the greater the risk of overfitting it**.
+
+One (obvious?) solution to the curse of dimensionality is to ("simply") increase the number of training instances, so that there are a sufficient amount to take care of all the features. One (obvious!) problem with this is that it may not be possible to get more training data. But even if so, a bigger problem is that the number you would need to reach a given density (for the number of features) grows exponentially with the dimension. (*ex: Even with only 100 features (vastly less than even MNIST) you would need more training instances than observable atoms in the universe for them to be within distance 0.1 from each other).*
+
+So, now that we understand the problems of working in higher dimensions, let's begin our learning of dimensionality reduction.
 
 
+## 8.2 - Two Main Approaches for Dimensionality Reduction
+
+To stat, we will look at the two main approaches used for dimensionality reduction.
 
 
-
-## 8.2 - Main Approaches for Dimensionality Reduction
 ### 8.2.1 - Projection
+
+As you may have inferred throughout this course, for more real-world data problems, the training instances are never spread uniformly across all dimensions. Some features may be constant, while others may have high correlations with one another. Because of this, although the training instances live in a more general high-dimensional space, we can simply consider them to be existing a lower-dimensional **subspace**.
+
+As an example, consider the visual below:
+
+<insert 3D image>
+
+We can see that the blue data points are very close to the gray shaded plane. We can perform an orthogonal projection onto this plane and obtain the new (but related) image below:
+
+<insert subspace image>
+
+By doing this, we have taken our original data (which lives in 3D space) and instead projected it onto the 2D plane (which is the subspace), thereby reducing the dimension of the data! The new features z_1 & z_2 are related to the original features x_1, x_2, x_3.
+
+Unfortunately, this technique does not work for all data sets. As an example, consider the so-called **"Swiss roll"** toy data set below:
+
+<insert swiss roll>
+
+We can see that if we project to the x_1,x_2-plane, the resulting 2D data set will have lots of points with different target values overlapping (ie. it looks like a mess). On the other hand, if we were to somehow "unroll" the original data set, we would obtain a data set that is 2D and preserves the relations between each point! We can see this in the figure below:
+
+<insert 2D swiss roll figure>
+
+Hence, we have to be careful when deciding whether to use projection!
+
+
 ### 8.2.2 - Manifold Learning
+
+
+
+
+
+
+
 
 ## 8.3 - Principle Component Analysis (PCA)
 ### 8.3.1 - Preserving the Variance
