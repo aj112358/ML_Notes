@@ -92,17 +92,33 @@ The takeaway is that implementing dimensionality reduction techniques will indee
 Now that we have knowledge of the two main techniques of DR, we will look into more specific methods, learn their underlying theory, and how to implement them in SKL.
 
 
-## 8.3 - Principle Component Analysis (PCA)
+## 8.3 - Principal Component Analysis (PCA)
 
-
-
-
-
+**Principal component analysis (PCA)** is the most popular DR method. The general procedure is to define a hyperplane, and then project all the data points onto this (lower dimensional) hyperplane. We look into the detail of this technique now.
 
 
 ### 8.3.1 - Preserving the Variance
+
+The first question to ask is how do we choose an appropriate hyperplane? The guiding principle behind this question is to **choose the hyperplane that will preserve the (maximum) variance of the original data set**. This is a reasonable idea as we will then be *minimizing the amount of information that is lost from the projection*.
+
+Also, it so happens that choosing such a hyperplane will also have the minimal mean-squared distance between the original data and the projected data.
+
+
 ### 8.3.2 - Principle Components
+
+The method of PCA finds the aforementioned axis that will preserve the maximum variance. It will also find a second axis that accounts for the **largest *remaining* variance**, and this second axis would be orthogonal to the first one. Depending on the dimensionality, PCA will actually find an axis for each feature, each one taking into account the remaining variance from the previous ones. Each axis is called a **principal component**, and we order them as 1st, 2nd, etc.
+
+To mathematically define each principal compenent, PCA will fina a **zero-centered unit vector** for that axis. These vectors are highly sensitive to small changes in the data set, but will generally produce the same hyperplane. To find these vectors, we simply compute the **singular value decomposition (SVD)** of the training set matrix, and the principal components are contained within the matrix V as its columns.
+
+As an illustration, we can use NumPy to compute the principal components for us. In this case, we must first manually zero-center the data (ie. each feature column) first, as **PCA expects the data set to be centered about the origin**. Later when we use SKL, this will be done for us automatically. We go to the JN now.
+
+
 ### 8.3.3 - Projecting Down to d Dimensions
+
+
+
+
+
 ### 8.3.4 - Using SKL
 ### 8.3.5 - Explained Variance Ratio
 ### 8.3.6 - Choosing the Right Number of Dimensions
