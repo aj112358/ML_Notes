@@ -181,17 +181,37 @@ We illustrate this alternative method in the JN now.
 
 ## 8.4 - Kernel PCA
 
+It so happens that the so-called **kernel trick** that we saw when learning about SVMs also applies to PCA. This trick implicitly mapps instances into a very high-dimensional space without computational complexity. When used with PCA, it is called **Kernel PCA (kPCA)**, and it can be used to perform complex non-linear projections for dimensionality reduction. It is good at **preserving cluster of instances after projection (or even after unrolling a twisted manifold)**.
 
+In SKL, we can use the 'KernelPCA' class to implement kPCA and we are able to select the hyperparameter 'kernel' to specify which we wish to use. We illustrate this in the JN quickly.
 
+When we apply it to the Swiss roll data set (see image way above), we get the following reduced data sets for various kernels:
 
-
-
-
-
-
+<insert image>
 
 
 ### 8.4.1 - Selecting a Kernal & Tuning Hyperparameters
+
+The question to ask now is how do we select an appropriate kernel? It so happens that kPCA is actually an *unsupervised* learning algorithm, so there is no performance measure we can take advantage of to help use tune our model.
+
+That being said, DR is usually a data cleaning/preparation step for *supervised* learning tasks, so in that case we can use GridSearchCV to help us find the best kernel and hyperparameters that would yield the highest performing model. We go to the JN to see how this can be done.
+
+#### A Truly Unsupervised Approach
+
+We learned previously that we are able to take projected data and from it *reconstruct* the original data set. This reconstructed data will not match the original data set precisely (because of variance loss during projection), hence we can compute the reconstruction error to assess it. It so happens that it is possible to actually use this reconstruction error as a metric for hyperparameter tuning! We simply find the kernel and hyperparameter values that would yield the lowest reconstruction error.
+
+It turns out the the reconstruction process is not as (mathematically) easy with kPCA, since this is a non-linear process. To explain this, consider the diagram below:
+
+<insert diagram>
+
+The top-left plot shows the original Swiss roll data set, and the top-right shows the data set in the reduced space after applying kPCA (using an RBF kernel in this case). Because of the kernel trick, performing kPCA is equivalent to first applying the **feature map** $\phi$ (thereby mapping the training data into an infinite-dimensional vector space and then performing a (linear) PCA. This composite transformation will yield the same reduced data set.
+
+Now, normally when we took a reduced data set and did reconstruction, we got back the true (albeit not all) original data. In this case, if we were to take any instance in the reduced space and try to invert it (ie. inverse linear PCA), this would then have to lie in the infinite-dimensional feature space. As such, it is not possible to compute the *true* reconstruction error (because it's not possible to invert into an infinite-dimensional vector space).
+
+To get around this issue
+
+
+
 
 ## 8.5 - LLE
 
