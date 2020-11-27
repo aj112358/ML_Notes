@@ -151,20 +151,46 @@ Now, we can visually see that at about 80 dimensions, the cumulative variance st
 
 ### 8.3.7 - PCA for Compression
 
+After implementing a dimensionality reduction, you will find that the projected training set is **much** smaller in size than the original! So it is possible to **compress** your data set into a smaller size (with fewer features) while still *preserving a high variance*. This is very helpful as it can reduce the training time considerably, which is good for lengthier trained algorithms such as an SVM classifier.
 
+It turns out that it is also possible to **decompress** the projected data set back to the original number of dimensions. Of course, it won't look exactly like the original data set as there was *some* variance lost in through projection. The mean squared distance between this decompressed data and the original data set is called the **reconstruction error**.
 
-
-
-
-
-
-
+In order to decompress the projected data, we simply apply the inverse transformation to it. This is easily done with SKL using the 'inverse_transform()' method and so we do not show an illustration of it. It is also possible to decompress mathematically/manually by multiplying the projected training data matrix by the *transpose* of the W-matrix (that is, the matrix whose columns are the principal components).
 
 
 ### 8.3.8 - Randomized PCA
+
+When instantiating the PCA class, we have the option to specify the so-called 'svd_solver' hyperparameter. We can get SKL to use a more stochastic process called **randomized PCA** by setting the hyperparameter to "randomized". This will quickly find an approximation of the first d principal components (instead of doing a full SVD). The time complexity of this stochastic approach is O(m * d^2) + O(d^3), which is faster than that of the full SVD computation which is O(m * n^2) + O(n^3), especially when d << n.
+
+By default, this hyperparameter is set to "auto", meaning SKL will automatically do a randomized PCA if both the following conditions hold:
+* m or n is greater than 500
+* d is less than 80% of m or n
+Otherwise, SKL will do the full SVD computation. If you prefer that SKL do the full computation anyways, you can specify the hyperparameter to be "full".
+
+
 ### 8.3.9 - Incremental PCA
 
+There is a problem with how we have implemented PCA so far and that is **we assumed/required that the entire training data be *stored in memory***. Of course this is not the case with big data! So, we can instead run what is called **incremental PCA (IPCA)** to deal with this situation. We can split our training data set into mini-batches and feed the IPCA algorithm one batch at a time. This is also a good way to implement PCA in an online fashion, dealing with new incoming data as it is received.
+
+We illustrate this with SKL using the MNIST data set. **Note** that we have to use the 'partial_fit()' method when dealing with mini-batches, and then subsequently use 'transform()' to get the final reduced data set. 
+
+As an alternative method, we can use NumPy's 'memmap' class. This **allows you to manipulate a large array stored as a *binary file on disk* as if it were entirely in memory** - the class will load into memory only the data it currently needs. As IPCA uses only a small part of the data anyways, the memory usage at any given time is kept in control. In this implementation, we **can** simply call the 'fit()' method. 
+
+We illustrate this alternative method in the JN now.
+
+
 ## 8.4 - Kernel PCA
+
+
+
+
+
+
+
+
+
+
+
 ### 8.4.1 - Selecting a Kernal & Tuning Hyperparameters
 
 ## 8.5 - LLE
