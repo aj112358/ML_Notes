@@ -113,15 +113,31 @@ To mathematically define each principal compenent, PCA will fina a **zero-center
 As an illustration, we can use NumPy to compute the principal components for us. In this case, we must first manually zero-center the data (ie. each feature column) first, as **PCA expects the data set to be centered about the origin**. Later when we use SKL, this will be done for us automatically. We go to the JN now.
 
 
-### 8.3.3 - Projecting Down to d Dimensions
+### 8.3.3 - Projecting Down to d Dimensions (ie. Onto a Hyperplane)
 
+Now that you have computed all n pricipal components (where n is the number of features), you now need to decide what d dimensional hyperplane you wish to project onto, with d<n representing the first d principal components (so as to preserve as much variance as possible). 
 
-
+Once you have chosen what dimension to project onto (see later below), you can then simply project your data set onto that hyperplane by computing the matrix product of (i) the matrix of training instances, and (ii) a matrix with the desired d principal components as its column. We illustrate this quickly in the JN.
 
 
 ### 8.3.4 - Using SKL
+
+All the above can be automated using SKL's "PCA" class. This will compute the SVD automatically (and will center the data itself beforehand), and will output the projected data. It also contains the principal components for our use, among other things. If you need the principal components, we can use the 'components_' method. We illustrate this in the JN now.
+
+
 ### 8.3.5 - Explained Variance Ratio
+
+A useful metric is the so-called **explained variance ratio** of each principal component. This ratio **indicates the proportion of the dataset's variance that *lies along each principal component***. This information is found in the 'explained_variance_ratio_' variable.
+
+As an example, from the JN we see that we have an output of [0.84248607, 0.14631839]. This indicates that ~84.2% of the variance of the original data lies on the first principal component, and ~14.6% of the variance lies on the second. This means that the third (and final) principal component contains <1.2% of the variance, and hence probably does not contain too much information about the original data set.
+
+
 ### 8.3.6 - Choosing the Right Number of Dimensions
+
+
+
+
+
 ### 8.3.7 - PCA for Compression
 ### 8.3.8 - Randomized PCA
 ### 8.3.9 - Incremental PCA
