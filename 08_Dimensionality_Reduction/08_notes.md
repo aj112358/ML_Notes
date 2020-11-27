@@ -134,11 +134,33 @@ As an example, from the JN we see that we have an output of [0.84248607, 0.14631
 
 ### 8.3.6 - Choosing the Right Number of Dimensions
 
+A good way to select what dimension hyperplane your wish to project onto is to **choose the dimension d so that the first d principal components carry a sufficient amount of the variance**. For example, you may wish to have >95% of the variance carried onto the hyperplane.
 
+On the other hand, if you are simply using DR for data visualization purposes, then just **reduce the dimension to 2 or 3**, so that you can create 2D and 3D visuals.
 
+We can use SKL to determine the appropriate hyperplane to use. In the instantiation of the PCA class, the attribute 'n_components' can be specified as a a floating-point number between 0.0 and 1.0. Hence, if we want the reduced data set to carry 95% of the variance (and we don't know the required hyperplane dimension a priori), we can simply set 'n_components' to 0.95, and SKL will automatically select the appropriate dimension.
+
+We go the JN to illustrate this now.
+
+One final way to decide on the hyperplane dimension is to use the **elbow method**. We can actually plot the **cumulative variance** as a function of the dimension and will get a curve such as the one below:
+
+<insert elbow curve>
+    
+Now, we can visually see that at about 80 dimensions, the cumulative variance starts to taper off. Hence, you would select the reduced dimension to be 80, as this explains over 90% of the variance of the original data set. Of course, this can be done more precisely using SKL, but this provides a good visual tool for us.
 
 
 ### 8.3.7 - PCA for Compression
+
+
+
+
+
+
+
+
+
+
+
 ### 8.3.8 - Randomized PCA
 ### 8.3.9 - Incremental PCA
 
