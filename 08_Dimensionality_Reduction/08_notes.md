@@ -223,15 +223,45 @@ One way to perform this reconstruction is to **train a supervised regression mod
 We can do this automatically with SKL's 'KernalPCA' class by specifying the hyperparameter 'fit_inverse_transform' to be "True". In this case, this actually provides us access to a 'inverse_transform()' method that we can then apply to the reduced data set to get the pre-images (*this method is not available unless you do this*). We can then compute the reconstruction pre-image error (using the original training instances and the pre-images). We illustrate this in the JN now.
 
 
-## 8.5 - LLE
+## 8.5 - Locally Linear Embedding (LLE)
 
+**Locally linear embedding (LLE)** is another powerful non-linear DR technique. It as an example of manifold learning, and hence does not use projections but instead tries to model the manifold that the data set lie on. In essense, LLE works as a two step process:
+1. It measures how each training instance is *linearly related to its closest neighbors*
+2. It tries to find a low-dimensional representation of the training data that *preserves these **local** relationships*
+This approach is very useful when wanting to **unroll twisted manifolds**, especially on data with minimal noise present. We now discuss the mathematical theory underlying the LLE algorithm.
 
+For each training instance x^(i), the algorithm identifies its k closest neighbors and then attempts to reconstruct each x^(i) as a **linear function of these neighbors**. It does this by finding weights w_{i,j} so as to minimize the squared-distance between the training instance x^(i) and the weighted linear combination of all other training instances (where we define the weight to be 0 for those instances that are *not* one of the k closest neighbors).
 
+This first step in the process can be modelled mathematically as the following constrained optimization problem:
 
+<insert equations here>
+    
+Once this step is complete, we will have the **weight matrix** \hat{W} with all the weights - this contains the encoding of all local linear relationships between the training instances. The next step is to map each training instance into a lower d-dimensional space **while attempting to preserve these relationships**. Denote z^(i) as the image of training instance x^(i) in d-dimensional space. Then we are trying to find the image ^(i) that would minimize the squared distance between itself and the weighted linear combinations of all other z^(i) (in order to preserve the local relationships). 
 
+In this step we have an *unconstrained* optimization problem:
+
+<insert equations here>
+
+The output of this optimization will be a matrix \hat{Z} that contains all the image points z^(i) in the reduced d-dimensional space.
+
+All of this is easily done using SKL's 'LocallyLinearEmbedding' class. We can specify the dimension we wish to reduce to as well as the number of closest neighbors we wish to consider. We do this quickly in the JN.
+
+Regarding the time complexity, we have the following:
+* O(m\*log(m)\*n\*log(k)) for finding the k closest neighbors
+* O(m\*n\*k^3) for finding the optimized weights
+* O(d\*m^2) for computing the lower-dimensional images
+
+As you can see, because of the m^2 in the last bullet point, this LLE algorithm does not scale well with the size of the data set.
 
 
 ## 8.6 - Other Dimensionality Reduction Techniques
+
+
+
+
+
+
+
 
 
 
