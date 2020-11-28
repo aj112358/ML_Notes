@@ -256,7 +256,17 @@ As you can see, because of the m^2 in the last bullet point, this LLE algorithm 
 
 ## 8.6 - Other Dimensionality Reduction Techniques
 
+In this chapter, we have only looked at a few DR techniques: PCA, kPCA, LLE. There do exist many other DR techniques available for our use, and we briefly list some of them here.
 
+* Random Projections: Here we project our training data to a lower-dimensional space by using a *random* linear projection. It was shown by W.B Johnson & J. Lindenstrauss that this actually preserves distances rather well. The quality of the DR depends on the number of training instances and the lower dimension, but NOT on the initial training sets dimension!
+
+* Multidimensional Scaling (MDS): Here we try to perform DR while trying to preserve distances between the training instances.
+
+* Isomap: Here we convert our training data **into a graph** by connecting each training instance to its nearest neighbors. We then perform DR while trying to preserve the **geodesic distance** (*number of nodes on a shortest path between two points*) between training instances.
+
+* t-Distributed Stochastic Neighbor Embedding (t-SNE): We perform DR by keeping **similar instances close** and **dissimilar instances apart**. It is mostly used for data visualization.
+
+* Linear Discriminant Analysis (LDA): 
 
 
 
