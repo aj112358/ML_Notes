@@ -266,16 +266,11 @@ In this chapter, we have only looked at a few DR techniques: PCA, kPCA, LLE. The
 
 * t-Distributed Stochastic Neighbor Embedding (t-SNE): We perform DR by keeping **similar instances close** and **dissimilar instances apart**. It is mostly used for data visualization.
 
-* Linear Discriminant Analysis (LDA): 
-
-
-
-
-
-
+* Linear Discriminant Analysis (LDA): This is a classification algorithm. During training, it learns the **most discriminative axes between classes**. These are then used to define a hyperplane for projection. This method keeps classes as far as possible (in their own clusters). It is a useful/common techniques that can be used to do DR first before running another classification algorithm.
 
 
 ## - Concluding Remarks
 
+In this chapter, we learned about dimensionality reduction and various methods of implementation including principal component analysis, kernal PCA, locally linear embeddings, as well as list a few other techniques. Each techniques generally falls into the category of either projection or manifold learning. With projection we find a lower-dimensional hyperplane to orthogonally project our data onto. With manifold learning, we attempt to mathematically model the manifold the data lies on and unroll/untwist this manifold to in order to map the data into a lower-dimensional space. All methods can be implemented in SKL. One more chapter to go!
 
 [anomaly_detection]: https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/anomaly_detection.png "illustration of anomaly detection"
