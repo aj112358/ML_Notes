@@ -208,12 +208,28 @@ The top-left plot shows the original Swiss roll data set, and the top-right show
 
 Now, normally when we took a reduced data set and did reconstruction, we got back the true (albeit not all) original data. In this case, if we were to take any instance in the reduced space and try to invert it (ie. inverse linear PCA), this would then have to lie in the infinite-dimensional feature space. As such, it is not possible to compute the *true* reconstruction error (because it's not possible to invert into an infinite-dimensional vector space).
 
-To get around this issue
+To get around this issue, we can essentially 'come from the other end', meaning we can work forwards from the origial data set (????) and see what training instance maps closest to the inverse reconstructed instance (????). Said again, we can try to find a point in the original training data that maps (as close as possible) to the reconstructed point in the infinite-dimensional feature space. This point in the original training set is called the **reconstruction pre-image**.
 
+Then, now that we have found such a pre-image, we can consider the metric that is **the squared distance between the reconstruction pre-image and the original training instance** (*NOTE: I think something is wrong with this metric definition or explanation; in p228 in textbook*).
 
+We can then use this metric as an assessment for our ML model, and thus do hyperparameter tuning to find the optimal kernel and hyperparameter values that would minimize this reconstruction pre-image error.
+
+#### How to Perform the Reconstruction
+
+One way to perform this reconstruction is to **train a supervised regression model** where:
+* Training set -> projected instances (in the reduced space)
+* Target set -> original training instances (in the original space)
+
+We can do this automatically with SKL's 'KernalPCA' class by specifying the hyperparameter 'fit_inverse_transform' to be "True". In this case, this actually provides us access to a 'inverse_transform()' method that we can then apply to the reduced data set to get the pre-images (*this method is not available unless you do this*). We can then compute the reconstruction pre-image error (using the original training instances and the pre-images). We illustrate this in the JN now.
 
 
 ## 8.5 - LLE
+
+
+
+
+
+
 
 ## 8.6 - Other Dimensionality Reduction Techniques
 
