@@ -2,8 +2,26 @@
 
 ## Chapter Objectives
 
-1. Learn the two main approaches for dimensionality reduction
-    1. Projection
+1. Learn about clustering - algorithms and theories
+    1. Algorithms and theories
+    2. Common applications
+2. Learn about the k-means clustering algorithm
+    1. How to decide on the centroids
+    2. Using a performance metric (*inertia*)
+    3. Accelerated and mini-batch k-means
+    4. Limits of the k-means algorithm
+3. Learn how to use clusterin for:
+    1. Image segmentation
+    2. Preprocessing
+    3. Semi-supervised learning
+4. Learn about the DBSCAN algorithm
+5. Gain familiarity of a few other clustering algorithms
+6. Learn about the Gaussian mixture model
+    1. Theory
+    2. Implementation in SKL
+7. Learn how to apply Gaussian mixtures to anomaly detection
+    1. Lots of statistical concepts!
+8. Become familiar with other algorithms for anomaly/novelty detection
 
 
 
