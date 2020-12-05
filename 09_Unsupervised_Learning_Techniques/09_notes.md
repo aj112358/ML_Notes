@@ -51,9 +51,39 @@ There is no fixed way to define a cluster - depending on the problem, you may wi
 
 The **k-means algorithm** is a ML algorithm that is capable of clustering data sets quick and efficiently (usually taking only a few iterations). It was created at the famous Bell Laboratories in 1957 by Stuart Lloyd, and actually published in 1982. Another individual, Edward W. Forgy, published a paper for the same algorithm in 1975, and so this algorithm is also called the "Lloyd-Forgy".
 
-We first illustrate the use of this method in SKL before talking about the underlying theory.
+We first illustrate the use of this method in SKL (using the 'KMeans' class) before talking about the underlying theory.
+
+The k-means ML model's decision boundaries form what is called a **Voronoi diagram**; see the image below:
+
+<insert decision boundary diagram>
+    
+You can see that at any particular boundary there is some ambiguity in the ML model's prediction, so such points *may* have been mis-assigned to the wrong cluster. Since the k-means algorithm only looks at the distance between an instance and a cluster's centroid, **it does not behave well when the clusters have varying diameters**.
+
+To try and overcome this issues, instead of assigning each instance to a single cluster (called **hard clustering**), we can instead determine a score for each cluster (called **soft clustering**). This **score** can simply be the distance between an instance and all cluster centroids, or you can also compute it as a *similarity score* (using Gaussian RBF perhaps!). In SKL, the 'KMeans' class offers the 'transform()' method can be used to measure the distance of each instance to all clusters.
+
+This method is very useful for dimensionality reduction as it will return a k-dimensional data set (recall, k is the number of clusters). **This can be a very efficient *non-linear* way of DR on a data set!!!**
 
 
+#### 9.1.1a - The K-Means Algorithm
+
+To appreciate the k-means algorithm, consider the following. If you had a supervised learning task, so that the data set instances came equipped with target labels, you could then easily find the cluster centroids (take the mean of the instances with the same labels). On the other hand, if you somehow already knew the centroid locations, you could easily assign each instance to a cluster (assign to the cluster with the minimum instance-centroid distance).
+
+Now, we **do not have either of these above scenarios**! So it is amazing to think that it is still possible to define cluster *blindly*! The k-means algorithm accomplishes this as follows. We start by randomly defining the k centroid locations (by randomly selection k instances to act as the initial centroids). We then create the clusters by assigning labels to all instances. This will yield our initial Voronoi diagram. Then, for each cluster, we find its centroid and then update the clusters (by *perhaps* re-assigning each instance to a new cluster, depending on its updated distance from the new centroids).
+
+We continue this process until the cluster centroids reach an equilibrium position. Since the average distance between the instances and their *closest* clusters is continually decreasing, this algorithm is guaranteed to converge in a finite (and usually small!) number of iterations.
+
+*Unfortunately*, the algorithm is highly sensitive to the choice of initial selection, and it's possible to get non-unique decision boundaries. This could cause the algorithm to converge to a local optimum, which is not what we want. Let's see how to fix this issue!
+
+
+#### 9.1.1b - Centroid Initialization Methods
+
+
+
+
+
+
+#### 9.1.1a - Accelerated K-Means & Mini-Batch K-Means
+#### 9.1.1a - Finding the Optimal Number of Clusters
 
 ### 9.1.2 - Limits of K-Means
 ### 9.1.3 - Using Clustering for Image Segmentation
