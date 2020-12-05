@@ -77,13 +77,33 @@ We continue this process until the cluster centroids reach an equilibrium positi
 
 #### 9.1.1b - Centroid Initialization Methods
 
+One obvious way to prevent the above issue is to already have an idea of the centroid locations. This can be done by simply trying to visualize the data, or you can run another clustering algorithm first. If you happen to know the centroids' approximate locations, you can include that in the 'KMeans' class instantiation via the 'init' hyperparameter.
 
+Another (obvious?) solution is to simply run the k-means algorithm multiple times, usign a different initialization each time, and keep the "best" solution. The number of random initializations can be set using the 'n_init' hyperparameter (it is 10 by default).
 
+This begs the question: How does SKL know what the "best" solution is? The answer: It uses a performance metric called **inertia**. This is defined to be the mean squared distance between each instance and its closest centroid (ie. it averages all these squared distances). SKL will run the k-means algorithm as many times as you specify (via 'n_init'), measure the inertia of each completed model, and then select the final ML model which has the **lowest inertia**. You can access a k-means model's inertia using the 'inertia_' variable.
 
+Finally, it so happens that an improvement to the original k-means algorithm was made back in 2006 by Arthur & Vassilvitskii, called **K-Means++**. They define the initialization step as one that selects the centroids to be as far from each other as possible. As a result, the k-means algorithm is not as likely to converge to a *local* optimum, and although this requires more computation, the trade-off is for a vast reduction in the number of iterations of the algorithm. 
+
+It so happens that the SKL class 'KMeans' automatically uses the K-Means++ initialization by default.
 
 
 #### 9.1.1a - Accelerated K-Means & Mini-Batch K-Means
+
+As an aside, we quickly discuss these two variants of the original k-means algorithm.
+
+The first is called **accelerated k-means**, created in 2003 by Charles Elkan. It takes advantage of the well-known **triangle inequality** to avoid unnecessary distance computations and therefore speeds up the training of the k-means algorithm. SKL uses this method by default.
+
+The second is called **mini-batch k-means**, created in 2010 by David Sculley. Here, as with any mini-batch technique, we use only a subset of the data at each iteration, and so the centroids will update only slightly per iteration. This is a good implementation for data sets that do not fit in memory, but you can still always use NumPy's 'memmap' function instead (see Ch 8). With mini-batches, we can use the 'partial_fit()' method but of course this will take more time to train the model. The inertial of mini-batch k-means is usually (slightly) worse than that of regular k-means.
+
+
 #### 9.1.1a - Finding the Optimal Number of Clusters
+
+
+
+
+
+
 
 ### 9.1.2 - Limits of K-Means
 ### 9.1.3 - Using Clustering for Image Segmentation
