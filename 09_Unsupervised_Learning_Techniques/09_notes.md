@@ -29,7 +29,7 @@ As an example, suppose there is an assembly line and the output is a fully made 
 
 One solution to this is to manually create a label for each image but this would take up a lot of human resources. You could just label a subset of your data and then look into semi-supervised learning but this would probably not yield a very good ML model. It would be so much easier if there was a ML algorithm that could just classify the images without labels! This is where **unsupervised learning techniques** can help us. 
 
-In this chapter we will look at two common unsupervised learning techniques: clustering and Gaussian mixture models. The former will be studied through the k-means and DSCAN algorithms. We will then use the latter for clustering (as well), anomaly detection, and density estimation. Here are some common use applications for unsupervised learning:
+In this chapter we will look at two common unsupervised learning techniques: clustering and Gaussian mixture models. The former will be studied through the k-means and DSCAN algorithms. We will then use the latter for clustering (as well), anomaly detection, and density estimation. Here are some common use applications for unsupervised learning (*see p.237-238 for more details*):
 
 * Data analysis
 * Customer segmentation
@@ -42,25 +42,19 @@ In this chapter we will look at two common unsupervised learning techniques: clu
 
 ## 9.1 - Clustering
 
+In ML, **clustering** is the task of identifying similar instances in a data set. Similar instances are grouped together in **clusters**. This is similar to classification except that here we do not know what the classes are upfront (like we do with a supervised classification task). Clustering algorithms can help us with such a problem, and they can **use all the features** to acheive relatively good results!
+
+There is no fixed way to define a cluster - depending on the problem, you may wish to use a different mathematical definition for how an instance is categorized into a cluster. One common way to define clusters is to categorize an instance based on its distance from the clusters. We will look at two ways to create clusters: K-Means and DBSCAN.
+
+
+## 9.1.1 - K-Means
+
+The **k-means algorithm** is a ML algorithm that is capable of clustering data sets quick and efficiently (usually taking only a few iterations). It was created at the famous Bell Laboratories in 1957 by Stuart Lloyd, and actually published in 1982. Another individual, Edward W. Forgy, published a paper for the same algorithm in 1975, and so this algorithm is also called the "Lloyd-Forgy".
+
+We first illustrate the use of this method in SKL before talking about the underlying theory.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-### 9.1.1 - K-Means
 ### 9.1.2 - Limits of K-Means
 ### 9.1.3 - Using Clustering for Image Segmentation
 ### 9.1.4 - Using Clustering for Preprocessing
