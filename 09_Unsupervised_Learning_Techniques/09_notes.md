@@ -144,12 +144,14 @@ So, you must look at your data and decide if using k-means is a good choice; the
 
 **IMPORTANT: It is important that you scale your data before implementing k-means. This will not guarantee that the clusters will become perfectly spherical, but will still give you better results.**
 
+Regardless of all these limits, the k-means algorithm is still a very useful clustering technique, and so we will briefly look at three applications now.
+
 
 ### 9.1.3 - Using Clustering for Image Segmentation
 
+The first application is with **image segmentation**, which is the task of partitioning an image into multiple segments. From the Wikipedia page, we have the sentance: *"The goal of segmentation is to simplify and/or change the representation of an image into something that is more meaningful and easier to analyze"*. Image segmentation can be further divided into two types.
 
-
-
+**Semantic segmentation** 
 
 
 ### 9.1.4 - Using Clustering for Preprocessing
