@@ -116,8 +116,27 @@ The silhouette *coefficient* ranges from -1 to +1, with the following interpreta
 
 Now, we can use SKL's 'silhouette_score' (from the 'metrics' class) to compute the score. So, we can compute the score for various numbers of clusters and plot the values. Let's go to the JN to see how this is done and also to summarize the above discussions through code.
 
+As a final method of making an educated guess for the optimal number of clusters, we can create what is called a **silhouette diagram**. This is a plot of *each instances* silhouette coefficient, and then sorted by cluster, and then sorted by value (in each cluster). Here is an example:
+
+<insert silhouette diagram>
+
+Each plot depicts a silhouette diagram, which consists of the "knife shaped" regions, one representing each cluster. Some important features are:
+* height of each region -> the number of instances in each cluster
+* width of each region -> sorted silhouette coefficients of the instances in that cluster (**wider is better!**)
+* dashed line -> mean silhouette coefficient (ie. silhouette score) for that number of clusters
+
+When the regions in a certain plot fall short of the dashed line, this means that most of the instances in that cluster have a lower coefficient than the mean score. This indicates that the **cluster is bad**, as most instances are too close to other clusters. In the diagram above, the plots for k=3 and k=6 show we will get bad clusters.
+
+On the other hand, when most instances go beyond the dashed line, this indicates **a good choice for the number of clusters**. We can also look at the heights of each region. A particular number of clusters is **more promising if each cluster region has relatively the same heights**.
+
 
 ### 9.1.2 - Limits of K-Means
+
+
+
+
+
+
 ### 9.1.3 - Using Clustering for Image Segmentation
 ### 9.1.4 - Using Clustering for Preprocessing
 ### 9.1.5 - Using Clustering for Semi-Supervised Learning
