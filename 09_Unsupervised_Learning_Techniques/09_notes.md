@@ -132,12 +132,26 @@ On the other hand, when most instances go beyond the dashed line, this indicates
 
 ### 9.1.2 - Limits of K-Means
 
+Although k-means is a fast and scalable algorithm, it also has its flaws:
+* necessary to run the algorithm several times (to avoid sub-optimal solutions)
+* need to specify the number of clusters beforehand
+* does not behave well with:
+    * clusters of varying size
+    * clusters of varying density
+    * non-spherical shapes
 
+So, you must look at your data and decide if using k-means is a good choice; there are still many other clustering algorithms available for use too. In particular, for *elliptical clusters* the Gaussian Mixture models work pretty well (see below...).
 
-
+**IMPORTANT: It is important that you scale your data before implementing k-means. This will not guarantee that the clusters will become perfectly spherical, but will still give you better results.**
 
 
 ### 9.1.3 - Using Clustering for Image Segmentation
+
+
+
+
+
+
 ### 9.1.4 - Using Clustering for Preprocessing
 ### 9.1.5 - Using Clustering for Semi-Supervised Learning
 ### 9.1.6 - DBSCAN
