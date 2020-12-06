@@ -99,10 +99,22 @@ The second is called **mini-batch k-means**, created in 2010 by David Sculley. H
 
 #### 9.1.1a - Finding the Optimal Number of Clusters
 
+We now investigate one obvious question: How can we specify an appropriate number of clusters when initializing the 'KMeans' class? If you can visualize the data, then it is easy, but if not we need to develop a way to determine a good choice for k.
 
+As can be shown, we cannot simply pick the number of clusters based on minimizing inertia. Indeed, by the definition of inertia, with a greater number of clusters you will naturally continue to minimize inertia. Instead, we can use the inertia performance metric in a more educated way as follows.
 
+As a first attempt, we can plot the inertia value for various number of clusters. A typical curve will most definitely have an elbow, and so we can select the value of k corresponding to this elbow. This may not be the optimal number of clusters but it is still a decent choice. Any lesser value of k would have higher inertia, and any higher value of k may cause a cluster to be cut in half for no reason.
 
+As a second and more refined attempt, we can compute the so-called **silhouette score** of a trained k-means model. This is defined as the mean of the **silhouette coefficient** over all instances. This coefficient is simply $(b-a) / max(a,b)$, where:
+* a -> mean distance to other instances *in the same cluster*
+* b -> mean distance to the instances *in the closest cluster* (not its own cluster)
 
+The silhouette *coefficient* ranges from -1 to +1, with the following interpretations based on the value:
+* closer to +1 -> instance is inside its own cluster and far from other clusters
+* close to 0 -> instance is close to a cluster boundary
+* closer to -1 -> instance has likely been assigned to the wrong cluster
+
+Now, we can use SKL's 'silhouette_score' (from the 'metrics' class) to compute the score. So, we can compute the score for various numbers of clusters and plot the values. Let's go to the JN to see how this is done and also to summarize the above discussions through code.
 
 
 ### 9.1.2 - Limits of K-Means
