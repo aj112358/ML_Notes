@@ -242,6 +242,29 @@ This is a *generative process*, and can be represented in the following diagram 
 
 The interpretation of this diagram takes a bit to understand, so we leave it to carefully read the descriptions on p.261 of the textbook (*I may add the interpretations in my notes later*). The diagram uses the so-called **plate notation**, which is a way to visualize repeated variables in a graphical model (*see Wikipedia page for more info*). Variables that are known are called **observed variables**, and those which are unknown are called **latent variables**.
 
+---
+
+Now, you may be wondering: What can we use a GMM model for?!
+
+First, given the data set X, we would normally start by trying to estimate the weight vector \phi, as well as trying to estimate each Gaussian's parameters (the mean vectors and covariance matrices). All this can be accomplished using SKL's 'GaussianMixture' class. Let's go to the JN to see how it's done.
+
+You will have noticed that for the three Gaussians their means were 2-vectors. This makes sense because the blobs are 2D and so their locations require two components. 
+
+All these computations by the 'GaussianMixture' class were able to be done because of the **Expectation-Maximization (EM) algorithm**. This is a concept from statistics, and is use with point estimation, namely with finding point estimates of a random sample. It is an algorithm that is guaranteed to converge to the MLE.
+
+We won't go too much in depth of this algorithm as it is a more advanced statistical concept, but we will say it is very similar to the k-means algorithm in the following way:
+* It initializes the cluster parameters randomly
+* Repeat the following two steps:
+    1. Assign instances to clusters (the *expectation step*)
+    2. Update each cluster (the *maximization step*)
+
+We can think of the EM algorithm as a generalization of the k-means algorithm, in that it not only finds the cluster's centers (ie. means) but also their size/shape/orientation (via the covariance matrices), as well as each clusters relative weights. **On the other hand**, the EM algorithm implements **soft clustering** - it estimates the probability that an instances belongs to each cluster (whereas k-means implements *hard clustering*). During each maximization step, each custer is updated using **all** instances via their weights (the estimated probability it belongs to a cluster). These probabilities are referred to as the **responsibilities** of the clusters. So, during maximization, each cluster's update will mostly be impacted by the instances it is more responsible for.
+
+**NOTE: In SKL's implementation, the EM algorithm falls to the same trap as the k-means algorithm, where it may not converge to the most optimal solution. Hence, we must run the algorithm multiple times, the number set by the 'n_init' hyperparameter. By default, this is set to only 1!!!**.
+
+Finally, now that we have the clusters defined (location, size, etc.), we can go ahead and assign the instances to the clusters. SKL allows us to use the 'predict()' method for hard clustering, or the 'predict_proba()' for soft clustering. Also, a GMM is an example of a **generative model**, meaning we can actual **sample new instances from it**.
+
+Let's go the JN to see how all this is done.
 
 
 ### 9.2.1 - Anomaly Detection Using Gaussian Mixtures
