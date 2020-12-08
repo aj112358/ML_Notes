@@ -221,7 +221,26 @@ SKL offers us the use of many other clustering algorithms; here is a quick descr
 
 ## 9.2 - Gaussian Mixtures
 
+A **Gaussian mixture model (GMM)** is a probabilistic model that assumes the instances were generated from a mixture of several Gaussian distributions whose parameters are unknown. They can be used for density estimation, clustering, and anomaly detection.
 
+All the instances (that were) generated from a the same Gaussian distribution form a cluster, usually in the shape of an ellipse (or ellipsoid in 3D). Each elliptical cluster can have a different size, shape, density, and orientation. 
+
+So, when you observe an instance, you know that it must have come from one of these Gaussian distributions, but you don't know which one. You also don't have prior knowledge of the parameters of any of these distributions.
+
+Among the several different types of GMMs, the simplest one is the one *where you know the number k of Gaussian distributions beforehand*. SKL implements this variant through the 'GaussianMixture' class.
+
+When choosing to work with such a GMM, you are making the following assumptions about your data set X, and how it was generated through the following probabilistic process:
+1. For each instance, a cluster is selected randomly from among k clusters
+    * probability of selecting j-th cluster is defined by that cluster's weight, \phi^j
+    * index of selected cluster for the i-th instance is z^i
+2. Suppose the i-th instance has been assigned to the j-th cluster (denoted: z^i = j)
+    * **THUS**: The location x^(i) of this instance is sampled from the j-th Gaussian distribution (denoted: x^(i) ~ norm(\mu-j, \Sigma-j)
+    
+This is a *generative process*, and can be represented in the following diagram below, which represents the conditional dependencies between the random variables/vectors:
+
+<insert diagram>
+
+The interpretation of this diagram takes a bit to understand, so we leave it to carefully read the descriptions on p.261 of the textbook (*I may add the interpretations in my notes later*). The diagram uses the so-called **plate notation**, which is a way to visualize repeated variables in a graphical model (*see Wikipedia page for more info*). Variables that are known are called **observed variables**, and those which are unknown are called **latent variables**.
 
 
 
