@@ -187,7 +187,21 @@ Some other active learning strategies are to label those instances such that:
 
 ### 9.1.6 - DBSCAN
 
+**Density-based spatial clustering of applications with noise** or more commonly known as **DBSCAN** is a clustering algortihm that is based on *local density estimation*, and is able to identify clusters of arbitrary shapes. It does this by defining a "cluster" as a **continuous region of high density**. Here is the pseudocode for this algorithm:
+1) For each instance, count how many other instances are in it's $\epsilon$-neighborhood.
+2) If there are at least 'min_samples' (a hyperparameter) number of instances in the neighborhood, then the instance is called a **core instance**
+    * So, a core instance is one that is located in a highly-dense region
+3) Assign all instances in the neighborhood to the same cluster
+    * Note: This neighborhood *may* include other core instances -> a long sequence of neighboring core instances form a single cluster
+4) Any instance that is NOT a core instance NOR has a core instance in its neighborhood is considered an **anomaly**
 
+As you may have inferred, this algorithm works better if you data set has clusters that are spread far apart and are very dense. 
+
+SKL offers us the 'DBSCAN' class for implementation. We go to the JN now to see a simple use of this class using the 'moons' data set.
+
+It may come as a surprise that DBSCAN with SKL does not come equipped with a 'predict()' method - that is, we cannot use the fitted model to make predictions on new input instances. It does have a 'fit_predict()' method though, and this is not too difficult to implement in SKL. Let's see the code in the JN.
+
+In conclusion, DBSCAN is a very powerful clustering algorithm that we can **use to identify clusters of odd shapes**. It can be used to find outliers (hence, anomaly detection!). But, as stated above, if the cluster densities vary, then it may not capture all the clusters properly. The time complexity of DBSCAN happens to be about O(m * log(m)) (which is very close to linear!), but for the implementation in SKL this can go up to O(m^2) if the neighborhood radius is large.
 
 
 ### 9.1.7 - Other Clustering Algorithms
