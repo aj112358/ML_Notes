@@ -206,7 +206,25 @@ In conclusion, DBSCAN is a very powerful clustering algorithm that we can **use 
 
 ### 9.1.7 - Other Clustering Algorithms
 
+SKL offers us the use of many other clustering algorithms; here is a quick description of some.
+
+* **Agglomerative clustering** - This is an iterative algorithm that builds clusters starting from each individual instance in a 'bottom-up' fashion. At each iteration, the nearest pair of clusters are connected, and the result (mathematically speaking) is a binary tree whose leaves are the individual instances, essentially outputting a "cluster tree". This scales very well to large number of instances/clusters, but requires the use of a **connectivity matrix** which indicates which pairs of instances are neighbors.
+
+* **BIRCH** - An acronym for **Balanced Iterative Reducing and Clustering using Hierarchies**. This is designed to be used for very large data sets. During training, it builds a tree data structure containing just enough information so as to quickly assign new instances to a cluster. Instances do not need to be stored in the tree, and hence this algorithm minimizes the use of memory.
+
+* **Mean-Shift** - This algorithm starts by defning a circle centered at each instance point, and then computes the mean of all interior instances. It then relocates to this mean and repeates theis proceure. Eventually, all circles will reach an equilibrium as they slowly move closer to the local density maximum. Then, all the circles that have settled generally in the same place, their instances are assigned to the same cluster. This algorithm is not well suited for use with large data sets, as the complexity is O(m^2).
+
+* **Affinity Propagation** - This algorithm essentially partitions the data sets into equivalence classes (instances vote for those instances to which they are most similar to - these instances are in the same class/cluster). The time complexity is again O(m^2), so it is not suited for large data sets.
+
+* **Spectral Clustering** - This algorithm takes a similarity matrix between the instances and creates a lower-dimensional embedding from it. It then implements any other clustering algorithm to this reduced data set (SKL implements k-means). This method has the ability to **capture complex cluster structures** and can be used to "cut graphs" (ex: identify clusters of friends on a social network). It does not scale well with the size of data, and also does not behave well with varying-sized clusters.
+
+
 ## 9.2 - Gaussian Mixtures
+
+
+
+
+
 ### 9.2.1 - Anomaly Detection Using Gaussian Mixtures
 ### 9.2.2 - Selecting the Number of Clusters
 ### 9.2.3 - Bayesian Gaussian Mixture Models
