@@ -151,12 +151,45 @@ Regardless of all these limits, the k-means algorithm is still a very useful clu
 
 The first application is with **image segmentation**, which is the task of partitioning an image into multiple segments. From the Wikipedia page, we have the sentance: *"The goal of segmentation is to simplify and/or change the representation of an image into something that is more meaningful and easier to analyze"*. Image segmentation can be further divided into two types.
 
-**Semantic segmentation** 
+**Semantic segmentation** is a technique where for every pixel associated to *instances* of the same class, these pixels are assigned to the same overall class. For example, in a photo of people and cats, all the people will become colored the same, and all the dogs will become colored the same.
+
+**Instance segmentation** is a technique where every pixel that is associated with a different instance is assigned to a different class. For example, in the same photo scenario, each person is it's own class and each cat is it's own class.
+
+Nowadays, both these types of image segmentation is done through very complex methods (based on CNNs!) so we will not look into these further. Instead, we will consider a much simpler type of image segmentation called **color segmentation**. Here, a "segment" will consist of all pixels that have a similar color, and we will be in control of how many segments we want to use. An example of this is in analyzing satellite images - if you want to investigate the change in the total amount of forestry present in the image, it may be sufficient to simply implement color segmentation.
+
+To illustrate an example of color segmentation, we finish our discussion in the JN now.
 
 
 ### 9.1.4 - Using Clustering for Preprocessing
+
+As mentioned previously, we can take advantage of clustering techniques when trying to do dimensionality reduction. We will work through an example in the JN now.
+
+
 ### 9.1.5 - Using Clustering for Semi-Supervised Learning
+
+We can also consider using clustering for semi-supervised learning (*Recall: Semi-supervised learning is a technique that uses a few lablelled instances when ultimately working on an unsupervised task with lots of unlabelled instances*). We will work through an example of this in the JN now.
+
+
+### Active Learning
+
+There are further steps we can take to continue attempting to improve our ML models, one of which is implementing what is called **active learning**. This is when the ML model asks for human input when trying to assign labels to unclassified data.
+
+One of the more common ways to implement active learning is called **uncertainty sampling**, that has the following procedure:
+1) Train the ML model on some labelled instances, and use it to make predictions on the unlabelled instances
+2) For those predictions that the model is uncertain about, we get a person to label them (and it's now a labelled instance)
+3) We repeat the above two steps until *the performance improvements are no longer worth the effort of labelling manually*
+
+Some other active learning strategies are to label those instances such that:
+* would result in the largest model change
+* would result in the largest drop in model's validation error
+* different models disagree on
+
+
 ### 9.1.6 - DBSCAN
+
+
+
+
 ### 9.1.7 - Other Clustering Algorithms
 
 ## 9.2 - Gaussian Mixtures
