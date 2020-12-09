@@ -266,8 +266,22 @@ Finally, now that we have the clusters defined (location, size, etc.), we can go
 
 Let's go the JN to see how all this is done.
 
+We can also visualize the decision boundaries that the GMM created, and from the JN they look like this:
+
+<insert plot>
+
+It appears that the GMM found a really good fit to our data! This was expected as we had actually generated the blob data from a Gaussian in the first place! Also, we gave the algorithm the correct number of clusters (since we knew how many there were).
+
+Unfortunately, not all your data sets will be Gaussian, and you won't always know a priori how many clusters there are. This is what **limits the EM algorithm**: if there are too many dimensions, or too many clusters, or few instances, the EM algorithm may not converge to the optimal solution.
+
+To overcome this issue, we can limit the number of parameters (weights, means, covariances) the algorithm needs to learn. One way to achieve this is to limit the range of shapes the clusters can have, and this can be done by prescribing specifications on the entries of the covariance matrices. In SKL, this is done via the 'covariance_type' hyperparameter, which can be set to either "spherical" (clusters must be spherical in shape), "diag" (clusters must have axes parallel to coordinate axes), or "tied" (all clusters are exactly the same shape, size, orientation - ie. they have the exact same covariance matrices), among other options. SKL's default is "full" which essentially means that the clusters have no predefined form.
+
 
 ### 9.2.1 - Anomaly Detection Using Gaussian Mixtures
+
+
+
+
 ### 9.2.2 - Selecting the Number of Clusters
 ### 9.2.3 - Bayesian Gaussian Mixture Models
 ### 9.2.4 - Other Algorithms for Anomaly and Novelty Detection
