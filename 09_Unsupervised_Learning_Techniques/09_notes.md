@@ -279,7 +279,21 @@ To overcome this issue, we can limit the number of parameters (weights, means, c
 
 ### 9.2.1 - Anomaly Detection Using Gaussian Mixtures
 
+As you probably already know, **anomaly detection** (aka: **outlier detection**) is the task of detecting instances that deviate greatly from the norm. These instances are called **anomalies/outliers**. Some common uses of anomaly detection:
+* fraud detection
+* detection of defective products
+* removing outliers from a data set before training another model with it
+    * can achieve significant improvements in performance!
+    
+It is very easy to use a GMM for the purposes of anomaly detection: We simply classify an instance to be an anomaly if it is located in a low-density region (so, we must define what density threshold is appropriate for our application).
 
+As an example, suppose you know that the defective rate of products is 4%. You could then set this as your density threshold to start. If you are getting **too many false positives** (good products classified as defective) you can try **lowering** the threshold. If you get **too many false negatives** (defective products that weren't caught), you can try **increasing** the threshold.
+
+We now go to the JN to illustrate a quick implementation of this example.
+
+Related to anomaly detection is the task of **novelty detection**. Here, the GMM algorithm is assumed to have been trained on already clean data (no outliers). This is in contrast to anomaly detection, which does not make this assumption. 
+
+**Note**: GMMs try to fit all the data, including any potential outliers. If there are many of them, this may cause increased bias, as the algorithm assumes normality so some outliers may be considered normal. A remedy to this is to fit the model once, identify any outliers, remore them from the data set, and fit a fresh model on this cleaned data set.
 
 
 ### 9.2.2 - Selecting the Number of Clusters
