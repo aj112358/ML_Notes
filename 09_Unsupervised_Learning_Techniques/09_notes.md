@@ -297,6 +297,29 @@ Related to anomaly detection is the task of **novelty detection**. Here, the GMM
 
 
 ### 9.2.2 - Selecting the Number of Clusters
+
+Just like k-means, GMM required us to specify the number of clusters upon instantiation of the class. So we will take a look at how to do this with GMMs.
+
+Recall that with k-means, we can take advantage of the performance metric called "inertia", as well as plot so-called "silhouette diagrams" to help us make an informed decision as to an appropriate number of clusters to specify. Unfortunately, with GMMs these metrics are **not reliable since the clusters may not be spheical or may have different sizes**. 
+
+For GMMs, we instead use so-called **theoretical information criterion** and try to minimize such criterion. Examples are the **Bayesian information criterion (BIC)** or the **Akaike information criterion (AIC)**. These are defined below:
+
+<img src="http://latex.codecogs.com/svg.latex?BIC=\operatorname{log}(m)p-2\operatorname{log}(\hat{L})" title="Bayesian information criterion (BIC)" />
+
+<img src="http://latex.codecogs.com/svg.latex?AIC=2p-2\operatorname{log}(\hat{L})" title="Akaike information criterion (AIC)" />
+
+where the variables are defined as:
+* m -> number of instances
+* p -> **number** of parameters learned by the model
+* \hat{L} -> maximized value of the **likelihood function** for the model
+
+As can be inferred from the equations, both the BIC and AIC penalize models that have more parameters to learn (ex: more clusters), and reward models that fit the data well. They usually just end up selecting the exact same model, but when they don't the BIC tends to be the simpler model BUT also does not fit the data quite as well as the AIC.
+
+In SKL, we can use the methods 'bic()' and 'aic()' to compute these quantities
+
+
+
+
 ### 9.2.3 - Bayesian Gaussian Mixture Models
 ### 9.2.4 - Other Algorithms for Anomaly and Novelty Detection
 
