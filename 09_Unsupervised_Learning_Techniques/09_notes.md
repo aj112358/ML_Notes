@@ -328,12 +328,15 @@ Let's go to the JN to see how this is done.
 
 With regards to Bayesian statistics, the prior distribution p(z) of the labels z can be taken into account using the 'weight_concentration_prior' hyperparameter of the class, where we can incorporate our prior knowledge of having few or many clusters. We can then use **Bayes' Theorem** to compute the posterior distribution p(z|X), given an observation of some data X. 
 
-Unfortunately, one of the main problems of Bayesian statistics is that of finding the distribution of the **evidence** p(X), and this is also the case with GMMs. This is because this requires integration over all possible value of z (where the integrand is written using the marginal distrubtions, which happens to include the likelihood function). There happen to be many ways to try and work around this problem, one of which is known as **Variational inference**. Here, we select a family of distributions q(z; \lambda) (where \lambda is called the **variational parameters**) and try to find optimal values of \lambda so as to make q(z) a good approximation of p(z|X) (the posterior distribution!). This is done by minimizing the so-called **KL divergence** from q(z) to p(z|X). This is a measure of how different once probability distribution is from another (*see Wikipedia article for more information; "Relative Entropy"*). The equation for the KL divergence is shown below:
+Unfortunately, one of the main problems of Bayesian statistics is that of finding the distribution of the **evidence** p(X), and this is also the case with GMMs. This is because this requires integration over all possible value of z (where the integrand is written using the marginal distrubtions, which happens to include the likelihood function). There happen to be many ways to try and work around this problem, one of which is known as **Variational inference**. Here, we select a family of distributions q(z; \lambda) (where \lambda is called the **variational parameters**) and try to find optimal values of \lambda so as to make q(z) a good approximation of p(z|X) (the posterior distribution!). This is done by minimizing the so-called **KL divergence** from q(z) to p(z|X). This is a measure of how different once probability distribution is from another (*see Wikipedia article for more information; "Relative Entropy"*).
 
-<img src="http://latex.codecogs.com/svg.latex?D_{KL}(q||p)=E_q\left[\operatorname{log}\left(\frac{q(\mathbf{z})}{p(\mathbf{z|X})}\right)\right]" title="http://latex.codecogs.com/svg.latex?D_{KL}(q||p)=E_q\left[\operatorname{log}\left(\frac{q(\mathbf{z})}{p(\mathbf{z|X})}\right)\right]" />
+The equation for the KL divergence is shown below:
 
+<img src="http://latex.codecogs.com/svg.latex?\begin{align*}D_{KL}(q||p)&=E_q\left[\operatorname{log}\left(\frac{q(\mathbf{z})}{p(\mathbf{z|X})}\right)\right]&space;\\&\quad\vdots&space;\\&=\operatorname{log}p(\mathbf{X})-\left[&space;E_q(\operatorname{log}p(\mathbf{z,X}))-E_q(\operatorname{log}q(\mathbf{z}))\right]\end{align*}" title="http://latex.codecogs.com/svg.latex?\begin{align*}D_{KL}(q||p)&=E_q\left[\operatorname{log}\left(\frac{q(\mathbf{z})}{p(\mathbf{z|X})}\right)\right] \\&\quad\vdots \\&=\operatorname{log}p(\mathbf{X})-\left[ E_q(\operatorname{log}p(\mathbf{z,X}))-E_q(\operatorname{log}q(\mathbf{z}))\right]\end{align*}" />
 
-
+which has been simplified using Bayes' Theorem to the final equation, in which the bracketed expression is called the **evidence lower bound (ELBO)**. Since we wish to miniize this divergence *with respect to q*, we need only maximize the value of ELBO. There are a few ways to do this:
+* **mean field variational inference**
+* **black box stochastic variational inference (BBSVI)**
 
 
 
