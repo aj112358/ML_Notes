@@ -318,9 +318,38 @@ As can be inferred from the equations, both the BIC and AIC penalize models that
 In SKL, we can use the methods 'bic()' and 'aic()' to compute these quantities
 
 
-
-
 ### 9.2.3 - Bayesian Gaussian Mixture Models
+
+In the section above we saw ways of determining an appropriate number of clusters to use. It turns out that we can actually find this number automatically using what are called **Bayesian GMMs**. In this model, the cluster parameters (weights, means, covariances) are **not treated as fixed**, but rather as random variables themselves (*indeed this is the foundation of Bayesian statistics!*).
+
+In SKL, we have the 'BayesianGaussianMixture' class that can be used. The input hyperparameter 'n_components' is set to a good educated guess, and it will find the optimal number of clusters for your data set by assigning a weight of (essentially) 0 to any unnecessary clusters. It assigns these weights using somethign called the **stick breaking process**. This is a statistical interpretation of the larger **Dirichlet process**, and this statistical interpretation is a way to compute a multivariate Beta distribution from univariate Beta distributions. *You can read about this on p.270, and also see the Wikipedia article too*.
+
+Let's go to the JN to see how this is done.
+
+With regards to Bayesian statistics, the prior distribution p(z) of the labels z can be taken into account using the 'weight_concentration_prior' hyperparameter of the class, where we can incorporate our prior knowledge of having few or many clusters. We can then use **Bayes' Theorem** to compute the posterior distribution p(z|X), given an observation of some data X. 
+
+Unfortunately, one of the main problems of Bayesian statistics is that of finding the distribution of the **evidence** p(X), and this is also the case with GMMs. This is because this requires integration over all possible value of z (where the integrand is written using the marginal distrubtions, which happens to include the likelihood function). There happen to be many ways to try and work around this problem, one of which is known as **Variational inference**. Here, we select a family of distributions q(z; \lambda) (where \lambda is called the **variational parameters**) and try to find optimal values of \lambda so as to make q(z) a good approximation of p(z|X) (the posterior distribution!). This is done by minimizing the so-called **KL divergence** from q(z) to p(z|X). This is a measure of how different once probability distribution is from another (*see Wikipedia article for more information; "Relative Entropy"*). The equation for the KL divergence is shown below:
+
+<img src="http://latex.codecogs.com/svg.latex?D_{KL}(q||p)=E_q\left[\operatorname{log}\left(\frac{q(\mathbf{z})}{p(\mathbf{z|X})}\right)\right]" title="http://latex.codecogs.com/svg.latex?D_{KL}(q||p)=E_q\left[\operatorname{log}\left(\frac{q(\mathbf{z})}{p(\mathbf{z|X})}\right)\right]" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### 9.2.4 - Other Algorithms for Anomaly and Novelty Detection
 
 ## - Concluding Remarks
