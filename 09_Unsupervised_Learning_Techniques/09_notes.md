@@ -338,22 +338,24 @@ which has been simplified using Bayes' Theorem to the final equation, in which t
 * **mean field variational inference**
 * **black box stochastic variational inference (BBSVI)**
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+We leave it to the reader to investigate these concepts more in-depth if they are interested.
 
 
 ### 9.2.4 - Other Algorithms for Anomaly and Novelty Detection
+
+As we know, GMMs work well if your clusters are ellipsoidal in shape. Of course, not all the data sets you will encounter in your daily life have such nice shapes. As such, SKL offers us many other algorithms for irregularly shaped data sets, which are mainly used for anomaly and novelty instance detection. We list them below:
+
+* **PCA** (*Or any other DR technique with an 'inverse_transform' method*) -> It so happens that reconstruction errors for anomaly instances will be much higher than the reconstruction errors for normal instances.
+
+* **Fast-MCD (Minimum Covariance Determinant)** -> This algorithm is useful for outlier detection and for cleaning up a data set. It assumes that normal instances were all generated from a *single* Gaussian and that outliers were NOT generated from this same Gaussian. So, this algorithm is careful to ignore such outliers, which yields a better estimation of the elliptic envelope containing the normal instances. We can implement this in SKL via that 'EllipticEnvelope' class.
+
+* **Isolation Forest** -> This algorithm grows a random forest where each decision tree is grown randomly (select a random feature and random threshold value for splitting). Once complete, all the instances are separated and outliers are far from the other instances. This is an efficient algorithm to use for high-dimensional data.
+
+* **Local Outlier Factor (LOF)** -> 
+
+
+
+
 
 ## - Concluding Remarks
 
