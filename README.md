@@ -1,6 +1,9 @@
 # ML_Notes
 This repository is meant to be a medium for learning ML using the well known O'Reilly book "Hands-On Machine Learning...".
 
+This book can be purchsed on Amazon here: https://www.amazon.ca/Hands-Machine-Learning-Scikit-Learn-TensorFlow/dp/1492032646/
+* *Note: I am not partnered with the publishing company in any way. Having finished studying the first part of the book, I am just personally recommending this book to those who are intersted in learning ML and its implemetnation using Scikit-Learn. Have fun!
+
 
 
 ### History of Machine Learning
