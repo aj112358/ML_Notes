@@ -351,12 +351,15 @@ As we know, GMMs work well if your clusters are ellipsoidal in shape. Of course,
 
 * **Isolation Forest** -> This algorithm grows a random forest where each decision tree is grown randomly (select a random feature and random threshold value for splitting). Once complete, all the instances are separated and outliers are far from the other instances. This is an efficient algorithm to use for high-dimensional data.
 
-* **Local Outlier Factor (LOF)** -> 
+* **Local Outlier Factor (LOF)** -> Given an instance, we compare the density of its k nearest neighbors with the density of those neighbors themselves. Outliers will be more isolated.
 
-
-
+* **One-Class SVM** -> This algorithm is **better suited for novelty detection**. This algorithm attempts to separate the instances in high-dimensional space *from the origin*. This corresponds to finding some region in the original space that contains the majority of the instances. An instance outside this region is considered an anomaly.
 
 
 ## - Concluding Remarks
+
+This was quite the chapter! We learned about unsupervised learning techniques that can be applied to clustering tasks. The two main techniques we looked at are the k-means algorithm, and Gaussian mixture models. We learned how the k-means algorithm works, and various ways to initialize it appropriately as well as ways to determine an appropriate number of clusters. We saw three applications of the k-means algorithm to clustering: image segmentation, preprocessing, and semi-supervised learning. We looked into another clustering algorithm called DBSCAN and briefly discussed various other clustering algorithms. With the GMMs, we learned their statistical interpretation, and how they can be used for anomaly detection. We then saw how Bayesian statistics can be applied to GMMs, and finished the chapter with a brief list of other algorithms for anomaly detection. 
+
+Good job for finishing the first part of the book (*The Fundamentals of Machine Learning*), which happens to be 276 pages long!
 
 [anomaly_detection]: https://github.com/aj112358/ML_Notes/blob/main/01_The_Machine_Learning_Landscape/01_images/anomaly_detection.png "illustration of anomaly detection"
